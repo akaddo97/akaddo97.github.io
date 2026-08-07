@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Option A | AK Addo homepage draft</title>
+<style>
+  :root{--bg:#FAF8F2;--ink:#1A1A1A;--muted:#5A5750;--accent:#F5C518;--rule:#E4DFD2;
+        --fg:#1A1A1A;--line:#E4DFD2;--chip:#F0EDE3;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif;
+    font-size:18px;line-height:1.65;-webkit-font-smoothing:antialiased;}
+  main{max-width:620px;margin:0 auto;padding:76px 24px 72px;}
+  .photo{width:180px;height:180px;border-radius:50%;object-fit:cover;display:block;margin:0 0 32px;}
+  h1{font-size:38px;line-height:1.15;letter-spacing:-0.02em;margin:0 0 6px;}
+  .role{font-size:18px;color:var(--muted);margin:0 0 36px;}
+  .role::after{content:"";display:block;width:52px;height:3px;background:var(--accent);margin-top:20px;}
+  p{margin:0 0 22px;}
+  .last{margin-bottom:0;}
+  a{color:var(--ink);text-decoration:none;border-bottom:2px solid var(--accent);padding-bottom:1px;}
+  a:hover{background:var(--accent);}
+  nav{margin-top:44px;padding-top:28px;border-top:1px solid var(--rule);
+    display:flex;flex-wrap:wrap;gap:14px 28px;}
+  nav a{font-size:17px;font-weight:600;}
+  .offers{margin-top:46px;}
+  .offers a{border-bottom:0;padding-bottom:0;}
+  .offers a:hover{background:transparent;}
+  .oh{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+      margin:0 0 16px;}
+  .work{margin-top:46px;padding-top:30px;border-top:1px solid var(--rule);}
+  .repos{margin:0 0 22px;padding-left:22px;}
+  .repos li{margin-bottom:7px;}
+  .pub{font-size:16px;color:var(--muted);margin:0;}
+  .pub a{color:var(--ink);}
+  .slot{margin-top:34px;padding:20px 22px;border:2px dashed var(--rule);border-radius:10px;}
+  .slot .oh{margin-bottom:10px;}
+  .slotnote{font-size:15px;color:var(--muted);margin:0;}
+  @media (max-width:520px){
+    body{font-size:17px;}
+    main{padding:52px 22px 56px;}
+    h1{font-size:31px;}
+    .photo{width:140px;height:140px;margin-bottom:26px;}
+  }
+
+  .optbar{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:10px;
+    flex-wrap:wrap;padding:9px 14px;background:#1A1A1A;color:#FAF8F2;font-size:13px;}
+  .optbar b{font-weight:600;letter-spacing:.04em;}
+  .optbar a{color:#FAF8F2;border-bottom:1px solid #55524A;padding-bottom:1px;font-size:13px;}
+  .optbar a:hover{background:var(--accent);color:#1A1A1A;}
+  .optbar .here{border-bottom-color:var(--accent);color:var(--accent);}
+  .optbar .note{color:#A5A096;}
+  .ed-bar{position:fixed;top:46px;right:12px;z-index:50;display:flex;gap:6px;align-items:center;
+    background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:5px 7px;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);}
+  .ed-bar button{font:inherit;font-size:12px;padding:3px 8px;border:1px solid var(--line);
+    background:var(--chip);color:var(--fg);border-radius:6px;cursor:pointer;}
+  .ed-bar button.on{background:var(--accent);color:#1A1A1A;border-color:var(--accent);}
+  .ed-bar .ed-status{color:var(--muted);padding:0 2px;font-size:12px;}
+  #doc[contenteditable="true"]{outline:2px dashed var(--accent);outline-offset:8px;border-radius:6px;}
+  @media print{.ed-bar,.optbar{display:none}}
+  @media (max-width:640px){.ed-bar{position:static;margin:10px 12px 0;justify-content:flex-end;}}
+
+  .oa{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .oa .card{display:block;border:1px solid var(--rule);border-radius:10px;padding:22px 20px 20px;
+    background:#fff;transition:border-color .12s,transform .12s;}
+  .oa .card:hover{border-color:var(--ink);transform:translateY(-2px);}
+  .oa .card .t{font-size:15px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    line-height:1.3;margin:0 0 6px;}
+  .oa .card .s{font-size:16px;color:var(--muted);margin:0;}
+  .oa .card .bar{width:34px;height:3px;background:var(--accent);margin:0 0 16px;}
+  .strip{display:flex;align-items:center;justify-content:space-between;gap:12px;
+    margin-top:12px;padding:13px 20px;border:1px solid var(--rule);border-radius:10px;
+    background:transparent;}
+  .strip:hover{border-color:var(--muted);}
+  .strip .t{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
+  .strip .s{font-size:14px;color:var(--muted);}
+  @media (max-width:520px){.oa{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<div class="optbar" contenteditable="false"><b>Option A</b><span class="note">two panes plus a quiet strip</span><span><a class="here" href="a.html">A</a> <a class="" href="b.html">B</a> <a class="" href="c.html">C</a> <a class="" href="d.html">D</a></span><a href="index.html">All options</a><span class="note">draft, not the live site</span></div>
+<div class="ed-bar" contenteditable="false"><button id="edEdit" type="button">Edit</button><button id="edSave" type="button">Save a copy</button><button id="edRevert" type="button">Revert</button><span class="ed-status" id="edStatus">Read only</span></div>
+
+<main id="doc" data-genkey="633e40145113">
+  <img class="photo" src="../ak-addo.jpg" width="180" height="180" alt="AK Addo">
+
+  <h1>AK Addo</h1>
+  <p class="role">Forward-deployed AI engineer</p>
+
+  <p>I am an AI strategy and data consultant, working forward-deployed with
+     professionals, SMEs, and enterprises. I make them faster with
+     cost-effective AI that exists this week, and build them the tools to stay
+     ahead.</p>
+
+  <p>I also run an AI upskilling cohort, teaching young professionals practical
+     AI skills.</p>
+
+  <p>Before going independent in 2024 I spent three years at Man Group in
+     London, moving through risk engineering, quantitative equity research, and
+     data science. I hold a BSc in Physics from King's College London.</p>
+
+  <p>Most of my recent work is knowledge graphs.
+     <a href="https://github.com/akaddo97/sponge">Sponge</a>, an agentic
+     knowledge-graph platform I built, is public on GitHub.</p>
+
+  <p class="last">Off the clock I run
+     <a href="https://ak-baking.square.site/">AK Bakes</a>, a home bakery.</p>
+
+  <div class="offers">
+    <p class="oh">What I do</p>
+    <div class="oa">
+      <a class="card" href="../build/">
+        <div class="bar"></div>
+        <p class="t">Bespoke tech products</p>
+        <p class="s">Make yourself faster</p>
+      </a>
+      <a class="card" href="../learn/">
+        <div class="bar"></div>
+        <p class="t">AI fluency</p>
+        <p class="s">Learn</p>
+      </a>
+    </div>
+    <a class="strip" href="https://ak-baking.square.site/">
+      <span class="t">Baking</span>
+      <span class="s">Tasty treats</span>
+    </a>
+  </div>
+
+  <div class="work">
+    <p class="oh">Work you can check</p>
+
+    <p><a href="https://github.com/akaddo97/sponge">Sponge</a> is an agentic
+       knowledge-graph platform. The model proposes a change, you approve it, and
+       a hard validator gates every write with snapshot rollback, so a rejected
+       write restores the store byte-identical. Friction is the feature. It runs
+       on my own graph of about 1,900 nodes.</p>
+
+    <ul class="repos">
+      <li><a href="https://github.com/akaddo97/llm-providers">llm-providers</a>,
+          a protocol-based abstraction over language-model providers.</li>
+      <li><a href="https://github.com/akaddo97/knowledge-gun">knowledge-gun</a>,
+          paste-ready context bundles from a curated knowledge graph.</li>
+      <li><a href="https://github.com/akaddo97/knowledge-gun-mcp">knowledge-gun-mcp</a>,
+          an MCP server wrapping it.</li>
+    </ul>
+
+    <p class="pub">Published research:
+       <a href="https://meridian.allenpress.com/imaps-conferences/article/2019/HiTen/000061/420559/Comparative-study-of-how-additives-affect-sintered">Comparative
+       study of how additives affect sintered silver microstructure</a>, IMAPS
+       HiTEN 2019.</p>
+  </div>
+
+  <div class="slot">
+    <p class="oh">Slot: one piece of your writing</p>
+    <p class="slotnote">This is the highest-value thing on the page and the one
+       part only you can write. The argument is already in the Sponge README:
+       in a system where a model writes to a store you depend on, the approval
+       step is the product rather than the overhead. Four months of running it
+       is the evidence. Replace this box with your own words, or say the word
+       and it comes out before this goes live.</p>
+  </div>
+
+  <nav>
+    <a href="https://www.linkedin.com/in/ak-addo-248149196/">LinkedIn</a>
+    <a href="https://github.com/akaddo97">GitHub</a>
+    <a href="https://ak-baking.square.site/">AK Bakes</a>
+  </nav>
+</main>
+
+<script>
+/* Editable-in-place harness. Reusable, dependency-free. See skills/editable_html/SKILL.md.
+   Ships the data-genkey hardening so a regenerated option cannot be masked by a stale snapshot. */
+(function(){
+  var doc=document.getElementById('doc'), btn=document.getElementById('edEdit'),
+      status=document.getElementById('edStatus'),
+      KEY='akkg-edit:'+document.title+':'+(doc.dataset.genkey||'0');
+  try{localStorage.removeItem('akkg-edit:'+document.title);}catch(e){}
+  try{var saved=localStorage.getItem(KEY);if(saved){doc.innerHTML=saved;status.textContent='Restored your saved edits';}}catch(e){}
+  var editing=false;
+  function setEditing(on){
+    editing=on;
+    doc.setAttribute('contenteditable',on?'true':'false');
+    btn.textContent=on?'Editing':'Edit'; btn.classList.toggle('on',on);
+    status.textContent=on?'Click any text to change it':'Read only';
+    if(on)doc.focus();
+  }
+  btn.addEventListener('click',function(){setEditing(editing===false);});
+  doc.addEventListener('input',function(){
+    if(editing===false){return;}
+    try{localStorage.setItem(KEY,doc.innerHTML);status.textContent='Saved in this browser';}catch(e){}
+  });
+  document.getElementById('edSave').addEventListener('click',function(){
+    var was=editing; if(was)setEditing(false);
+    var html='<!doctype html>\n'+document.documentElement.outerHTML;
+    var a=document.createElement('a');
+    a.href=URL.createObjectURL(new Blob([html],{type:'text/html'}));
+    a.download=(document.title||'page').replace(/[^a-z0-9]+/gi,'_').replace(/^_|_$/g,'')+'_edited.html';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function(){URL.revokeObjectURL(a.href);},1000);
+    if(was)setEditing(true);
+  });
+  document.getElementById('edRevert').addEventListener('click',function(){
+    if(confirm('Discard your saved edits and reload the original?')===false)return;
+    try{localStorage.removeItem(KEY);}catch(e){}
+    location.reload();
+  });
+})();
+</script>
+</body>
+</html>
