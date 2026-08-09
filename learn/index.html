@@ -32,6 +32,21 @@
   ul{margin:0 0 22px;padding-left:22px;}
   li{margin-bottom:9px;}
   .lane{font-weight:600;}
+  /* Cohort roster, anonymised: initial and lane only. These are private
+     individuals, so no names, employers, or photographs ship here. */
+  .cohort{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 18px;}
+  .mcard{display:flex;gap:14px;align-items:flex-start;padding:16px 16px 14px;
+    border:1px solid var(--rule);border-radius:10px;background:#fff;}
+  .mk{flex:0 0 auto;width:38px;height:38px;border-radius:50%;background:var(--ink);
+    color:var(--bg);font-size:16px;font-weight:700;line-height:38px;text-align:center;}
+  .mb{min-width:0;}
+  .ml{font-size:14px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+    line-height:1.3;margin:0 0 4px;}
+  .md{font-size:15px;color:var(--muted);margin:0 0 8px;}
+  .mr{display:inline-block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--muted);background:#F0EDE3;border-radius:20px;padding:2px 9px;margin:0;}
+  .cnote{font-size:15px;color:var(--muted);}
+  @media (max-width:520px){.cohort{grid-template-columns:1fr;}}
   a{color:var(--ink);text-decoration:none;border-bottom:2px solid var(--accent);padding-bottom:1px;}
   a:hover{background:var(--accent);}
   nav{margin-top:52px;padding-top:28px;border-top:1px solid var(--rule);
@@ -73,13 +88,72 @@
      practical AI skills. It is selective and free for the people I take on.
      Members commit to an hour a week, do the homework, and report back.</p>
 
-  <p>It runs across three lanes:</p>
+  <p>It runs as one lane per person, built around the work they actually do,
+     rather than as one syllabus everybody sits through. Six participants and
+     one peer are running now.</p>
 
-  <ul>
-    <li><span class="lane">Health AI</span>, for clinical and health-operations settings.</li>
-    <li><span class="lane">Financial-services AI</span>, for finance, markets, and operators.</li>
-    <li><span class="lane">Marketing AI</span>, for growth, content, and audience work.</li>
-  </ul>
+  <div class="cohort">
+    <div class="mcard">
+      <div class="mk">A</div>
+      <div class="mb">
+        <p class="ml">Health AI</p>
+        <p class="md">Clinical and health-operations settings.</p>
+        <p class="mr">Mentee</p>
+      </div>
+    </div>
+    <div class="mcard">
+      <div class="mk">A</div>
+      <div class="mb">
+        <p class="ml">SME Operations AI</p>
+        <p class="md">Running the back office of a small organisation.</p>
+        <p class="mr">Participant</p>
+      </div>
+    </div>
+    <div class="mcard">
+      <div class="mk">R</div>
+      <div class="mb">
+        <p class="ml">Financial Services AI</p>
+        <p class="md">Finance, markets, and the operators inside them.</p>
+        <p class="mr">Mentee</p>
+      </div>
+    </div>
+    <div class="mcard">
+      <div class="mk">D</div>
+      <div class="mb">
+        <p class="ml">Law and AI</p>
+        <p class="md">Legal research and document work.</p>
+        <p class="mr">Student</p>
+      </div>
+    </div>
+    <div class="mcard">
+      <div class="mk">B</div>
+      <div class="mb">
+        <p class="ml">Reinsurance AI</p>
+        <p class="md">Risk and submission analysis.</p>
+        <p class="mr">Participant</p>
+      </div>
+    </div>
+    <div class="mcard">
+      <div class="mk">H</div>
+      <div class="mb">
+        <p class="ml">Theatre and Media AI</p>
+        <p class="md">Production and performance work.</p>
+        <p class="mr">Participant</p>
+      </div>
+    </div>
+    <div class="mcard">
+      <div class="mk">A</div>
+      <div class="mb">
+        <p class="ml">Marketing AI</p>
+        <p class="md">Growth, content, and audience work.</p>
+        <p class="mr">Peer</p>
+      </div>
+    </div>
+  </div>
+
+  <p class="cnote">Members are shown by initial and lane. The cohort is made up
+     of private individuals, so no names, employers, or photographs are
+     published here.</p>
 
   <p>Places are limited. If you want one, say which lane fits and what you want
      to build.</p>
