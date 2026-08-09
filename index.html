@@ -16,12 +16,21 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231A1A1A'/><text y='68' x='50' text-anchor='middle' font-family='system-ui' font-weight='700' font-size='48' fill='%23F5C518'>AK</text></svg>">
 
 <style>
+  /* Palette. Cream, near-black, and yellow are the shared anchors across AK's
+     properties. Cocoa and amber are the AK Bakes side of that system, taken from
+     mockups/REBRAND_AKBAKES_SCOPE.md so the bakery block is brand-consistent
+     rather than an invented brown. */
   :root{
     --bg:#FAF8F2;
     --ink:#1A1A1A;
     --muted:#5A5750;
     --accent:#F5C518;
     --rule:#E4DFD2;
+    --panel:#F0EDE3;
+    --cocoa:#4A2E1C;
+    --cocoa-lift:#5C3A24;
+    --amber:#D99A2B;
+    --cream-soft:#EBE0D2;
   }
   *{box-sizing:border-box;}
   body{
@@ -33,73 +42,69 @@
     line-height:1.65;
     -webkit-font-smoothing:antialiased;
   }
-  main{
-    max-width:620px;
-    margin:0 auto;
-    padding:88px 24px 72px;
-  }
-  .photo{
-    width:180px;
-    height:180px;
-    border-radius:50%;
-    object-fit:cover;
-    display:block;
-    margin:0 0 32px;
-  }
-  h1{
-    font-size:38px;
-    line-height:1.15;
-    letter-spacing:-0.02em;
-    margin:0 0 6px;
-  }
-  .role{
-    font-size:18px;
-    color:var(--muted);
-    margin:0 0 36px;
-  }
-  .role::after{
-    content:"";
-    display:block;
-    width:52px;
-    height:3px;
-    background:var(--accent);
-    margin-top:20px;
-  }
+  main{max-width:620px;margin:0 auto;padding:88px 24px 72px;}
+  .photo{width:180px;height:180px;border-radius:50%;object-fit:cover;display:block;margin:0 0 32px;}
+  h1{font-size:38px;line-height:1.15;letter-spacing:-0.02em;margin:0 0 6px;}
+  .role{font-size:18px;color:var(--muted);margin:0 0 36px;}
+  .role::after{content:"";display:block;width:52px;height:3px;background:var(--accent);margin-top:20px;}
   p{margin:0 0 22px;}
   .last{margin-bottom:0;}
-  a{
-    color:var(--ink);
-    text-decoration:none;
-    border-bottom:2px solid var(--accent);
-    padding-bottom:1px;
-  }
+  a{color:var(--ink);text-decoration:none;border-bottom:2px solid var(--accent);padding-bottom:1px;}
   a:hover{background:var(--accent);}
-  nav{
-    margin-top:44px;
-    padding-top:28px;
-    border-top:1px solid var(--rule);
-    display:flex;
-    flex-wrap:wrap;
-    gap:14px 28px;
-  }
-  nav a{
-    font-size:17px;
-    font-weight:600;
-    border-bottom-width:2px;
-  }
+  .oh{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 16px;}
+
+  /* Offerings: a two-colour split for the two commercial offerings. */
+  .offers{margin-top:46px;}
+  .offers a{border-bottom:0;padding-bottom:0;}
+  .offers a:hover{background:transparent;}
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:12px;overflow:hidden;}
+  .split .half{display:block;padding:30px 24px 28px;transition:opacity .12s;}
+  .split .half:hover{opacity:.88;}
+  .split .dark{background:var(--ink);color:var(--bg);}
+  .split .cream{background:var(--panel);color:var(--ink);}
+  .split .bar{width:34px;height:3px;background:var(--accent);margin:0 0 18px;}
+  .split .t{font-size:15px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    line-height:1.3;margin:0 0 6px;}
+  .split .s{font-size:16px;margin:0;opacity:.72;}
+
+  /* Evidence: the fastest route from "is this real" to running code. */
+  .work{margin-top:46px;padding-top:30px;border-top:1px solid var(--rule);}
+  .repos{margin:0 0 22px;padding-left:22px;}
+  .repos li{margin-bottom:7px;}
+  .pub{font-size:16px;color:var(--muted);margin:0;}
+  .pub a{color:var(--ink);}
+
+  /* Baking: deliberately the only cocoa block on the page, so it reads as a
+     separate world rather than a third service. Cream on cocoa is 11.6:1. */
+  .bake{display:flex;align-items:center;gap:20px;margin-top:44px;padding:26px 26px 24px;
+    border-radius:12px;background:var(--cocoa);color:var(--cream-soft);
+    border-bottom:0;transition:background .14s,transform .14s;}
+  .bake:hover{background:var(--cocoa-lift);transform:translateY(-2px);}
+  .bake .bd{flex:1;}
+  .bake .bar{width:34px;height:3px;background:var(--amber);margin:0 0 16px;}
+  .bake .t{font-size:15px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    color:#FFF6E9;margin:0 0 5px;}
+  .bake .s{font-size:16px;margin:0;color:var(--cream-soft);}
+  .bake .arw{font-size:22px;line-height:1;color:var(--amber);}
+
+  nav{margin-top:44px;padding-top:28px;border-top:1px solid var(--rule);
+    display:flex;flex-wrap:wrap;gap:14px 28px;}
+  nav a{font-size:17px;font-weight:600;}
+
   @media (max-width:520px){
     body{font-size:17px;}
     main{padding:56px 22px 56px;}
     h1{font-size:31px;}
     .photo{width:140px;height:140px;margin-bottom:26px;}
+    .split{grid-template-columns:1fr;}
+    .bake{padding:22px 20px 20px;}
   }
 </style>
 </head>
 <body>
 
 <main>
-  <img class="photo" src="ak-addo.jpg" width="180" height="180"
-       alt="AK Addo">
+  <img class="photo" src="ak-addo.jpg" width="180" height="180" alt="AK Addo">
 
   <h1>AK Addo</h1>
   <p class="role">Forward-deployed AI engineer</p>
@@ -121,12 +126,68 @@
      knowledge-graph platform I built, is public on GitHub.</p>
 
   <p class="last">Off the clock I run
-     <a href="https://ak-baking.square.site">AK Bakes</a>, a home bakery.</p>
+     <a href="https://ak-baking.square.site/">AK Bakes</a>, a home bakery.</p>
+
+  <div class="offers">
+    <p class="oh">What I do</p>
+    <div class="split">
+      <a class="half dark" href="build/">
+        <div class="bar"></div>
+        <p class="t">Bespoke tech products</p>
+        <p class="s">Make yourself faster</p>
+      </a>
+      <a class="half cream" href="learn/">
+        <div class="bar"></div>
+        <p class="t">AI fluency</p>
+        <p class="s">Learn</p>
+      </a>
+    </div>
+  </div>
+
+  <div class="work">
+    <p class="oh">Work you can check</p>
+
+    <p><a href="https://github.com/akaddo97/sponge">Sponge</a> is an agentic
+       knowledge-graph platform. The model proposes a change, you approve it, and
+       a hard validator gates every write with snapshot rollback, so a rejected
+       write restores the store byte-identical. Friction is the feature. It runs
+       on my own graph of about 1,900 nodes.</p>
+
+    <ul class="repos">
+      <li><a href="https://github.com/akaddo97/llm-providers">llm-providers</a>,
+          a protocol-based abstraction over language-model providers.</li>
+      <li><a href="https://github.com/akaddo97/knowledge-gun">knowledge-gun</a>,
+          paste-ready context bundles from a curated knowledge graph.</li>
+      <li><a href="https://github.com/akaddo97/knowledge-gun-mcp">knowledge-gun-mcp</a>,
+          an MCP server wrapping it.</li>
+    </ul>
+
+    <p class="pub">Published research:
+       <a href="https://meridian.allenpress.com/imaps-conferences/article/2019/HiTen/000061/420559/Comparative-study-of-how-additives-affect-sintered">Comparative
+       study of how additives affect sintered silver microstructure</a>, IMAPS
+       HiTEN 2019.</p>
+  </div>
+
+  <!-- SLOT, intentionally empty on the live page.
+       One short piece of AK's own writing belongs here, between the evidence
+       block above and the bakery block below. The argument already exists in
+       the Sponge README: in a system where a model writes to a store you depend
+       on, the approval step is the product rather than the overhead. Only AK
+       writes this. Do not draft it. -->
+
+  <a class="bake" href="https://ak-baking.square.site/">
+    <div class="bd">
+      <div class="bar"></div>
+      <p class="t">Baking</p>
+      <p class="s">Tasty treats</p>
+    </div>
+    <div class="arw">&rarr;</div>
+  </a>
 
   <nav>
     <a href="https://www.linkedin.com/in/ak-addo-248149196/">LinkedIn</a>
     <a href="https://github.com/akaddo97">GitHub</a>
-    <a href="https://ak-baking.square.site">AK Bakes</a>
+    <a href="https://ak-baking.square.site/">AK Bakes</a>
   </nav>
 </main>
 
