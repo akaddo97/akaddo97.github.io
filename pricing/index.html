@@ -21,14 +21,13 @@
   .back{display:inline-block;font-size:15px;color:var(--muted);text-decoration:none;
     margin-bottom:44px;border-bottom:1px solid transparent;}
   .back:hover{border-bottom-color:var(--muted);}
-  .eyebrow{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 10px;}
-  h1{font-size:40px;line-height:1.1;letter-spacing:-0.02em;margin:0 0 8px;}
-  .sub{font-size:19px;color:var(--muted);margin:0 0 18px;}
-  .sub::after{content:"";display:block;width:52px;height:3px;background:var(--accent);margin-top:22px;}
+  /* The page's only h1 carries this class, so it reads as a heading to search
+     engines and screen readers while looking like the small label AK left. */
+  .eyebrow{font-size:13px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--muted);margin:0 0 10px;}
   p{margin:0 0 22px;}
   h2{font-size:15px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
     margin:44px 0 14px;font-weight:600;}
-  .lede{font-size:20px;line-height:1.55;}
   a{color:var(--ink);text-decoration:none;border-bottom:2px solid var(--accent);padding-bottom:1px;}
   a:hover{background:var(--accent);}
 
@@ -65,8 +64,6 @@
   @media (max-width:520px){
     body{font-size:17px;}
     main{padding:40px 22px 56px;}
-    h1{font-size:32px;}
-    .lede{font-size:18px;}
   }
 
   /* Editable harness, hidden unless ?edit=1. Public visitors never see it. */
@@ -158,61 +155,44 @@
 <main id="doc">
   <a class="back" href="../">Back to AK Addo</a>
 
-  <p class="eyebrow">Services and prices</p>
-  <h1>How I work, and what it costs</h1>
-  <p class="sub">Published up front, so the first conversation is about your problem.</p>
-
-  <p class="lede">Most businesses that want AI need their systems to talk to
-     each other first, and that is usually the part that pays for itself. The
-     work is measured against business goals you choose before anything gets
-     built.</p>
-
-  <h2>Start here, free</h2>
+  <!-- AK stripped the h1, the standfirst, and the lede on 2026-08-10 to get
+       the page straight to the offer. The page still needs one h1 for search
+       and for screen readers, so the line he kept is the h1, carrying the
+       eyebrow's styling. It looks exactly as he left it. -->
+  <h1 class="eyebrow">Services and prices</h1>
 
   <div class="free">
     <p class="ft">A free 30 minutes</p>
-    <p>Tell me what is slow, who it is slowing down, and what you have already
-       tried. You will get an honest read on whether it is worth building, and
-       roughly what it would take. No charge, and no obligation afterwards.</p>
+    <p>Pick this to have a short discussion scoping a potential project.</p>
     <!-- FORM:BOOKING -->
-    <a class="btn" href="https://www.linkedin.com/in/ak-addo-248149196/">Book the call</a>
+    <a class="btn" href="https://www.linkedin.com/in/ak-addo-248149196/">Book a free 30 minutes</a>
   </div>
 
   <h2>The method</h2>
 
-  <p>Every engagement runs through the same five stages. The order matters:
-     the measures are agreed before any building starts, so the plumbing work
-     is a scoped dependency rather than a surprise discovered after signing.</p>
-
   <ol class="stages">
     <li>
-      <p class="st">Diagnose</p>
-      <p class="sd">Walk the systems that actually exist. Email, records,
-         scheduling, whatever the finance runs on, and what talks to what. You
-         get a map of your stack, which most owners have never seen written
-         down.</p>
+      <p class="st">Discovery</p>
+      <p class="sd">Map you and your team's tech stack.</p>
     </li>
     <li>
       <p class="st">Choose the goals</p>
-      <p class="sd">Pick a small number of demonstrable business goals before
-         anything is built. Hours returned, response times, error rates,
-         whatever you already track. Agreed in advance, in writing, chosen by
-         you.</p>
+      <p class="sd">Pick a small number of demonstrable business goals to
+         tailor the products built.</p>
     </li>
     <li>
-      <p class="st">Fix the plumbing</p>
-      <p class="sd">The non-AI tech work. Integration, data hygiene, and the
-         systems that do not currently talk to each other.</p>
+      <p class="st">Non-AI tech work</p>
+      <p class="sd">If necessary, for example a structured database so a
+         language model can work well on your company data.</p>
     </li>
     <li>
-      <p class="st">Build the thing</p>
-      <p class="sd">The AI layer, on top of a stack that can now support it.
-         Built end to end, from the data layer to the interface.</p>
+      <p class="st">Knowledge Graph Solution</p>
+      <p class="sd">A tech product with an AI layer. Built end to end: from the
+         data to the interface.</p>
     </li>
     <li>
       <p class="st">Measure</p>
-      <p class="sd">Against the goals from stage 2, not against a new set
-         chosen afterwards. You get a result you can point at.</p>
+      <p class="sd">Against the goals from stage 2.</p>
     </li>
   </ol>
 
@@ -256,29 +236,19 @@
         </tr>
         <tr>
           <td>Day rate</td>
-          <td>For work that does not fit any of the above.</td>
+          <td>For any other work.</td>
           <td class="num">£750</td>
         </tr>
       </tbody>
     </table>
   </div>
 
-  <p class="note">Prices are anchors, not quotes. Everything above the audit is
-     scoped against the goals agreed in stage 2, so the number you are given is
-     the number for your work rather than a list price. Owners with several
-     businesses are usually better served by one engagement per business than
-     by one large programme, and that is priced accordingly.</p>
-
-  <h2>What you are buying</h2>
-
-  <p>Tools are built end to end, from the data layer to the interface, by me. I
-     work with professionals, SMEs, and enterprises, including teams with no
-     engineers in them. Previous client work is available as a portfolio
-     document on request.</p>
+  <p class="note">Previous client work is available as a portfolio document on
+     request.</p>
 
   <div class="ask">
     <h3>Not sure which one fits?</h3>
-    <p>That is what the free thirty minutes is for. Describe the workflow and I will tell you honestly whether it is worth building.</p>
+    <p>That is what the free thirty minutes is for. Describe your workflow and we can see if there is something there.</p>
     <!-- FORM:BOOKING -->
     <a class="btn" href="https://www.linkedin.com/in/ak-addo-248149196/">Book a free 30 minutes</a>
   </div>
