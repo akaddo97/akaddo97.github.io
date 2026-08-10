@@ -46,7 +46,21 @@
   .mr{display:inline-block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
     color:var(--muted);background:#F0EDE3;border-radius:20px;padding:2px 9px;margin:0;}
   .cnote{font-size:15px;color:var(--muted);}
+  /* The curriculum graph breaks out wider than the text column on desktop and
+     scrolls inside its own box on narrow screens, so the page never scrolls
+     sideways. */
+  .figwrap{margin:0 0 18px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .curgraph{display:block;width:100%;min-width:720px;height:auto;}
+  .curnote{font-size:15px;color:var(--muted);}
+  .weeks{margin:0 0 22px;padding-left:22px;}
+  .weeks li{margin-bottom:11px;}
+  .wk{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--muted);margin-right:8px;}
   @media (max-width:520px){.cohort{grid-template-columns:1fr;}}
+  @media (min-width:980px){
+    .figwrap{width:min(920px,calc(100vw - 48px));
+      margin-left:calc(50% - min(460px,calc(50vw - 24px)));}
+  }
   a{color:var(--ink);text-decoration:none;border-bottom:2px solid var(--accent);padding-bottom:1px;}
   a:hover{background:var(--accent);}
   nav{margin-top:52px;padding-top:28px;border-top:1px solid var(--rule);
@@ -72,12 +86,106 @@
   <p class="lede">Getting an operator or a team fluent and measurably faster
      with the tools that exist now.</p>
 
+  <h2>What gets taught</h2>
+
+  <p>There is a real curriculum behind this, six weeks of it. Fifteen topics,
+     in four tracks, in the order below. What changes per person is the lane it
+     gets applied to, not the syllabus.</p>
+
+  <div class="figwrap">
+<svg class="curgraph" viewBox="0 0 920 500" role="img" aria-label="The curriculum taught on the six-week cohort, as a graph of fifteen topics grouped into four tracks" xmlns="http://www.w3.org/2000/svg">
+<rect x="0" y="0" width="920" height="500" fill="#FAF8F2"/>
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#B8B2A4"/></marker></defs>
+<rect x="20" y="58" width="250" height="178" rx="14" fill="#ffffff" stroke="#E4DFD2" stroke-width="1"/>
+<text x="36" y="46" font-size="12" font-weight="700" letter-spacing="1.4" fill="#B45309" data-bg="#FAF8F2">THE TOOLKIT</text>
+<rect x="20" y="268" width="250" height="178" rx="14" fill="#ffffff" stroke="#E4DFD2" stroke-width="1"/>
+<text x="36" y="256" font-size="12" font-weight="700" letter-spacing="1.4" fill="#4F46E5" data-bg="#FAF8F2">HOW MODELS BEHAVE</text>
+<rect x="320" y="58" width="250" height="240" rx="14" fill="#ffffff" stroke="#E4DFD2" stroke-width="1"/>
+<text x="336" y="46" font-size="12" font-weight="700" letter-spacing="1.4" fill="#0E7490" data-bg="#FAF8F2">GETTING GOOD OUTPUT</text>
+<rect x="620" y="58" width="280" height="292" rx="14" fill="#ffffff" stroke="#E4DFD2" stroke-width="1"/>
+<text x="636" y="46" font-size="12" font-weight="700" letter-spacing="1.4" fill="#7C3AED" data-bg="#FAF8F2">RETRIEVAL AND GRAPHS</text>
+<path d="M197.5,104 C281.2,104 281.2,104 364.9,104" fill="none" stroke="#B8B2A4" stroke-width="1.4" marker-end="url(#ar)" opacity="0.75"/>
+<path d="M207.85,152 C286.375,152 286.375,104 364.9,104" fill="none" stroke="#B8B2A4" stroke-width="1.4" marker-end="url(#ar)" opacity="0.75"/>
+<path d="M197.5,200 C430.075,200 430.075,104 662.65,104" fill="none" stroke="#B8B2A4" stroke-width="1.4" marker-end="url(#ar)" opacity="0.75"/>
+<path d="M235.45,314 C300.17499999999995,314 300.17499999999995,104 364.9,104" fill="none" stroke="#B8B2A4" stroke-width="1.4" marker-end="url(#ar)" opacity="0.75"/>
+<path d="M145,378.0 L145,298.0" fill="none" stroke="#B8B2A4" stroke-width="1.4" marker-end="url(#ar)" opacity="0.75"/>
+<path d="M225.1,410 C291.55,410 291.55,260 358.0,260" fill="none" stroke="#B8B2A4" stroke-width="1.4" marker-end="url(#ar)" opacity="0.75"/>
+<path d="M445,120.0 L445,140.0" fill="none" stroke="#B8B2A4" stroke-width="1.4" marker-end="url(#ar)" opacity="0.75"/>
+<path d="M445,172.0 L445,192.0" fill="none" stroke="#B8B2A4" stroke-width="1.4" marker-end="url(#ar)" opacity="0.75"/>
+<path d="M445,224.0 L445,244.0" fill="none" stroke="#B8B2A4" stroke-width="1.4" marker-end="url(#ar)" opacity="0.75"/>
+<path d="M525.1,104 C593.875,104 593.875,104 662.65,104" fill="none" stroke="#B8B2A4" stroke-width="1.4" marker-end="url(#ar)" opacity="0.75"/>
+<path d="M507.85,208 C576.625,208 576.625,312 645.4,312" fill="none" stroke="#B8B2A4" stroke-width="1.4" marker-end="url(#ar)" opacity="0.75"/>
+<path d="M760,120.0 L760,140.0" fill="none" stroke="#B8B2A4" stroke-width="1.4" marker-end="url(#ar)" opacity="0.75"/>
+<path d="M760,172.0 L760,192.0" fill="none" stroke="#B8B2A4" stroke-width="1.4" marker-end="url(#ar)" opacity="0.75"/>
+<path d="M760,224.0 L760,244.0" fill="none" stroke="#B8B2A4" stroke-width="1.4" marker-end="url(#ar)" opacity="0.75"/>
+<path d="M760,224.0 L760,296.0" fill="none" stroke="#B8B2A4" stroke-width="1.4" marker-end="url(#ar)" opacity="0.75"/>
+<rect x="92.5" y="88.0" width="105.0" height="32" rx="8" fill="#B45309"/>
+<text x="145.0" y="108.5" font-size="13" font-weight="600" text-anchor="middle" style="fill:#ffffff" data-bg="#B45309">NotebookLM</text>
+<rect x="82.2" y="136.0" width="125.7" height="32" rx="8" fill="#B45309"/>
+<text x="145.0" y="156.5" font-size="13" font-weight="600" text-anchor="middle" style="fill:#ffffff" data-bg="#B45309">Deep Research</text>
+<rect x="92.5" y="184.0" width="105.0" height="32" rx="8" fill="#B45309"/>
+<text x="145.0" y="204.5" font-size="13" font-weight="600" text-anchor="middle" style="fill:#ffffff" data-bg="#B45309">Perplexity</text>
+<rect x="54.5" y="298.0" width="180.9" height="32" rx="8" fill="#4F46E5"/>
+<text x="145.0" y="318.5" font-size="13" font-weight="600" text-anchor="middle" style="fill:#ffffff" data-bg="#4F46E5">Large language models</text>
+<rect x="54.5" y="346.0" width="180.9" height="32" rx="8" fill="#4F46E5"/>
+<text x="145.0" y="366.5" font-size="13" font-weight="600" text-anchor="middle" style="fill:#ffffff" data-bg="#4F46E5">Training vs inference</text>
+<rect x="64.9" y="394.0" width="160.2" height="32" rx="8" fill="#4F46E5"/>
+<text x="145.0" y="414.5" font-size="13" font-weight="600" text-anchor="middle" style="fill:#ffffff" data-bg="#4F46E5">Context management</text>
+<rect x="364.9" y="88.0" width="160.2" height="32" rx="8" fill="#0E7490"/>
+<text x="445.0" y="108.5" font-size="13" font-weight="600" text-anchor="middle" style="fill:#ffffff" data-bg="#0E7490">Prompt engineering</text>
+<rect x="337.3" y="140.0" width="215.4" height="32" rx="8" fill="#0E7490"/>
+<text x="445.0" y="160.5" font-size="13" font-weight="600" text-anchor="middle" style="fill:#ffffff" data-bg="#0E7490">Prompt depth and iteration</text>
+<rect x="382.1" y="192.0" width="125.7" height="32" rx="8" fill="#0E7490"/>
+<text x="445.0" y="212.5" font-size="13" font-weight="600" text-anchor="middle" style="fill:#ffffff" data-bg="#0E7490">Metaprompting</text>
+<rect x="358.0" y="244.0" width="174.0" height="32" rx="8" fill="#0E7490"/>
+<text x="445.0" y="264.5" font-size="13" font-weight="600" text-anchor="middle" style="fill:#ffffff" data-bg="#0E7490">Workflow compression</text>
+<rect x="662.6" y="88.0" width="194.7" height="32" rx="8" fill="#7C3AED"/>
+<text x="760.0" y="108.5" font-size="13" font-weight="600" text-anchor="middle" style="fill:#ffffff" data-bg="#7C3AED">AI search and retrieval</text>
+<rect x="712.0" y="140.0" width="96.0" height="32" rx="8" fill="#7C3AED"/>
+<text x="760.0" y="160.5" font-size="13" font-weight="600" text-anchor="middle" style="fill:#ffffff" data-bg="#7C3AED">RAG</text>
+<rect x="686.8" y="192.0" width="146.4" height="32" rx="8" fill="#7C3AED"/>
+<text x="760.0" y="212.5" font-size="13" font-weight="600" text-anchor="middle" style="fill:#ffffff" data-bg="#7C3AED">Knowledge graphs</text>
+<rect x="669.5" y="244.0" width="180.9" height="32" rx="8" fill="#7C3AED"/>
+<text x="760.0" y="264.5" font-size="13" font-weight="600" text-anchor="middle" style="fill:#ffffff" data-bg="#7C3AED">Data capture (Sponge)</text>
+<rect x="645.4" y="296.0" width="229.2" height="32" rx="8" fill="#7C3AED"/>
+<text x="760.0" y="316.5" font-size="13" font-weight="600" text-anchor="middle" style="fill:#ffffff" data-bg="#7C3AED">Building agents and tool use</text>
+<text x="20" y="486" font-size="12" fill="#5A5750" data-bg="#FAF8F2">Fifteen of the ninety-four topics on the wider curriculum spine. The rest is deliberately out of scope.</text>
+</svg>
+  </div>
+
+  <p class="curnote">The wider curriculum spine runs to ninety-four topics. This
+     course teaches fifteen of them. The technical foundations track, the maths,
+     GPU architecture, transformers, and backpropagation, is deliberately left
+     out: this is a tooling-fluency course, not a machine-learning course.</p>
+
+  <h2>The six weeks</h2>
+
+  <ol class="weeks">
+    <li><span class="wk">Week 1</span> Kickoff and the tooling. NotebookLM, Deep
+        Research, Perplexity, and what a large language model is actually
+        doing.</li>
+    <li><span class="wk">Week 2</span> Designing your own Deep Research prompts,
+        and how AI search and retrieval works underneath.</li>
+    <li><span class="wk">Week 3</span> Prompt depth and iteration, plus enough
+        data science to read what comes back critically.</li>
+    <li><span class="wk">Week 4</span> Metaprompting, building agents and tool
+        use, workflow compression, and context management.</li>
+    <li><span class="wk">Week 5</span> Knowledge graphs as a concept, and why
+        capturing your own data compounds.</li>
+    <li><span class="wk">Week 6</span> Knowledge graphs built for real, with RAG
+        and retrieval wired in, closing the loop on your own work.</li>
+  </ol>
+
+  <p>Before week 1 there is a warm-up: a piece of real research in your own
+     field, so the tooling has something true to bite on from the first
+     session.</p>
+
   <h2>For teams</h2>
 
-  <p>Fluency work starts from the job you already do rather than from a
-     curriculum. We go through your actual workflow, find where the time goes,
-     and rebuild those steps around the AI that exists this week. You keep
-     working tools at the end, not notes.</p>
+  <p>Team fluency work runs differently. It starts from the job you already do:
+     we go through your actual workflow, find where the time goes, and rebuild
+     those steps around the AI that exists this week. You keep working tools at
+     the end, not notes.</p>
 
   <p>It suits professionals, SMEs, and enterprises, including teams with no
      engineers in them.</p>
