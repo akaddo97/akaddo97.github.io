@@ -21,16 +21,20 @@ Every page also carries an edit-in-place toolbar, hidden from public visitors an
 
 ## The action rail, and the form links
 
-Every page carries the same fixed rail: book a call, prices, CV, bakery. It is a left strip on desktop and a bottom bar below 769px.
+Every page carries the same fixed rail: home, book a call, prices, CV, bakery. It is a left strip on desktop and a bottom bar below 769px.
 
-Two of those actions, plus several buttons in the page bodies, point at forms that do not exist yet. Each one is marked with an HTML comment on the line above it, alone on that line:
+Each action that depends on an external link is marked with an HTML comment on the line above it, alone on that line:
 
-- `<!-- FORM:BOOKING -->`, nine links
-- `<!-- FORM:CV -->`, five links
-- `<!-- FORM:MENTOR -->`, one link
-- `<!-- FORM:COHORT -->`, two links
+| Marker | Links | Points at |
+|---|---|---|
+| `<!-- FORM:BOOKING -->` | 9 | **Live.** A Google Calendar booking page. |
+| `<!-- FORM:CV -->` | 5 | Pending. Falls back to LinkedIn. |
+| `<!-- FORM:MENTOR -->` | 1 | Pending. Falls back to LinkedIn. |
+| `<!-- FORM:COHORT -->` | 2 | Pending. Falls back to LinkedIn. |
 
-Until a form exists, its links fall back to the LinkedIn profile, so no action on the site opens onto a dead end. The field specification for each form, and the tested one-command swap that wires one in, live in `docs/scoping/website_forms_spec_2026-08-10.html` in the `aks_claude_data` repo.
+A pending action falls back to the LinkedIn profile, so nothing on the site opens onto a dead end while its form is being built.
+
+The footer is the same on every page: the other three pages of the site, in a fixed order, then LinkedIn, GitHub, and AK Bakes. The only entry ever omitted is the page you are already on. The field specification for each form, and the tested one-command swap that wires one in, live in `docs/scoping/website_forms_spec_2026-08-10.html` in the `aks_claude_data` repo.
 
 ## Link check
 
