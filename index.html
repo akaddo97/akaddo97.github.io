@@ -82,9 +82,9 @@
   .bake:hover{background:var(--cocoa-lift);transform:translateY(-2px);}
   .bake .bd{flex:1;}
   .bake .bar{width:34px;height:3px;background:var(--amber);margin:0 0 16px;}
-  .bake .t{font-size:15px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
-    color:#FFF6E9;margin:0 0 5px;}
-  .bake .s{font-size:16px;margin:0;color:var(--cream-soft);}
+  .bake .t{font-size:19px;font-weight:700;letter-spacing:-0.01em;line-height:1.3;
+    color:#FFF6E9;margin:0 0 7px;}
+  .bake .s{font-size:16px;line-height:1.55;margin:0;color:var(--cream-soft);}
   .bake .arw{font-size:22px;line-height:1;color:var(--amber);}
 
   nav{margin-top:44px;padding-top:28px;border-top:1px solid var(--rule);
@@ -122,6 +122,44 @@
     border-radius:8px;padding:11px 20px;font-size:16px;font-weight:600;}
   .btn:hover{background:#000;color:var(--bg);}
 
+  /* Persistent action rail. Every page carries the same four actions, booking
+     first. A 64px left strip from 769px up, a bottom bar below that, because on
+     a phone the reachable edge is the bottom one and horizontal space is the
+     scarce axis. Sits outside #doc so the edit harness cannot remove it. */
+  /* The generic nav rule below styles the footer nav (margin, padding, top
+     border, and a gap). The rail is also a nav, so it resets all four here
+     rather than inheriting a 44px offset and a rule across its top. */
+  .rail{position:fixed;z-index:60;display:flex;background:var(--ink);
+    margin:0;padding:0;border:0;gap:0;}
+  .rail-item{display:flex;align-items:center;color:#9C978C;border-bottom:0;
+    padding-bottom:0;font-weight:500;transition:color .16s ease,background .16s ease;}
+  .rail-item svg{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;
+    stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+  .rail-item:hover{color:#fff;background:transparent;}
+  .rail-primary{color:var(--accent);}
+  .rail-primary:hover{color:var(--ink);background:var(--accent);}
+  .rail-item:focus-visible{outline:2px solid var(--accent);outline-offset:-2px;}
+  @media (min-width:769px){
+    body{padding-left:64px;}
+    .rail{top:0;left:0;bottom:0;width:64px;flex-direction:column;align-items:stretch;
+      border-right:1px solid #2A2A2A;}
+    .rail-item{position:relative;justify-content:center;height:64px;}
+    .rail-item .rail-label{position:absolute;left:100%;margin-left:10px;padding:6px 10px;
+      white-space:nowrap;font-size:12px;color:#fff;background:var(--ink);
+      border:1px solid #2A2A2A;border-radius:4px;opacity:0;transform:translateX(-4px);
+      pointer-events:none;transition:opacity .16s ease,transform .16s ease;}
+    .rail-item:hover .rail-label,
+    .rail-item:focus-visible .rail-label{opacity:1;transform:translateX(0);}
+  }
+  @media (max-width:768px){
+    body{padding-bottom:60px;}
+    .rail{left:0;right:0;bottom:0;height:60px;flex-direction:row;
+      border-top:1px solid #2A2A2A;padding-bottom:env(safe-area-inset-bottom);}
+    .rail-item{flex:1;flex-direction:column;justify-content:center;gap:4px;}
+    .rail-item .rail-label{font-size:10px;letter-spacing:.02em;}
+  }
+  @media print{.rail{display:none}}
+
   .routes{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
   .route{display:block;border:1px solid var(--rule);border-radius:10px;padding:18px 18px 16px;
     background:#fff;border-bottom:1px solid var(--rule);transition:border-color .12s,transform .12s;}
@@ -134,6 +172,27 @@
 <body>
 
 <div class="ed-bar" contenteditable="false"><button id="edEdit" type="button">Edit</button><button id="edSave" type="button">Save a copy</button><button id="edRevert" type="button">Revert</button><span class="ed-status" id="edStatus">Read only</span></div>
+
+<!-- Persistent action rail. Identical on every page. The two form links carry
+     FORM: markers so both can be swapped across the site with one grep once the
+     Google Forms exist. Until then they fall back to LinkedIn, so no action on
+     this site opens onto a dead end. -->
+<nav class="rail" aria-label="Quick actions">
+  <!-- FORM:BOOKING -->
+  <a class="rail-item rail-primary" href="https://www.linkedin.com/in/ak-addo-248149196/" target="_blank" rel="noopener" aria-label="Book a free 30 minutes">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 5h12v11H4z"/><path d="M4 8h12"/><path d="M7 3v3"/><path d="M13 3v3"/></svg>
+    <span class="rail-label">Book a call</span></a>
+  <a class="rail-item" href="pricing/" aria-label="Services and prices">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3v14"/><path d="M13.5 6H8.5a2 2 0 000 4h3a2 2 0 010 4H6"/></svg>
+    <span class="rail-label">Prices</span></a>
+  <!-- FORM:CV -->
+  <a class="rail-item" href="https://www.linkedin.com/in/ak-addo-248149196/" target="_blank" rel="noopener" aria-label="Download the CV">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 3h6l4 4v10H5z"/><path d="M11 3v4h4"/><path d="M8 11h4"/><path d="M8 14h4"/></svg>
+    <span class="rail-label">CV</span></a>
+  <a class="rail-item" href="https://ak-baking.square.site/" target="_blank" rel="noopener" aria-label="AK Bakes">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 12a7 4 0 0114 0z"/><path d="M3 12v2a7 4 0 0014 0v-2"/></svg>
+    <span class="rail-label">Bakery</span></a>
+</nav>
 
 <main id="doc">
   <img class="photo" src="ak-addo.jpg" width="180" height="180" alt="AK Addo">
@@ -150,12 +209,13 @@
 
   <p>Before going independent in 2024 I spent three years at Man Group in
      London, moving through risk engineering, quantitative equity research, and
-     data science. I have a BSc in Physics, and am flirting with the idea of an
-     MBA.</p>
+     data science. I have a BSc in Physics, and am hoping to study an MBA in the
+     US in the future.</p>
 
-  <p>Most of my recent work is leveraging knowledge graphs.
-     <a href="https://github.com/akaddo97/sponge">Sponge</a>, an agentic
-     knowledge-graph platform I built, is public on GitHub.</p>
+  <p>Most of my recent work is leveraging knowledge graphs. Alongside client
+     work I am juggling processes across several AI startups, which keeps me
+     close to how agentic systems are actually being built rather than how they
+     are described.</p>
 
   <p class="last">Off the clock I run
      <a href="https://ak-baking.square.site/">AK Bakes</a>, a home bakery.</p>
@@ -176,15 +236,27 @@
     </div>
   </div>
 
+  <!-- The bakery sits above the repos deliberately. It is the differentiator:
+       a real business with real customers whose back office I am rebuilding
+       with the same tooling I sell. The repos are evidence, this is the proof. -->
+  <a class="bake" href="https://ak-baking.square.site/">
+    <div class="bd">
+      <div class="bar"></div>
+      <p class="t">AK Bakes, run on its own AI back office</p>
+      <p class="s">A real business with real customers, and my own testbed.
+         Orders, stock, costings, and customer messages are being moved onto
+         the same tooling I build for clients. If it cannot survive my own
+         bakery, I will not sell it to you.</p>
+    </div>
+    <div class="arw">&rarr;</div>
+  </a>
+
   <div class="work">
     <p class="oh">Work you can check</p>
 
-    <p><a href="https://github.com/akaddo97/sponge">Sponge</a> is an agentic
-       knowledge-graph platform. The model proposes a change, you approve it, and
-       a hard validator gates every write with snapshot rollback, so a rejected
-       write restores the store byte-identical.</p>
-
     <ul class="repos">
+      <li><a href="https://github.com/akaddo97/sponge">Sponge</a>, an agentic
+          knowledge-graph platform where the model proposes and you approve.</li>
       <li><a href="https://github.com/akaddo97/llm-providers">llm-providers</a>,
           a protocol-based abstraction over language-model providers.</li>
       <li><a href="https://github.com/akaddo97/knowledge-gun">knowledge-gun</a>,
@@ -201,53 +273,110 @@
 
   <!-- SLOT, intentionally empty on the live page.
        One short piece of AK's own writing belongs here, between the evidence
-       block above and the bakery block below. The argument already exists in
-       the Sponge README: in a system where a model writes to a store you depend
+       block above and the outcomes below. The argument already exists in the
+       Sponge README: in a system where a model writes to a store you depend
        on, the approval step is the product rather than the overhead. Only AK
        writes this. Do not draft it. -->
 
-  <a class="bake" href="https://ak-baking.square.site/">
-    <div class="bd">
-      <div class="bar"></div>
-      <p class="t">Baking</p>
-      <p class="s">Tasty treats</p>
-    </div>
-    <div class="arw">&rarr;</div>
-  </a>
-
+  <!-- Named by outcome rather than by visitor type. These are things being
+       built right now, so a question about any of them lands on work in
+       progress rather than on a capability claim. -->
   <div class="work" id="start">
-    <p class="oh">How to get involved</p>
+    <p class="oh">What I build</p>
 
     <div class="routes">
       <a class="route" href="build/">
-        <p class="rt">You want a tool built</p>
-        <p class="rd">Something in your workflow is manual and should not be.
-           Start here and tell me what it is.</p>
+        <p class="rt">Intent classification for email triage</p>
+        <p class="rd">A shared inbox that sorts itself, routes to the right
+           person, and stops the same question being answered three times.</p>
       </a>
-      <a class="route" href="learn/">
-        <p class="rt">You want to get fluent</p>
-        <p class="rd">For you or your team. There is a six-week curriculum and
-           a working tool at the end of it.</p>
+      <a class="route" href="build/">
+        <p class="rt">Knowledge bases for cognitive offload</p>
+        <p class="rd">The things your team knows, held somewhere they can be
+           asked, so nothing depends on one person remembering.</p>
       </a>
-      <a class="route" href="learn/#cohort">
-        <p class="rt">You want a cohort place</p>
-        <p class="rd">Free and selective, an hour a week. Say which lane fits
-           and what you want to build.</p>
+      <a class="route" href="build/">
+        <p class="rt">Automations for freeing up staff</p>
+        <p class="rd">The repetitive middle of a workflow handed to agents, so
+           people spend their hours on the parts that need judgement.</p>
       </a>
-      <a class="route" href="https://www.linkedin.com/in/ak-addo-248149196/">
-        <p class="rt">You are hiring</p>
-        <p class="rd">Happy to talk. Message me and I will send a CV.</p>
+      <a class="route" href="build/">
+        <p class="rt">Document workflows</p>
+        <p class="rd">Unstructured PDFs and documents parsed into a database
+           you can actually query and report on.</p>
       </a>
     </div>
   </div>
 
-  <div class="ask">
-    <h3>Start a conversation</h3>
-    <p>Tell me what is slow, who it is slowing down, and what you have already tried. No form to fill in yet, so a message is the fastest route.</p>
-    <a class="btn" href="https://www.linkedin.com/in/ak-addo-248149196/">Get in touch</a>
+  <div class="work">
+    <p class="oh">What the cohort learns</p>
+
+    <div class="routes">
+      <a class="route" href="learn/">
+        <p class="rt">Knowledge graphs for CRM</p>
+        <p class="rd">Your own contacts, context, and history as a graph you
+           own, rather than as a tool subscription.</p>
+      </a>
+      <a class="route" href="learn/#vibe">
+        <p class="rt">Vibe coding software that compounds</p>
+        <p class="rd">Building working software without an engineering
+           background, in a way where each thing you build makes the next one
+           easier.</p>
+      </a>
+      <a class="route" href="learn/">
+        <p class="rt">Neural networks</p>
+        <p class="rd">What is actually happening inside the models, at the
+           level you need to make good calls about them.</p>
+      </a>
+      <a class="route" href="learn/">
+        <p class="rt">Mathematics</p>
+        <p class="rd">The relevant maths, and only for the members who want
+           it. Nobody is made to sit through it.</p>
+      </a>
+    </div>
+  </div>
+
+  <!-- Prices are published deliberately, and before any introduction lands.
+       Full working: docs/scoping/pricing_and_client_pipeline_2026-08-10.html
+       in the aks_claude_data repo. -->
+  <div class="work">
+    <p class="oh">What it costs</p>
+
+    <p>Prices are published so the first conversation can be about your problem
+       rather than about my rate. The day rate is £750, everything is measured
+       against business goals you choose before any building starts, and the
+       first step is free.</p>
+
+    <p><a class="btn" href="pricing/">See how I work, and what it costs</a></p>
+  </div>
+
+  <div class="work">
+    <p class="oh">Three things you can do right now</p>
+
+    <div class="routes">
+      <!-- FORM:BOOKING -->
+      <a class="route" href="https://www.linkedin.com/in/ak-addo-248149196/">
+        <p class="rt">Book a free 30 minutes</p>
+        <p class="rd">Tell me what is slow, who it is slowing down, and what
+           you have already tried. No charge, and no obligation after it.</p>
+      </a>
+      <!-- FORM:CV -->
+      <a class="route" href="https://www.linkedin.com/in/ak-addo-248149196/">
+        <p class="rt">Download the CV</p>
+        <p class="rd">If you are hiring or introducing me to someone who is.
+           Short form first, then the download.</p>
+      </a>
+      <!-- FORM:MENTOR -->
+      <a class="route" href="https://www.linkedin.com/in/ak-addo-248149196/">
+        <p class="rt">Mentor a cohort member</p>
+        <p class="rd">An hour a month with someone early in their career who
+           is doing the work. You pick the lane that matches you.</p>
+      </a>
+    </div>
   </div>
 
   <nav>
+    <a href="pricing/">Services and prices</a>
     <a href="https://www.linkedin.com/in/ak-addo-248149196/">LinkedIn</a>
     <a href="https://github.com/akaddo97">GitHub</a>
     <a href="https://ak-baking.square.site/">AK Bakes</a>

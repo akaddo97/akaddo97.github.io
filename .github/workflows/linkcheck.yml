@@ -1,0 +1,77 @@
+# Weekly check on the outbound links that matter, chiefly the HiTEN publication
+# URL, which the publisher has moved before.
+#
+# This never fails the build. GitHub Pages deploys from the branch and does not
+# depend on this workflow, and the job is written to exit 0 whatever it finds.
+# The notification is a GitHub issue: one open issue at a time, updated with a
+# fresh comment each week the link is still broken, closed by hand once fixed.
+#
+# A link is only reported broken on 404, 410, or a total failure to connect,
+# and only after three attempts. Publishers behind a WAF answer automated
+# requests with 403 or 429 all the time, and treating those as broken would
+# make this cry wolf until it gets ignored.
+
+name: Link check
+
+on:
+  schedule:
+    - cron: "0 8 * * 1"   # 08:00 UTC every Monday
+  workflow_dispatch:       # so it can be run by hand from the Actions tab
+
+permissions:
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check the links
+        id: check
+        run: |
+          UA='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36'
+          URLS=(
+            "https://meridian.allenpress.com/imaps-conferences/article/2019/HiTen/000061/420559/Comparative-study-of-how-additives-affect-sintered"
+            "https://ak-baking.square.site/"
+            "https://github.com/akaddo97/sponge"
+            "https://github.com/akaddo97/llm-providers"
+            "https://github.com/akaddo97/knowledge-gun"
+            "https://github.com/akaddo97/knowledge-gun-mcp"
+          )
+          BROKEN=""
+          for url in "${URLS[@]}"; do
+            code=000
+            for attempt in 1 2 3; do
+              code=$(curl -sSL -o /dev/null -w '%{http_code}' \
+                       --max-time 25 --retry 0 -A "$UA" "$url" || echo 000)
+              case "$code" in
+                404|410|000) sleep 5 ;;
+                *) break ;;
+              esac
+            done
+            echo "$code  $url"
+            case "$code" in
+              404|410|000) BROKEN="${BROKEN}- ${url} returned ${code}"$'\n' ;;
+            esac
+          done
+          {
+            echo "broken<<EOF"
+            printf '%s' "$BROKEN"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Open or update an issue when something is broken
+        if: steps.check.outputs.broken != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BROKEN: ${{ steps.check.outputs.broken }}
+        run: |
+          TITLE="Link check: a published link is not resolving"
+          BODY=$(printf 'The weekly link check could not resolve these:\n\n%s\nChecked on %s. Three attempts each, so this is unlikely to be a blip. A 404 usually means the publisher has moved the page, in which case the fix is to find the new URL and update it in index.html.\n' \
+                 "$BROKEN" "$(date -u '+%Y-%m-%d %H:%M UTC')")
+          EXISTING=$(gh issue list --state open --search "$TITLE in:title" \
+                       --json number --jq '.[0].number' 2>/dev/null || true)
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --body "$BODY"
+          else
+            gh issue create --title "$TITLE" --body "$BODY"
+          fi

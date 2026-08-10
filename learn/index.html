@@ -94,11 +94,78 @@
   .btn{display:inline-block;background:var(--ink);color:var(--bg);border:0;border-bottom:0;
     border-radius:8px;padding:11px 20px;font-size:16px;font-weight:600;}
   .btn:hover{background:#000;color:var(--bg);}
+
+  /* Outcome-named topics. Same rule as the homepage: name the thing by what it
+     lets someone do, not by the technology it uses. */
+  .outs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 22px;}
+  .out{border:1px solid var(--rule);border-radius:10px;padding:16px 16px 14px;background:#fff;}
+  .out .ot{font-size:16px;font-weight:700;margin:0 0 4px;}
+  .out .od{font-size:15px;color:var(--muted);margin:0;}
+  @media (max-width:520px){.outs{grid-template-columns:1fr;}}
+
+  /* Persistent action rail. Every page carries the same four actions, booking
+     first. A 64px left strip from 769px up, a bottom bar below that, because on
+     a phone the reachable edge is the bottom one and horizontal space is the
+     scarce axis. Sits outside #doc so the edit harness cannot remove it. */
+  /* The generic nav rule below styles the footer nav (margin, padding, top
+     border, and a gap). The rail is also a nav, so it resets all four here
+     rather than inheriting a 44px offset and a rule across its top. */
+  .rail{position:fixed;z-index:60;display:flex;background:var(--ink);
+    margin:0;padding:0;border:0;gap:0;}
+  .rail-item{display:flex;align-items:center;color:#9C978C;border-bottom:0;
+    padding-bottom:0;font-weight:500;transition:color .16s ease,background .16s ease;}
+  .rail-item svg{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;
+    stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+  .rail-item:hover{color:#fff;background:transparent;}
+  .rail-primary{color:var(--accent);}
+  .rail-primary:hover{color:var(--ink);background:var(--accent);}
+  .rail-item:focus-visible{outline:2px solid var(--accent);outline-offset:-2px;}
+  @media (min-width:769px){
+    body{padding-left:64px;}
+    .rail{top:0;left:0;bottom:0;width:64px;flex-direction:column;align-items:stretch;
+      border-right:1px solid #2A2A2A;}
+    .rail-item{position:relative;justify-content:center;height:64px;}
+    .rail-item .rail-label{position:absolute;left:100%;margin-left:10px;padding:6px 10px;
+      white-space:nowrap;font-size:12px;color:#fff;background:var(--ink);
+      border:1px solid #2A2A2A;border-radius:4px;opacity:0;transform:translateX(-4px);
+      pointer-events:none;transition:opacity .16s ease,transform .16s ease;}
+    .rail-item:hover .rail-label,
+    .rail-item:focus-visible .rail-label{opacity:1;transform:translateX(0);}
+  }
+  @media (max-width:768px){
+    body{padding-bottom:60px;}
+    .rail{left:0;right:0;bottom:0;height:60px;flex-direction:row;
+      border-top:1px solid #2A2A2A;padding-bottom:env(safe-area-inset-bottom);}
+    .rail-item{flex:1;flex-direction:column;justify-content:center;gap:4px;}
+    .rail-item .rail-label{font-size:10px;letter-spacing:.02em;}
+  }
+  @media print{.rail{display:none}}
 </style>
 </head>
 <body>
 
 <div class="ed-bar" contenteditable="false"><button id="edEdit" type="button">Edit</button><button id="edSave" type="button">Save a copy</button><button id="edRevert" type="button">Revert</button><span class="ed-status" id="edStatus">Read only</span></div>
+
+<!-- Persistent action rail. Identical on every page. The two form links carry
+     FORM: markers so both can be swapped across the site with one grep once the
+     Google Forms exist. Until then they fall back to LinkedIn, so no action on
+     this site opens onto a dead end. -->
+<nav class="rail" aria-label="Quick actions">
+  <!-- FORM:BOOKING -->
+  <a class="rail-item rail-primary" href="https://www.linkedin.com/in/ak-addo-248149196/" target="_blank" rel="noopener" aria-label="Book a free 30 minutes">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 5h12v11H4z"/><path d="M4 8h12"/><path d="M7 3v3"/><path d="M13 3v3"/></svg>
+    <span class="rail-label">Book a call</span></a>
+  <a class="rail-item" href="../pricing/" aria-label="Services and prices">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3v14"/><path d="M13.5 6H8.5a2 2 0 000 4h3a2 2 0 010 4H6"/></svg>
+    <span class="rail-label">Prices</span></a>
+  <!-- FORM:CV -->
+  <a class="rail-item" href="https://www.linkedin.com/in/ak-addo-248149196/" target="_blank" rel="noopener" aria-label="Download the CV">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 3h6l4 4v10H5z"/><path d="M11 3v4h4"/><path d="M8 11h4"/><path d="M8 14h4"/></svg>
+    <span class="rail-label">CV</span></a>
+  <a class="rail-item" href="https://ak-baking.square.site/" target="_blank" rel="noopener" aria-label="AK Bakes">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 12a7 4 0 0114 0z"/><path d="M3 12v2a7 4 0 0014 0v-2"/></svg>
+    <span class="rail-label">Bakery</span></a>
+</nav>
 
 <main id="doc">
   <a class="back" href="../">Back to AK Addo</a>
@@ -109,6 +176,31 @@
 
   <p class="lede">Getting an operator or a team fluent and measurably faster
      with the tools that exist now.</p>
+
+  <h2>What you come away able to do</h2>
+
+  <div class="outs">
+    <div class="out">
+      <p class="ot">Knowledge graphs for CRM</p>
+      <p class="od">Your own contacts, context, and history as a graph you own,
+         rather than as a tool subscription.</p>
+    </div>
+    <div class="out">
+      <p class="ot">Vibe coding software that compounds</p>
+      <p class="od">Working software without an engineering background, built so
+         each thing makes the next one easier.</p>
+    </div>
+    <div class="out">
+      <p class="ot">Neural networks</p>
+      <p class="od">What is actually happening inside the models, at the level
+         you need to make good calls about them.</p>
+    </div>
+    <div class="out">
+      <p class="ot">Mathematics</p>
+      <p class="od">The relevant maths, and only for the members who want it.
+         Nobody is made to sit through it.</p>
+    </div>
+  </div>
 
   <h2>What gets taught</h2>
 
@@ -255,8 +347,55 @@
      of private individuals, so no names, employers, or photographs are
      published here.</p>
 
-  <p>Places are limited. If you want one, say which lane fits and what you want
-     to build.</p>
+  <div class="ask">
+    <h3>Apply for a cohort place</h3>
+    <p>Places are limited and it is selective. Say which lane fits, what you want to build, and what you can commit to.</p>
+    <!-- FORM:COHORT -->
+    <a class="btn" href="https://www.linkedin.com/in/ak-addo-248149196/">Apply for a place</a>
+  </div>
+
+  <h2 id="mentor">Mentor someone in it</h2>
+
+  <p>The members are early in their careers and doing the work in public. What
+     they do not have is someone further along in their own field to ask. If
+     you are that person, an hour a month is enough to matter, and you pick the
+     lane that matches what you actually do.</p>
+
+  <p>It is unpaid, it is light, and you will not be asked to teach the
+     curriculum. The teaching is mine. What is useful from you is the part I
+     cannot give them: what the work looks like from inside your industry.</p>
+
+  <div class="ask">
+    <h3>Be a mentor</h3>
+    <p>Tell me your field, roughly how much time you have, and which lane you would want to take. I will match you and introduce you.</p>
+    <!-- FORM:MENTOR -->
+    <a class="btn" href="https://www.linkedin.com/in/ak-addo-248149196/">Volunteer as a mentor</a>
+  </div>
+
+  <h2 id="vibe">Vibe coding</h2>
+
+  <p>A separate track, and the one most people ask for. Building working
+     software without an engineering background, in a way where each thing you
+     build makes the next one easier rather than leaving you with a pile of
+     prototypes you cannot maintain.</p>
+
+  <p>The distinction that matters is between software that compounds and
+     software that accumulates. Anyone can now get a model to produce something
+     that runs. The skill worth having is knowing what to keep, what to throw
+     away, and how to structure the thing you keep so it is still useful to you
+     in six months.</p>
+
+  <p>This one suits a room better than a call, so it is likely to run as
+     cowork sessions rather than as a lecture: everybody brings the thing they
+     are actually trying to build, and we build it. If that is what you want,
+     say so and I will tell you when the first one runs.</p>
+
+  <div class="ask">
+    <h3>Register interest in vibe coding</h3>
+    <p>Say what you are trying to build and whether a cowork session in person would work for you.</p>
+    <!-- FORM:COHORT -->
+    <a class="btn" href="https://www.linkedin.com/in/ak-addo-248149196/">Register interest</a>
+  </div>
 
   <h2>The six weeks</h2>
 
@@ -290,14 +429,19 @@
   <p>It suits professionals, SMEs, and enterprises, including teams with no
      engineers in them.</p>
 
+  <p>Team fluency work is priced as the Fluency Sprint or the team programme.
+     <a href="../pricing/">Prices and the method are published here.</a></p>
+
   <div class="ask">
-    <h3>Want in?</h3>
-    <p>For team fluency work, say what your team does and where the time goes. For a cohort place, say which lane fits and what you want to build.</p>
-    <a class="btn" href="https://www.linkedin.com/in/ak-addo-248149196/">Ask about fluency or a cohort place</a>
+    <h3>Talk about team fluency</h3>
+    <p>Say what your team does and where the time goes. Thirty minutes, free, and you will get an honest read on whether this is the right shape of work for you.</p>
+    <!-- FORM:BOOKING -->
+    <a class="btn" href="https://www.linkedin.com/in/ak-addo-248149196/">Book a free 30 minutes</a>
   </div>
 
   <nav>
     <a href="../build/">Bespoke tech products</a>
+    <a href="../pricing/">Services and prices</a>
     <a href="https://www.linkedin.com/in/ak-addo-248149196/">Get in touch</a>
     <a href="../">Home</a>
   </nav>
