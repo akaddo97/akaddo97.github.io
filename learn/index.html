@@ -72,11 +72,36 @@
     h1{font-size:32px;}
     .lede{font-size:18px;}
   }
+
+  /* Editable harness, hidden unless ?edit=1. Public visitors never see it. */
+  .ed-bar{display:none;position:fixed;top:12px;right:12px;z-index:50;gap:6px;align-items:center;
+    background:var(--bg);border:1px solid var(--rule);border-radius:8px;padding:5px 7px;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);}
+  body.ed-on .ed-bar{display:flex;}
+  .ed-bar button{font:inherit;font-size:12px;padding:3px 8px;border:1px solid var(--rule);
+    background:#F0EDE3;color:var(--ink);border-radius:6px;cursor:pointer;}
+  .ed-bar button.on{background:var(--accent);color:var(--ink);border-color:var(--accent);}
+  .ed-bar .ed-status{color:var(--muted);padding:0 2px;font-size:12px;}
+  #doc[contenteditable="true"]{outline:2px dashed var(--accent);outline-offset:10px;border-radius:6px;}
+  @media print{.ed-bar{display:none}}
+  @media (max-width:640px){body.ed-on .ed-bar{position:static;margin:10px 12px 0;justify-content:flex-end;}}
+
+  /* Inquiry block. */
+  .ask{margin-top:44px;padding:24px 24px 22px;border:1px solid var(--rule);border-radius:12px;
+    background:#fff;}
+  .ask h3{font-size:19px;margin:0 0 6px;letter-spacing:-0.01em;}
+  .ask p{font-size:16px;color:var(--muted);margin:0 0 16px;}
+  .btn{display:inline-block;background:var(--ink);color:var(--bg);border:0;border-bottom:0;
+    border-radius:8px;padding:11px 20px;font-size:16px;font-weight:600;}
+  .btn:hover{background:#000;color:var(--bg);}
+  .ask .alt{display:inline-block;margin-left:14px;font-size:15px;}
 </style>
 </head>
 <body>
 
-<main>
+<div class="ed-bar" contenteditable="false"><button id="edEdit" type="button">Edit</button><button id="edSave" type="button">Save a copy</button><button id="edRevert" type="button">Revert</button><span class="ed-status" id="edStatus">Read only</span></div>
+
+<main id="doc">
   <a class="back" href="../">Back to AK Addo</a>
 
   <p class="eyebrow">AI fluency</p>
@@ -115,6 +140,7 @@
 <path d="M445,224.0 L445,244.0" fill="none" stroke="#B8B2A4" stroke-width="1.4" marker-end="url(#ar)" opacity="0.75"/>
 <path d="M525.1,104 C593.875,104 593.875,104 662.65,104" fill="none" stroke="#B8B2A4" stroke-width="1.4" marker-end="url(#ar)" opacity="0.75"/>
 <path d="M507.85,208 C576.625,208 576.625,312 645.4,312" fill="none" stroke="#B8B2A4" stroke-width="1.4" marker-end="url(#ar)" opacity="0.75"/>
+<path d="M532.0,260 C588.7,260 588.7,312 645.4,312" fill="none" stroke="#B8B2A4" stroke-width="1.4" marker-end="url(#ar)" opacity="0.75"/>
 <path d="M760,120.0 L760,140.0" fill="none" stroke="#B8B2A4" stroke-width="1.4" marker-end="url(#ar)" opacity="0.75"/>
 <path d="M760,172.0 L760,192.0" fill="none" stroke="#B8B2A4" stroke-width="1.4" marker-end="url(#ar)" opacity="0.75"/>
 <path d="M760,224.0 L760,244.0" fill="none" stroke="#B8B2A4" stroke-width="1.4" marker-end="url(#ar)" opacity="0.75"/>
@@ -158,39 +184,7 @@
      GPU architecture, transformers, and backpropagation, is deliberately left
      out: this is a tooling-fluency course, not a machine-learning course.</p>
 
-  <h2>The six weeks</h2>
-
-  <ol class="weeks">
-    <li><span class="wk">Week 1</span> Kickoff and the tooling. NotebookLM, Deep
-        Research, Perplexity, and what a large language model is actually
-        doing.</li>
-    <li><span class="wk">Week 2</span> Designing your own Deep Research prompts,
-        and how AI search and retrieval works underneath.</li>
-    <li><span class="wk">Week 3</span> Prompt depth and iteration, plus enough
-        data science to read what comes back critically.</li>
-    <li><span class="wk">Week 4</span> Metaprompting, building agents and tool
-        use, workflow compression, and context management.</li>
-    <li><span class="wk">Week 5</span> Knowledge graphs as a concept, and why
-        capturing your own data compounds.</li>
-    <li><span class="wk">Week 6</span> Knowledge graphs built for real, with RAG
-        and retrieval wired in, closing the loop on your own work.</li>
-  </ol>
-
-  <p>Before week 1 there is a warm-up: a piece of real research in your own
-     field, so the tooling has something true to bite on from the first
-     session.</p>
-
-  <h2>For teams</h2>
-
-  <p>Team fluency work runs differently. It starts from the job you already do:
-     we go through your actual workflow, find where the time goes, and rebuild
-     those steps around the AI that exists this week. You keep working tools at
-     the end, not notes.</p>
-
-  <p>It suits professionals, SMEs, and enterprises, including teams with no
-     engineers in them.</p>
-
-  <h2>The upskilling cohort</h2>
+  <h2 id="cohort">Current cohort</h2>
 
   <p>I also run a small AI upskilling cohort, teaching young professionals
      practical AI skills. It is selective and free for the people I take on.
@@ -266,12 +260,96 @@
   <p>Places are limited. If you want one, say which lane fits and what you want
      to build.</p>
 
+  <h2>The six weeks</h2>
+
+  <ol class="weeks">
+    <li><span class="wk">Week 1</span> Kickoff and the tooling. NotebookLM, Deep
+        Research, Perplexity, and what a large language model is actually
+        doing.</li>
+    <li><span class="wk">Week 2</span> Designing your own Deep Research prompts,
+        and how AI search and retrieval works underneath.</li>
+    <li><span class="wk">Week 3</span> Prompt depth and iteration, plus enough
+        data science to read what comes back critically.</li>
+    <li><span class="wk">Week 4</span> Metaprompting, building agents and tool
+        use, workflow compression, and context management.</li>
+    <li><span class="wk">Week 5</span> Knowledge graphs as a concept, and why
+        capturing your own data compounds.</li>
+    <li><span class="wk">Week 6</span> Knowledge graphs built for real, with RAG
+        and retrieval wired in, closing the loop on your own work.</li>
+  </ol>
+
+  <p>Before week 1 there is a warm-up: a piece of real research in your own
+     field, so the tooling has something true to bite on from the first
+     session.</p>
+
+  <h2>For teams</h2>
+
+  <p>Team fluency work runs differently. It starts from the job you already do:
+     we go through your actual workflow, find where the time goes, and rebuild
+     those steps around the AI that exists this week. You keep working tools at
+     the end, not notes.</p>
+
+  <p>It suits professionals, SMEs, and enterprises, including teams with no
+     engineers in them.</p>
+
+  <div class="ask">
+    <h3>Want in?</h3>
+    <p>For team fluency work, say what your team does and where the time goes. For a cohort place, say which lane fits and what you want to build.</p>
+    <a class="btn" href="https://www.linkedin.com/in/ak-addo-248149196/">Ask about fluency or a cohort place</a>
+    <a class="alt" href="https://www.linkedin.com/in/ak-addo-248149196/">or just message me</a>
+  </div>
+
   <nav>
     <a href="../build/">Bespoke tech products</a>
     <a href="https://www.linkedin.com/in/ak-addo-248149196/">Get in touch</a>
     <a href="../">Home</a>
   </nav>
 </main>
+
+<script>
+/* Editable-in-place harness, gated. See skills/editable_html/SKILL.md.
+   Public visitors get no toolbar. Open any page with ?edit=1 to edit copy,
+   then "Save a copy" to download the edited HTML. Saved edits restore only in
+   edit mode, so a normal visit always shows what is actually published. */
+(function(){
+  var live=(location.search.indexOf('edit=1')>=0)||(location.hostname==='localhost');
+  if(live===false){return;}
+  var doc=document.getElementById('doc');
+  if(doc===null){return;}
+  document.body.classList.add('ed-on');
+  var btn=document.getElementById('edEdit'), status=document.getElementById('edStatus'),
+      KEY='akkg-edit:'+document.title+':'+(doc.dataset.genkey||'0');
+  try{var saved=localStorage.getItem(KEY);if(saved){doc.innerHTML=saved;status.textContent='Restored your saved edits';}}catch(e){}
+  var editing=false;
+  function setEditing(on){
+    editing=on;
+    doc.setAttribute('contenteditable',on?'true':'false');
+    btn.textContent=on?'Editing':'Edit'; btn.classList.toggle('on',on);
+    status.textContent=on?'Click any text to change it':'Read only';
+    if(on)doc.focus();
+  }
+  btn.addEventListener('click',function(){setEditing(editing===false);});
+  doc.addEventListener('input',function(){
+    if(editing===false){return;}
+    try{localStorage.setItem(KEY,doc.innerHTML);status.textContent='Saved in this browser';}catch(e){}
+  });
+  document.getElementById('edSave').addEventListener('click',function(){
+    var was=editing; if(was)setEditing(false);
+    var html='<!doctype html>\n'+document.documentElement.outerHTML;
+    var a=document.createElement('a');
+    a.href=URL.createObjectURL(new Blob([html],{type:'text/html'}));
+    a.download=(document.title||'page').replace(/[^a-z0-9]+/gi,'_').replace(/^_|_$/g,'')+'_edited.html';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function(){URL.revokeObjectURL(a.href);},1000);
+    if(was)setEditing(true);
+  });
+  document.getElementById('edRevert').addEventListener('click',function(){
+    if(confirm('Discard your saved edits and reload the original?')===false)return;
+    try{localStorage.removeItem(KEY);}catch(e){}
+    location.reload();
+  });
+})();
+</script>
 
 </body>
 </html>
