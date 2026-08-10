@@ -27,7 +27,7 @@ Two of those actions, plus several buttons in the page bodies, point at forms th
 
 - `<!-- FORM:BOOKING -->`, nine links
 - `<!-- FORM:CV -->`, five links
-- `<!-- FORM:MENTOR -->`, two links
+- `<!-- FORM:MENTOR -->`, one link
 - `<!-- FORM:COHORT -->`, two links
 
 Until a form exists, its links fall back to the LinkedIn profile, so no action on the site opens onto a dead end. The field specification for each form, and the tested one-command swap that wires one in, live in `docs/scoping/website_forms_spec_2026-08-10.html` in the `aks_claude_data` repo.

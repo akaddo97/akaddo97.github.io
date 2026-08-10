@@ -200,9 +200,9 @@
   <h1>AK Addo</h1>
   <p class="role">Forward-deployed AI engineer</p>
 
-  <p>I am an AI strategy and data consultant, working with professionals, SMEs,
-     and enterprise clients. I build token-efficient, model-agnostic tooling
-     that makes teams demonstrably faster.</p>
+  <p>I work with professionals, SMEs, and enterprise clients. I build
+     token-efficient, model-agnostic tooling that makes teams demonstrably
+     faster.</p>
 
   <p>I also run an AI upskilling cohort, teaching young professionals practical
      AI skills.</p>
@@ -213,12 +213,12 @@
      US in the future.</p>
 
   <p>Most of my recent work is leveraging knowledge graphs. Alongside client
-     work I am juggling processes across several AI startups, which keeps me
-     close to how agentic systems are actually being built rather than how they
-     are described.</p>
+     work I am juggling processes across several AI startups, and I find it
+     immensely interesting learning about AI native approaches to problems.</p>
 
   <p class="last">Off the clock I run
-     <a href="https://ak-baking.square.site/">AK Bakes</a>, a home bakery.</p>
+     <a href="https://ak-baking.square.site/">AK Bakes</a>, an AI-assisted home
+     bakery.</p>
 
   <div class="offers">
     <p class="oh">What I do</p>
@@ -236,6 +236,78 @@
     </div>
   </div>
 
+  <!-- Section order is deliberate and was set by AK on 2026-08-10: the site is
+       primarily for the services, so the two offerings and the cost pointer run
+       first, and the evidence (bakery, repos, writing) sits underneath. The
+       bakery stays immediately above the repos, which was the original ask. -->
+
+  <div class="work" id="start">
+    <p class="oh">Knowledge graph solutions</p>
+
+    <div class="routes">
+      <a class="route" href="build/">
+        <p class="rt">Intent classification for email triage</p>
+        <p class="rd">An inbox that sorts itself, routes to the right person,
+           and automates repetitive responses.</p>
+      </a>
+      <a class="route" href="build/">
+        <p class="rt">Knowledge bases for cognitive offload</p>
+        <p class="rd">The things your team knows, held somewhere they can be
+           asked, so nothing depends on people remembering.</p>
+      </a>
+      <a class="route" href="build/">
+        <p class="rt">Automations for freeing up staff</p>
+        <p class="rd">The repetitive middle of a workflow handed to agents, so
+           you can do more with the same people.</p>
+      </a>
+      <a class="route" href="build/">
+        <p class="rt">Document workflows</p>
+        <p class="rd">Unstructured PDFs and documents parsed into a database
+           you can query and report on.</p>
+      </a>
+    </div>
+  </div>
+
+  <div class="work">
+    <p class="oh">Curriculum</p>
+
+    <div class="routes">
+      <a class="route" href="learn/">
+        <p class="rt">Knowledge graphs for CRM</p>
+        <p class="rd">Your own contacts, context, and history as a graph you
+           own. Your agents maintain it, and become domain experts in your
+           specialised career context.</p>
+      </a>
+      <a class="route" href="learn/#vibe">
+        <p class="rt">Vibe coding software that compounds</p>
+        <p class="rd">Writing your own software, using natural language to
+           orchestrate agents.</p>
+      </a>
+      <!-- One card, not two. Inference is where the theory and the hardware
+           meet, and the syllabus already teaches training versus inference,
+           so splitting them would invent a distinction the course does not
+           make. AK's call, 2026-08-10. -->
+      <a class="route" href="learn/">
+        <p class="rt">Neural networks</p>
+        <p class="rd">What is actually happening inside the models, and inside
+           the data centres they run in.</p>
+      </a>
+      <a class="route" href="learn/">
+        <p class="rt">Mathematics</p>
+        <p class="rd">Optional. Calculus, chain rule.</p>
+      </a>
+    </div>
+  </div>
+
+  <!-- Prices live on /pricing/ only, per AK 2026-08-10. The homepage points at
+       them rather than quoting them, so the rate appears once and in context.
+       Full working: docs/scoping/pricing_and_client_pipeline_2026-08-10.html -->
+  <div class="work">
+    <p class="oh">Costs</p>
+
+    <p><a class="btn" href="pricing/">See how I work, and what it costs</a></p>
+  </div>
+
   <!-- The bakery sits above the repos deliberately. It is the differentiator:
        a real business with real customers whose back office I am rebuilding
        with the same tooling I sell. The repos are evidence, this is the proof. -->
@@ -245,14 +317,13 @@
       <p class="t">AK Bakes, run on its own AI back office</p>
       <p class="s">A real business with real customers, and my own testbed.
          Orders, stock, costings, and customer messages are being moved onto
-         the same tooling I build for clients. If it cannot survive my own
-         bakery, I will not sell it to you.</p>
+         the same AI tooling I build for clients.</p>
     </div>
     <div class="arw">&rarr;</div>
   </a>
 
   <div class="work">
-    <p class="oh">Work you can check</p>
+    <p class="oh">GitHub</p>
 
     <ul class="repos">
       <li><a href="https://github.com/akaddo97/sponge">Sponge</a>, an agentic
@@ -264,6 +335,14 @@
       <li><a href="https://github.com/akaddo97/knowledge-gun-mcp">knowledge-gun-mcp</a>,
           an MCP server wrapping it.</li>
     </ul>
+  </div>
+
+  <!-- Writing. AK's ask, 2026-08-10: a home for his own pieces when they
+       exist. It ships with the paper in it rather than as an empty promise,
+       since published research is writing. New items go at the top of this
+       list as they land. This supersedes the old empty SLOT comment. -->
+  <div class="work">
+    <p class="oh">Writing</p>
 
     <p class="pub">Published research:
        <a href="https://meridian.allenpress.com/imaps-conferences/article/2019/HiTen/000061/420559/Comparative-study-of-how-additives-affect-sintered">Comparative
@@ -271,87 +350,11 @@
        HiTEN 2019.</p>
   </div>
 
-  <!-- SLOT, intentionally empty on the live page.
-       One short piece of AK's own writing belongs here, between the evidence
-       block above and the outcomes below. The argument already exists in the
-       Sponge README: in a system where a model writes to a store you depend
-       on, the approval step is the product rather than the overhead. Only AK
-       writes this. Do not draft it. -->
-
-  <!-- Named by outcome rather than by visitor type. These are things being
-       built right now, so a question about any of them lands on work in
-       progress rather than on a capability claim. -->
-  <div class="work" id="start">
-    <p class="oh">What I build</p>
-
-    <div class="routes">
-      <a class="route" href="build/">
-        <p class="rt">Intent classification for email triage</p>
-        <p class="rd">A shared inbox that sorts itself, routes to the right
-           person, and stops the same question being answered three times.</p>
-      </a>
-      <a class="route" href="build/">
-        <p class="rt">Knowledge bases for cognitive offload</p>
-        <p class="rd">The things your team knows, held somewhere they can be
-           asked, so nothing depends on one person remembering.</p>
-      </a>
-      <a class="route" href="build/">
-        <p class="rt">Automations for freeing up staff</p>
-        <p class="rd">The repetitive middle of a workflow handed to agents, so
-           people spend their hours on the parts that need judgement.</p>
-      </a>
-      <a class="route" href="build/">
-        <p class="rt">Document workflows</p>
-        <p class="rd">Unstructured PDFs and documents parsed into a database
-           you can actually query and report on.</p>
-      </a>
-    </div>
-  </div>
-
+  <!-- HEADING PLACEHOLDER: "Start here" is provisional and AK has parked the
+       decision. Safe to publish as is; grep for HEADING PLACEHOLDER to find it.
+       Mentoring deliberately lives on the fluency page only, not here. -->
   <div class="work">
-    <p class="oh">What the cohort learns</p>
-
-    <div class="routes">
-      <a class="route" href="learn/">
-        <p class="rt">Knowledge graphs for CRM</p>
-        <p class="rd">Your own contacts, context, and history as a graph you
-           own, rather than as a tool subscription.</p>
-      </a>
-      <a class="route" href="learn/#vibe">
-        <p class="rt">Vibe coding software that compounds</p>
-        <p class="rd">Building working software without an engineering
-           background, in a way where each thing you build makes the next one
-           easier.</p>
-      </a>
-      <a class="route" href="learn/">
-        <p class="rt">Neural networks</p>
-        <p class="rd">What is actually happening inside the models, at the
-           level you need to make good calls about them.</p>
-      </a>
-      <a class="route" href="learn/">
-        <p class="rt">Mathematics</p>
-        <p class="rd">The relevant maths, and only for the members who want
-           it. Nobody is made to sit through it.</p>
-      </a>
-    </div>
-  </div>
-
-  <!-- Prices are published deliberately, and before any introduction lands.
-       Full working: docs/scoping/pricing_and_client_pipeline_2026-08-10.html
-       in the aks_claude_data repo. -->
-  <div class="work">
-    <p class="oh">What it costs</p>
-
-    <p>Prices are published so the first conversation can be about your problem
-       rather than about my rate. The day rate is £750, everything is measured
-       against business goals you choose before any building starts, and the
-       first step is free.</p>
-
-    <p><a class="btn" href="pricing/">See how I work, and what it costs</a></p>
-  </div>
-
-  <div class="work">
-    <p class="oh">Three things you can do right now</p>
+    <p class="oh">Start here</p>
 
     <div class="routes">
       <!-- FORM:BOOKING -->
@@ -365,12 +368,6 @@
         <p class="rt">Download the CV</p>
         <p class="rd">If you are hiring or introducing me to someone who is.
            Short form first, then the download.</p>
-      </a>
-      <!-- FORM:MENTOR -->
-      <a class="route" href="https://www.linkedin.com/in/ak-addo-248149196/">
-        <p class="rt">Mentor a cohort member</p>
-        <p class="rd">An hour a month with someone early in their career who
-           is doing the work. You pick the lane that matches you.</p>
       </a>
     </div>
   </div>
