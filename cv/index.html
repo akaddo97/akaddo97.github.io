@@ -231,14 +231,21 @@
         <input id="cvCompany" name="company" type="text" autocomplete="organization" required>
       </div>
       <div class="field">
-        <label for="cvPurpose">What is this for?</label>
+        <label for="cvPurpose">What do you want my CV for?</label>
+        <!-- These four must match the form's own options word for word, or
+             Google records nothing for the question. cv_form_wire.py checks. -->
         <select id="cvPurpose" name="purpose" required>
           <option value="">Pick one</option>
           <option>A specific role</option>
           <option>Building a shortlist</option>
           <option>Making an introduction</option>
-          <option>Curiosity, and that is fine</option>
+          <option>Just curious</option>
         </select>
+      </div>
+      <div class="field">
+        <label for="cvLinkedin">LinkedIn profile</label>
+        <input id="cvLinkedin" name="linkedin" type="text" autocomplete="url">
+        <p class="hint">Optional.</p>
       </div>
       <button class="btn" type="submit" id="cvSubmit">Download the CV</button>
       <p class="err" id="cvErr" hidden></p>
@@ -270,8 +277,8 @@
    That means a failed write is invisible here, which is the accepted trade for
    having no backend. The download never waits on it. */
 var FORM = {
-  ENDPOINT: "",
-  FIELDS: { name: "", email: "", company: "", purpose: "" }
+  ENDPOINT: "https://docs.google.com/forms/d/e/1FAIpQLSc7bFlSMv5HddV7DiNWSygfNi8So97YfzzDHSR_oGW_VhpRlQ/formResponse",
+  FIELDS: { name: "entry.1575010182", email: "emailAddress", company: "entry.181770931", purpose: "entry.560195620", linkedin: "entry.1395016513" }
 };
 var PDF = "../AK_Addo_CV.pdf";
 
@@ -307,7 +314,8 @@ var PDF = "../AK_Addo_CV.pdf";
       name:document.getElementById('cvName').value.trim(),
       email:document.getElementById('cvEmail').value.trim(),
       company:document.getElementById('cvCompany').value.trim(),
-      purpose:document.getElementById('cvPurpose').value
+      purpose:document.getElementById('cvPurpose').value,
+      linkedin:document.getElementById('cvLinkedin').value.trim()
     };
     if(values.name===""||values.company===""||values.purpose===""){
       fail('Please fill in every field.'); return;

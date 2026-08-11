@@ -25,8 +25,13 @@ WANTED = {
     "name": ["name"],
     "email": ["email"],
     "company": ["company", "organisation", "organization", "employer"],
-    "purpose": ["what is this for", "purpose", "reason", "what for"],
+    "purpose": ["cv for", "what is this for", "purpose", "reason", "what for"],
+    "linkedin": ["linkedin"],
 }
+
+# Google's own "collect email addresses" is not a question and has no entry id.
+# It is posted under this fixed name instead.
+EMAIL_FIELD = "emailAddress"
 
 
 def fetch(url):
@@ -54,6 +59,25 @@ def questions(data):
             if e and e[0]:
                 out.append((title, f"entry.{e[0]}"))
     return out
+
+
+def choices(data, entry_id):
+    """The exact option strings for a given entry id, or [] if it is free text."""
+    for item in (data[1][1] or []):
+        for e in (item[4] or []) if len(item) > 4 and item[4] else []:
+            if e and e[0] and f"entry.{e[0]}" == entry_id:
+                return [o[0] for o in (e[1] or []) if o and o[0]]
+    return []
+
+
+def page_select_options():
+    """The options actually offered by the select on the CV page."""
+    html = PAGE.read_text()
+    block = re.search(r'<select id="cvPurpose".*?</select>', html, re.S)
+    if not block:
+        return []
+    opts = re.findall(r"<option(?: value=\"([^\"]*)\")?>(.*?)</option>", block.group(0))
+    return [(v if v else txt).strip() for v, txt in opts if (v if v else txt).strip()]
 
 
 def match(qs):
@@ -86,7 +110,12 @@ def main():
         sys.exit("that does not look like a /viewform link")
     endpoint = url.replace("/viewform", "/formResponse")
 
-    qs = questions(load_data(fetch(url)))
+    html = fetch(url)
+    data = load_data(html)
+    qs = questions(data)
+    # Google's own email collection renders an email box with this placeholder
+    # and no entry id, so it has to be detected from the page rather than the items.
+    email_collected = "Your email" in html
     print(f"{len(qs)} question(s) on the form:")
     for title, entry in qs:
         print(f"  {entry:<22} {title!r}")
@@ -98,10 +127,30 @@ def main():
         if field in found:
             title, entry = found[field]
             fields[field] = entry
-            print(f"  {field:<8} -> {entry:<22} ({title!r})")
+            print(f"  {field:<9} -> {entry:<22} ({title!r})")
+        elif field == "email" and email_collected:
+            fields[field] = EMAIL_FIELD
+            print(f"  {field:<9} -> {EMAIL_FIELD:<22} (Google's own email collection)")
         else:
             fields[field] = ""
-            print(f"  {field:<8} -> NOT FOUND, will not be sent")
+            print(f"  {field:<9} -> NOT FOUND, will not be sent")
+
+    # A radio value the form does not recognise is recorded as nothing at all,
+    # silently. So the page's options must match the form's, exactly.
+    problems = []
+    if fields.get("purpose"):
+        want = choices(data, fields["purpose"])
+        have = page_select_options()
+        have = [o for o in have if o != "Pick one"]
+        if want and sorted(want) != sorted(have):
+            problems.append("purpose options differ:\n    form: " + " | ".join(want)
+                            + "\n    page: " + " | ".join(have))
+    if problems:
+        print("\nMISMATCH")
+        for p_ in problems:
+            print("  " + p_)
+    else:
+        print("\noptions match the page")
 
     block = (
         'var FORM = {\n'
