@@ -23,7 +23,7 @@ Every page also carries an edit-in-place toolbar, hidden from public visitors an
 
 The rail is the site's only navigation. There is no footer: it repeated the same links, so it was removed. Nine items in three groups, separated by rules:
 
-1. **Pages.** Home, Bespoke tech products, AI fluency, Services and prices. The current page is marked with `aria-current="page"` and a yellow indicator.
+1. **Pages.** Home, Bespoke tech products, AI fluency, Services and prices. The current page is marked with `aria-current="page"` and a yellow indicator. The CV page at `/cv/` carries the same rail and is marked current there, but is not one of the four listed pages.
 2. **Actions.** Book 30 minutes (the accent-coloured primary), Download a CV.
 3. **Elsewhere.** LinkedIn, GitHub, AK Bakes.
 
@@ -33,12 +33,20 @@ Each action that depends on an external link is marked with an HTML comment on t
 
 | Marker | Links | Points at |
 |---|---|---|
-| `<!-- FORM:BOOKING -->` | 9 | **Live.** A Google Calendar booking page. |
-| `<!-- FORM:CV -->` | 5 | Pending. Falls back to LinkedIn. |
+| `<!-- FORM:BOOKING -->` | 10 | **Live.** A Google appointment schedule. |
+| `<!-- FORM:CV -->` | 6 | **Live.** Points at `/cv/`, the gate page. |
 | `<!-- FORM:MENTOR -->` | 1 | Pending. Falls back to LinkedIn. |
 | `<!-- FORM:COHORT -->` | 2 | Pending. Falls back to LinkedIn. |
 
-A pending action falls back to the LinkedIn profile, so nothing on the site opens onto a dead end while its form is being built. The field specification for each form, and the tested one-command swap that wires one in, live in `docs/scoping/website_forms_spec_2026-08-10.html` in the `aks_claude_data` repo.
+Nineteen marked buttons in total. A pending action falls back to the LinkedIn profile, so nothing on the site opens onto a dead end while its form is being built.
+
+**Do not edit these by hand.** Every URL lives in `links.md`, and `apply_links.py` writes it to every button. `python3 apply_links.py` shows what would change, `--commit` writes, `--check` exits 1 if the site and `links.md` have drifted apart. The field specification for each form lives in `docs/scoping/google_forms_build_sheet_2026-08-11.html` in the `aks_claude_data` repo.
+
+## The CV page
+
+`/cv/` asks for a name, email, company, and purpose, posts them into a Google Form in the background, and downloads `AK_Addo_CV.pdf` from this repo. The form endpoint and its field ids are filled in by `cv_form_wire.py <form-url> --write`, which reads them out of the published form rather than anyone transcribing them.
+
+Two things worth knowing. The post is `no-cors` and fire-and-forget, because Google sends no CORS headers on `formResponse`, so a failed write is invisible to the page; the download never waits on it. And the PDF path is in the page source, so this is a courtesy gate rather than a lock. While the endpoint is empty the page still downloads the CV and simply skips the capture, so the button is never dead.
 
 ## Link check
 

@@ -3,12 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Knowledge Graph Solutions | AK Addo</title>
-<meta name="description" content="Knowledge graph solutions built end to end, a five-stage method, a published day rate, and work measured against business goals chosen before anything is built. The first step is free.">
+<title>CV | AK Addo</title>
+<meta name="description" content="Download AK Addo's CV. Four short questions first, so I know who is reading it.">
+<meta name="robots" content="noindex">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://akaddo97.github.io/pricing/">
-<meta property="og:title" content="Knowledge Graph Solutions">
-<meta property="og:description" content="Knowledge graph solutions built end to end. A published day rate, and work measured against goals you choose in advance. The first step is free.">
+<meta property="og:url" content="https://akaddo97.github.io/cv/">
+<meta property="og:title" content="CV | AK Addo">
+<meta property="og:description" content="Download AK Addo's CV.">
 <meta property="og:image" content="https://akaddo97.github.io/ak-addo.jpg">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231A1A1A'/><text y='68' x='50' text-anchor='middle' font-family='system-ui' font-weight='700' font-size='48' fill='%23F5C518'>AK</text></svg>">
 <style>
@@ -146,16 +147,31 @@
   }
   @media print{.rail{display:none}}
 </style>
+<style>
+  /* Page-specific: the four fields and the two states of the panel. Everything
+     else on this page is the site's shared style block above. */
+  .field{margin:0 0 18px;}
+  .field label{display:block;font-size:15px;font-weight:600;margin:0 0 6px;}
+  .field input,.field select{width:100%;font:inherit;font-size:16px;color:var(--ink);
+    background:#fff;border:1px solid var(--rule);border-radius:8px;padding:10px 12px;}
+  .field input:focus,.field select:focus{outline:2px solid var(--accent);outline-offset:1px;
+    border-color:var(--ink);}
+  .hint{font-size:14px;color:var(--muted);margin:6px 0 0;}
+  .cvform button{cursor:pointer;}
+  .cvform button[disabled]{opacity:.55;cursor:default;}
+  .done{display:none;}
+  .done p{margin:0 0 14px;}
+  body.cv-done .cvform{display:none;}
+  body.cv-done .done{display:block;}
+  .err{color:#7C2D12;font-size:15px;margin:12px 0 0;}
+  .privacy{font-size:14px;color:var(--muted);margin:22px 0 0;}
+</style>
 </head>
+
 <body>
 
 <div class="ed-bar" contenteditable="false"><button id="edEdit" type="button">Edit</button><button id="edSave" type="button">Save a copy</button><button id="edRevert" type="button">Revert</button><span class="ed-status" id="edStatus">Read only</span></div>
 
-<!-- The site's only navigation. It replaces the per-page footer, which
-     repeated these same links. Pages, then actions, then elsewhere,
-     separated by rules. Full labels show as tooltips on desktop; the
-     narrow bottom bar shows the short ones, because nine items in 390px
-     leaves 43px each. -->
 <nav class="rail" aria-label="Site">
   <a class="rail-item" href="../" aria-label="Home">
     <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 9.5L10 4l7 5.5"/><path d="M5 8.5V17h10V8.5"/></svg>
@@ -166,7 +182,7 @@
   <a class="rail-item" href="../learn/" aria-label="AI fluency">
     <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 4L2 7.5l8 3.5 8-3.5z"/><path d="M5.5 9.5V14c0 1.1 2 2 4.5 2s4.5-.9 4.5-2V9.5"/></svg>
     <span class="rail-label">AI fluency</span><span class="rail-short">Learn</span></a>
-  <a class="rail-item rail-here" href="../pricing/" aria-current="page" aria-label="Services and prices">
+  <a class="rail-item" href="../pricing/" aria-label="Services and prices">
     <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10.6 3H16v5.4l-7.4 7.4a1.6 1.6 0 01-2.2 0l-3.2-3.2a1.6 1.6 0 010-2.2z"/><path d="M13.3 6.2v.01"/></svg>
     <span class="rail-label">Services and prices</span><span class="rail-short">Prices</span></a>
   <div class="rail-sep"></div>
@@ -175,7 +191,7 @@
     <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 5h12v11H4z"/><path d="M4 8h12"/><path d="M7 3v3"/><path d="M13 3v3"/></svg>
     <span class="rail-label">Book 30 minutes</span><span class="rail-short">Book</span></a>
   <!-- FORM:CV -->
-  <a class="rail-item" href="/cv/" target="_blank" rel="noopener" aria-label="Download a CV">
+  <a class="rail-item rail-here" href="/cv/" aria-current="page" aria-label="Download a CV">
     <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 3h6l4 4v10H5z"/><path d="M11 3v4h4"/><path d="M8 11h4"/><path d="M8 14h4"/></svg>
     <span class="rail-label">Download a CV</span><span class="rail-short">CV</span></a>
   <div class="rail-sep"></div>
@@ -193,102 +209,120 @@
 <main id="doc">
   <a class="back" href="../">Back to Home</a>
 
-  <!-- AK stripped the h1, the standfirst, and the lede on 2026-08-10 to get
-       the page straight to the offer. The page still needs one h1 for search
-       and for screen readers, so the line he kept is the h1, carrying the
-       eyebrow's styling. It looks exactly as he left it. -->
-  <h1 class="eyebrow">Services and prices</h1>
+  <h1 class="eyebrow">Curriculum vitae</h1>
 
-  <div class="free">
-    <p class="ft">30-minute project scoping call</p>
-    <!-- FORM:BOOKING -->
-    <a class="btn" href="https://calendar.app.google/9MuKtzaxZCC6NXULA">Book 30 minutes</a>
+  <p class="lede">Four short questions, then the download starts. I read every
+     one of these, and it is the only way I get to know who is reading.</p>
+
+  <div class="ask cvform">
+    <h3>Who is this for?</h3>
+
+    <form id="cvForm" novalidate>
+      <div class="field">
+        <label for="cvName">Name</label>
+        <input id="cvName" name="name" type="text" autocomplete="name" required>
+      </div>
+      <div class="field">
+        <label for="cvEmail">Email</label>
+        <input id="cvEmail" name="email" type="email" autocomplete="email" required>
+      </div>
+      <div class="field">
+        <label for="cvCompany">Company or organisation</label>
+        <input id="cvCompany" name="company" type="text" autocomplete="organization" required>
+      </div>
+      <div class="field">
+        <label for="cvPurpose">What is this for?</label>
+        <select id="cvPurpose" name="purpose" required>
+          <option value="">Pick one</option>
+          <option>A specific role</option>
+          <option>Building a shortlist</option>
+          <option>Making an introduction</option>
+          <option>Curiosity, and that is fine</option>
+        </select>
+      </div>
+      <button class="btn" type="submit" id="cvSubmit">Download the CV</button>
+      <p class="err" id="cvErr" hidden></p>
+    </form>
   </div>
 
-  <h2>The method</h2>
-
-  <ol class="stages">
-    <li>
-      <p class="st">Discovery</p>
-      <p class="sd">Map you and/or your team's tech stack. Define the problems
-         you need to solve with this tech product.</p>
-    </li>
-    <li>
-      <p class="st">Choose the goals</p>
-      <p class="sd">Pick a small number of demonstrable business goals to
-         tailor the products that are built.</p>
-    </li>
-    <li>
-      <p class="st">Non-AI tech work</p>
-      <p class="sd">If necessary (e.g. a structured database to allow for a
-         language model to work well on your company data).</p>
-    </li>
-    <li>
-      <p class="st">Build a solution</p>
-      <p class="sd">A tech product with an AI layer. Built end to end: from the
-         data to the interface.</p>
-    </li>
-    <li>
-      <p class="st">Measure</p>
-      <p class="sd">Against the goals from stage 2.</p>
-    </li>
-  </ol>
-
-  <div class="tablewrap">
-    <table>
-      <thead>
-        <tr><th scope="col">Engagement</th><th scope="col">Description</th><th scope="col">Price</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Discovery call</td>
-          <td>Thirty minutes. An honest read on whether it is worth building.</td>
-          <td class="num">Free</td>
-        </tr>
-        <tr>
-          <td>AI Edge Audit</td>
-          <td>Two days minimum. Systems walked, findings written up, goals proposed.</td>
-          <td class="num">from £1,500</td>
-        </tr>
-        <tr>
-          <td>Fluency Sprint</td>
-          <td>Three sessions over three weeks, async support, one tool you keep.</td>
-          <td class="num">from £1,800</td>
-        </tr>
-        <tr>
-          <td>Operator Edge</td>
-          <td>A bespoke tool built and run for you, plus advisory. You never operate it.</td>
-          <td class="num">from £4,000</td>
-        </tr>
-        <tr class="flag">
-          <td>Build Sprint</td>
-          <td>Fluency plus a bespoke working tool, shipped. Priced as a project.</td>
-          <td class="num">from £6,000</td>
-        </tr>
-        <tr>
-          <td>Team programme</td>
-          <td>Multi-week training and tooling for a whole team.</td>
-          <td class="num">from £12,000</td>
-        </tr>
-        <tr>
-          <td>Day rate</td>
-          <td>For any other work.</td>
-          <td class="num">£750</td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="ask done" id="cvDone">
+    <h3>On its way</h3>
+    <p>The download should have started. If your browser blocked it,
+       <a id="cvDirect" href="../AK_Addo_CV.pdf" download>use this link instead</a>.</p>
+    <p>If something in it is worth a conversation, my calendar is on the site.</p>
   </div>
 
-  <p class="note">Previous client work is available as a portfolio document on
-     request.</p>
-
-  <div class="ask">
-    <h3>Not sure which one fits?</h3>
-    <!-- FORM:BOOKING -->
-    <a class="btn" href="https://calendar.app.google/9MuKtzaxZCC6NXULA">Book 30 minutes</a>
-  </div>
-
+  <p class="privacy">What you type here reaches me and nobody else. No list, no
+     newsletter, and no third party.</p>
 </main>
+
+<script>
+/* CV gate. Posts the four answers into a Google Form, then downloads the PDF
+   that is served from this repo.
+
+   FORM below is filled in by cv_form_wire.py, which reads the entry ids
+   straight out of the published form rather than anyone copying them by hand.
+   While ENDPOINT is empty the page still works: it downloads the CV and skips
+   the capture, so the button is never dead.
+
+   The post is deliberately no-cors and fire-and-forget. Google does not send
+   CORS headers on formResponse, so the browser will not let us read the reply.
+   That means a failed write is invisible here, which is the accepted trade for
+   having no backend. The download never waits on it. */
+var FORM = {
+  ENDPOINT: "",
+  FIELDS: { name: "", email: "", company: "", purpose: "" }
+};
+var PDF = "../AK_Addo_CV.pdf";
+
+(function(){
+  var form=document.getElementById('cvForm');
+  if(form===null){return;}
+  var err=document.getElementById('cvErr'), btn=document.getElementById('cvSubmit');
+
+  function fail(msg){ err.textContent=msg; err.hidden=false; }
+
+  function capture(values){
+    if(FORM.ENDPOINT===""){return;}
+    var body=new URLSearchParams();
+    Object.keys(FORM.FIELDS).forEach(function(k){
+      var id=FORM.FIELDS[k];
+      if(id!==""){ body.append(id, values[k]); }
+    });
+    try{
+      fetch(FORM.ENDPOINT,{method:'POST',mode:'no-cors',body:body});
+    }catch(e){ /* capture is best effort; the download is not */ }
+  }
+
+  function download(){
+    var a=document.createElement('a');
+    a.href=PDF; a.download='AK_Addo_CV.pdf';
+    document.body.appendChild(a); a.click(); a.remove();
+  }
+
+  form.addEventListener('submit',function(ev){
+    ev.preventDefault();
+    err.hidden=true;
+    var values={
+      name:document.getElementById('cvName').value.trim(),
+      email:document.getElementById('cvEmail').value.trim(),
+      company:document.getElementById('cvCompany').value.trim(),
+      purpose:document.getElementById('cvPurpose').value
+    };
+    if(values.name===""||values.company===""||values.purpose===""){
+      fail('Please fill in every field.'); return;
+    }
+    if(/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(values.email)===false){
+      fail('That email does not look right.'); return;
+    }
+    btn.disabled=true;
+    capture(values);
+    download();
+    document.body.classList.add('cv-done');
+  });
+})();
+</script>
+
 
 <script>
 /* Editable-in-place harness, gated. See skills/editable_html/SKILL.md.
