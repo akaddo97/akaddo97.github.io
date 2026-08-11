@@ -8,7 +8,7 @@ Format: one `key: url` line per link. Anything that is not a `key: url` line is
 ignored, so notes and headings are safe to write anywhere in this file.
 
     booking: https://calendar.app.google/9MuKtzaxZCC6NXULA
-    cv: https://www.linkedin.com/in/ak-addo-248149196/
+    cv: /cv/
     mentor: https://www.linkedin.com/in/ak-addo-248149196/
     cohort: https://www.linkedin.com/in/ak-addo-248149196/
 
