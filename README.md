@@ -19,9 +19,15 @@ Open the page, change the copy, and push to `main`. GitHub Pages rebuilds within
 
 Every page also carries an edit-in-place toolbar, hidden from public visitors and shown when the URL has `?edit=1` on it. Edits save to that browser only and never reach the published page. Use "Save a copy" to download an edited version.
 
-## The action rail, and the form links
+## The rail
 
-Every page carries the same fixed rail: home, book a call, prices, CV, bakery. It is a left strip on desktop and a bottom bar below 769px.
+The rail is the site's only navigation. There is no footer: it repeated the same links, so it was removed. Nine items in three groups, separated by rules:
+
+1. **Pages.** Home, Bespoke tech products, AI fluency, Services and prices. The current page is marked with `aria-current="page"` and a yellow indicator.
+2. **Actions.** Book 30 minutes (the accent-coloured primary), Download a CV.
+3. **Elsewhere.** LinkedIn, GitHub, AK Bakes.
+
+A 64px left strip from 769px up, where the full label appears as a tooltip on hover, and a bottom bar below that, where a short label sits under each icon. The short labels exist because nine items across 390px leaves 43px each, which the full names do not fit. Both are in the markup, as `.rail-label` and `.rail-short`; each link also carries the full name as its `aria-label`. On a short desktop window the strip scrolls internally rather than clipping.
 
 Each action that depends on an external link is marked with an HTML comment on the line above it, alone on that line:
 
@@ -32,9 +38,7 @@ Each action that depends on an external link is marked with an HTML comment on t
 | `<!-- FORM:MENTOR -->` | 1 | Pending. Falls back to LinkedIn. |
 | `<!-- FORM:COHORT -->` | 2 | Pending. Falls back to LinkedIn. |
 
-A pending action falls back to the LinkedIn profile, so nothing on the site opens onto a dead end while its form is being built.
-
-The footer is the same on every page: the other three pages of the site, in a fixed order, then LinkedIn, GitHub, and AK Bakes. The only entry ever omitted is the page you are already on. The field specification for each form, and the tested one-command swap that wires one in, live in `docs/scoping/website_forms_spec_2026-08-10.html` in the `aks_claude_data` repo.
+A pending action falls back to the LinkedIn profile, so nothing on the site opens onto a dead end while its form is being built. The field specification for each form, and the tested one-command swap that wires one in, live in `docs/scoping/website_forms_spec_2026-08-10.html` in the `aks_claude_data` repo.
 
 ## Link check
 
