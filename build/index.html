@@ -84,9 +84,11 @@
   .rail-sep{flex:none;background:#2A2A2A;}
   @media (min-width:769px){
     body{padding-left:64px;}
+    /* Deliberately not a scroll container. The hover label sits outside the
+       64px strip, so any overflow other than visible clips it away entirely.
+       Short windows are handled by shrinking the items below instead. */
     .rail{top:0;left:0;bottom:0;width:64px;flex-direction:column;align-items:stretch;
-      border-right:1px solid #2A2A2A;overflow-y:auto;scrollbar-width:none;}
-    .rail::-webkit-scrollbar{display:none;}
+      border-right:1px solid #2A2A2A;overflow:visible;}
     .rail-item{position:relative;justify-content:center;height:64px;}
     .rail-sep{height:1px;margin:7px 14px;}
     .rail-here::before{content:"";position:absolute;left:0;top:14px;bottom:14px;
@@ -109,6 +111,18 @@
     .rail-label{display:none;}
     .rail-short{font-size:9px;letter-spacing:.01em;line-height:1;
       max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  }
+  /* Nine items at 64px plus two rules need about 610px of height. Below that
+     the items shrink rather than scroll, so the hover labels keep working. */
+  @media (min-width:769px) and (max-height:620px){
+    .rail-item{height:50px;}
+    .rail-sep{margin:5px 14px;}
+  }
+  /* Last resort on a genuinely tiny window: scroll, and accept that the hover
+     label is clipped there, which is the lesser problem than unreachable links. */
+  @media (min-width:769px) and (max-height:480px){
+    .rail{overflow-y:auto;scrollbar-width:none;}
+    .rail::-webkit-scrollbar{display:none;}
   }
   @media print{.rail{display:none}}
 </style>
