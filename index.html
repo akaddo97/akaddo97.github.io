@@ -76,6 +76,7 @@
 
   /* Baking: deliberately the only cocoa block on the page, so it reads as a
      separate world rather than a third service. Cream on cocoa is 11.6:1. */
+  .work .bake{margin-top:0;}
   .bake{display:flex;align-items:center;gap:20px;margin-top:44px;padding:26px 26px 24px;
     border-radius:12px;background:var(--cocoa);color:var(--cream-soft);
     border-bottom:0;transition:background .14s,transform .14s;}
@@ -290,16 +291,20 @@
   <!-- The bakery sits above the repos deliberately. It is the differentiator:
        a real business with real customers whose back office I am rebuilding
        with the same tooling I sell. The repos are evidence, this is the proof. -->
-  <a class="bake" href="https://ak-baking.square.site/">
-    <div class="bd">
-      <div class="bar"></div>
-      <p class="t">AK Bakes, run on its own AI back office</p>
-      <p class="s">A passion project and technical testbed. Orders, stock,
-         costings, and customer messages are being moved onto the same AI
-         tooling I build for clients.</p>
-    </div>
-    <div class="arw">&rarr;</div>
-  </a>
+  <div class="work">
+    <p class="oh">AK Bakes</p>
+
+    <a class="bake" href="https://ak-baking.square.site/">
+      <div class="bd">
+        <div class="bar"></div>
+        <p class="t">AK Bakes, run on its own AI back office</p>
+        <p class="s">A passion project and technical testbed. Orders, stock,
+           costings, and customer messages are being moved onto the same AI
+           tooling I build for clients.</p>
+      </div>
+      <div class="arw">&rarr;</div>
+    </a>
+  </div>
 
   <div class="work">
     <p class="oh">GitHub</p>
