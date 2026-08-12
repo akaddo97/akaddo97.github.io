@@ -25,7 +25,6 @@
     --ink:#1A1A1A;
     --muted:#5A5750;
     --accent:#F5C518;
-    --accent-lift:#E4B411;
     --rule:#E4DFD2;
     --panel:#F0EDE3;
     --cocoa:#4A2E1C;
@@ -121,13 +120,16 @@
   .btn:hover{background:#000;color:var(--bg);}
   /* The costs pointer: same width as the split above it and the bakery card
      below, so the three read as one stack. */
-  .costs{margin-top:12px;}
-  /* Yellow, not ink: sitting directly under the dark half of the split it read
-     as the same panel. Accent is the only anchor in the palette still free,
-     since cocoa belongs to the bakery. Ink on accent is 10.7:1. */
-  .btn-wide{display:block;width:100%;text-align:center;padding:16px 20px;border-radius:12px;
-    background:var(--accent);color:var(--ink);}
-  .btn-wide:hover{background:var(--accent-lift);color:var(--ink);}
+  /* Outlined rather than filled. Ink is the split's dark half, cream is its
+     light half, cocoa belongs to the bakery, and accent read as too bright at
+     this size, so the palette had no fill left. This reuses the site's other
+     emphasis device instead: the 2px ink outline the prices page already puts
+     around its free block. Text width, centred in the column. */
+  .costs{margin-top:22px;text-align:center;}
+  .btn-outline{display:inline-block;background:#fff;color:var(--ink);
+    border:2px solid var(--ink);border-radius:10px;padding:13px 28px;
+    font-size:16px;font-weight:600;}
+  .btn-outline:hover{background:var(--ink);color:var(--bg);}
 
   /* The site's only navigation, so it carries the pages, the two actions, and
      the off-site links. A 64px left strip from 769px up, a bottom bar below
@@ -296,7 +298,7 @@
        No heading and no rule, per AK 2026-08-12: it reads as a third full-width
        panel under the two-up split rather than as its own section. -->
   <div class="costs">
-    <a class="btn btn-wide" href="pricing/">Method and Pricing</a>
+    <a class="btn-outline" href="pricing/">Method and Pricing</a>
   </div>
 
   <!-- The bakery sits above the repos deliberately. It is the differentiator:
