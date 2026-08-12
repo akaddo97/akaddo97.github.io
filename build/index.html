@@ -29,11 +29,16 @@
   h2{font-size:15px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
     margin:44px 0 14px;font-weight:600;}
   .lede{font-size:20px;line-height:1.55;}
-  .egs{display:grid;gap:12px;margin:0 0 8px;}
-  .eg{border-left:3px solid var(--accent);padding:4px 0 4px 20px;}
-  .eg p{margin:0;}
-  .egt{font-weight:600;margin:0 0 3px;}
-  .egb{color:var(--muted);font-size:17px;}
+  /* Tiles, matching the homepage exactly, per AK 2026-08-12. These are the
+     cards the Knowledge graph solutions block used before it was removed from
+     home as a repeat of this page. */
+  .routes{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 8px;}
+  .route{display:block;border:1px solid var(--rule);border-radius:10px;padding:18px 18px 16px;
+    background:#fff;}
+  .route p{margin:0;}
+  .rt{font-size:16px;font-weight:700;margin:0 0 5px;}
+  .rd{font-size:15px;color:var(--muted);margin:0;}
+  @media (max-width:520px){.routes{grid-template-columns:1fr;}}
   a{color:var(--ink);text-decoration:none;border-bottom:2px solid var(--accent);padding-bottom:1px;}
   a:hover{background:var(--accent);}
   @media (max-width:520px){
@@ -178,8 +183,8 @@
   <p class="sub">A working tool, built and run for you.</p>
 
   <p class="lede">I embed with your team, ship working tools into current
-     workflows, and teach best practices along the way. No generic training or
-     products here.</p>
+     workflows, and teach best practices along the way. No generic training, no
+     generic products.</p>
 
   <p>Tools are built end to end, from the data layer to the interface, by me. I
      work with professionals, SMEs, and enterprises, including teams of
@@ -189,34 +194,31 @@
 
   <!-- Named by outcome rather than by technology. Each of these is work in
        progress somewhere, so a question about one lands on something real. -->
-  <div class="egs">
-    <div class="eg">
-      <p class="egt">Intent classification for email triage</p>
-      <p class="egb">A shared inbox that sorts itself and routes each message to
-         the right person. The categories are owned by your staff, who propose
-         changes to them, with guardrails that stop a bad edit breaking the
-         routing.</p>
+  <div class="routes">
+    <div class="route">
+      <p class="rt">Intent classification for email triage</p>
+      <p class="rd">An inbox that sorts itself, routes to the right person, and
+         automates repetitive responses.</p>
     </div>
-    <div class="eg">
-      <p class="egt">Knowledge bases for cognitive offload</p>
-      <p class="egb">The things your team knows, held somewhere they can be
-         asked in plain language, so nothing critical depends on one person
-         remembering it.</p>
+    <div class="route">
+      <p class="rt">Knowledge bases for cognitive offload</p>
+      <p class="rd">The things your team knows, held somewhere they can be
+         asked, so nothing depends on people remembering.</p>
     </div>
-    <div class="eg">
-      <p class="egt">Automations for freeing up staff</p>
-      <p class="egb">The repetitive middle of a workflow handed to agents, so
-         people spend their hours on the parts that need judgement.</p>
+    <div class="route">
+      <p class="rt">Automations for freeing up staff</p>
+      <p class="rd">Repetitive work handed to agents, so your team can do more
+         with the same people.</p>
     </div>
-    <div class="eg">
-      <p class="egt">Document workflows</p>
-      <p class="egb">Unstructured documents, PDFs and word files, parsed into a
-         database you can query, report on, and build dashboards over.</p>
+    <div class="route">
+      <p class="rt">Document workflows</p>
+      <p class="rd">Unstructured PDFs and documents parsed into a database you
+         can query and report on.</p>
     </div>
-    <div class="eg">
-      <p class="egt">The pre-meeting briefing</p>
-      <p class="egb">Connect your sources once, and a brief on each day's
-         meeting attendees lands before the meeting.</p>
+    <div class="route">
+      <p class="rt">The pre-meeting briefing</p>
+      <p class="rd">Connect your sources once, and a brief on each day's meeting
+         attendees lands before the meeting.</p>
     </div>
   </div>
 
@@ -224,7 +226,6 @@
 
   <div class="ask">
     <h3>Have something in mind?</h3>
-    <p>Describe the workflow and we will go from there.</p>
     <!-- FORM:BOOKING -->
     <a class="btn" href="https://calendar.app.google/9MuKtzaxZCC6NXULA">Book 30 minutes</a>
   </div>
