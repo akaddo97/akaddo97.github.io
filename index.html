@@ -118,6 +118,10 @@
   .btn{display:inline-block;background:var(--ink);color:var(--bg);border:0;border-bottom:0;
     border-radius:8px;padding:11px 20px;font-size:16px;font-weight:600;}
   .btn:hover{background:#000;color:var(--bg);}
+  /* The costs pointer: same width as the split above it and the bakery card
+     below, so the three read as one stack. */
+  .costs{margin-top:12px;}
+  .btn-wide{display:block;width:100%;text-align:center;padding:16px 20px;border-radius:12px;}
 
   /* The site's only navigation, so it carries the pages, the two actions, and
      the off-site links. A 64px left strip from 769px up, a bottom bar below
@@ -282,11 +286,11 @@
 
   <!-- Prices live on /pricing/ only, per AK 2026-08-10. The homepage points at
        them rather than quoting them, so the rate appears once and in context.
-       Full working: docs/scoping/pricing_and_client_pipeline_2026-08-10.html -->
-  <div class="work">
-    <p class="oh">Costs</p>
-
-    <p><a class="btn" href="pricing/">See how I work, and what it costs</a></p>
+       Full working: docs/scoping/pricing_and_client_pipeline_2026-08-10.html
+       No heading and no rule, per AK 2026-08-12: it reads as a third full-width
+       panel under the two-up split rather than as its own section. -->
+  <div class="costs">
+    <a class="btn btn-wide" href="pricing/">Method and Pricing</a>
   </div>
 
   <!-- The bakery sits above the repos deliberately. It is the differentiator:
