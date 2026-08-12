@@ -25,6 +25,7 @@
     --ink:#1A1A1A;
     --muted:#5A5750;
     --accent:#F5C518;
+    --accent-lift:#E4B411;
     --rule:#E4DFD2;
     --panel:#F0EDE3;
     --cocoa:#4A2E1C;
@@ -121,7 +122,12 @@
   /* The costs pointer: same width as the split above it and the bakery card
      below, so the three read as one stack. */
   .costs{margin-top:12px;}
-  .btn-wide{display:block;width:100%;text-align:center;padding:16px 20px;border-radius:12px;}
+  /* Yellow, not ink: sitting directly under the dark half of the split it read
+     as the same panel. Accent is the only anchor in the palette still free,
+     since cocoa belongs to the bakery. Ink on accent is 10.7:1. */
+  .btn-wide{display:block;width:100%;text-align:center;padding:16px 20px;border-radius:12px;
+    background:var(--accent);color:var(--ink);}
+  .btn-wide:hover{background:var(--accent-lift);color:var(--ink);}
 
   /* The site's only navigation, so it carries the pages, the two actions, and
      the off-site links. A 64px left strip from 769px up, a bottom bar below
@@ -302,7 +308,7 @@
     <a class="bake" href="https://ak-baking.square.site/">
       <div class="bd">
         <div class="bar"></div>
-        <p class="t">AK Bakes, run on its own AI back office</p>
+        <p class="t">AK Bakes, an AI first bakery</p>
         <p class="s">A passion project and technical testbed. Orders, stock,
            costings, and customer messages are being moved onto the same AI
            tooling I build for clients.</p>
