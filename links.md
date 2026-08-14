@@ -9,7 +9,7 @@ ignored, so notes and headings are safe to write anywhere in this file.
 
     booking: https://calendar.app.google/9MuKtzaxZCC6NXULA
     cv: /cv/
-    mentor: https://www.linkedin.com/in/ak-addo-248149196/
+    mentor: https://forms.gle/9TQKPCNVHnF6iqqbA
     cohort: https://docs.google.com/forms/d/e/1FAIpQLSetZTijhq0l2xNujow4Qc9kulguoO5PSRlpVX6grZopnp9rPg/viewform?usp=dialog
 
 ## What each key is

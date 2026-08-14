@@ -35,10 +35,10 @@ Each action that depends on an external link is marked with an HTML comment on t
 |---|---|---|
 | `<!-- FORM:BOOKING -->` | 10 | **Live.** A Google appointment schedule. |
 | `<!-- FORM:CV -->` | 6 | **Live.** Points at `/cv/`, the gate page. |
-| `<!-- FORM:MENTOR -->` | 1 | Pending. Falls back to LinkedIn. |
-| `<!-- FORM:COHORT -->` | 2 | Pending. Falls back to LinkedIn. |
+| `<!-- FORM:MENTOR -->` | 1 | **Live.** The mentor signup form. |
+| `<!-- FORM:COHORT -->` | 1 | **Live.** The AI fluency participant signup. |
 
-Nineteen marked buttons in total. A pending action falls back to the LinkedIn profile, so nothing on the site opens onto a dead end while its form is being built.
+Eighteen marked buttons in total, all live as of 2026-08-13. The LinkedIn fallback pattern remains available for any future marker: a pending action points at the LinkedIn profile so nothing on the site opens onto a dead end while its form is being built.
 
 **Do not edit these by hand.** Every URL lives in `links.md`, and `apply_links.py` writes it to every button. `python3 apply_links.py` shows what would change, `--commit` writes, `--check` exits 1 if the site and `links.md` have drifted apart. The field specification for each form lives in `docs/scoping/google_forms_build_sheet_2026-08-11.html` in the `aks_claude_data` repo.
 
