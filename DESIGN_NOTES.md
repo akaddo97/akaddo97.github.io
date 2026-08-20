@@ -22,7 +22,7 @@ There is an empty slot marked in an HTML comment between blocks 2 and 3. One sho
 
 ## Why baking is where it is
 
-AK's instruction was that baking should be present but less prominent than the other two. Four treatments were built and compared before landing here: equal cards with baking muted, three cards with one lighter, editorial rows with baking last, and this one. They are all still in `options/` if you want to see the range.
+AK's instruction was that baking should be present but less prominent than the other two. Four treatments were built and compared before landing here: equal cards with baking muted, three cards with one lighter, editorial rows with baking last, and this one. Those drafts lived in `options/` and were removed from the live site on 2026-08-20; they are in git history at `3e73964` if you want to see the range.
 
 This version demotes baking by **separating it rather than shrinking it**. It is not a third item in the offerings grid, it is its own thing further down the page, in its own palette. That way it reads as a different world rather than as a weaker service, which matters because AK considers the baking a differentiator rather than a hobby to apologise for.
 
@@ -60,7 +60,7 @@ Plain HTML with inline CSS. No framework, no build step, no dependencies, no Jav
 
 Preview locally with `python3 -m http.server 8080` from the repo root.
 
-`options/` carries the four alternatives and is marked `noindex`. Those pages each ship a small Edit toolbar so AK can rewrite copy in the browser and download a copy. The live homepage deliberately has no toolbar, because it would show an Edit button to every visitor.
+The four homepage alternatives used to sit in `options/`, unlinked and marked `noindex`. They were deleted on 2026-08-20 once the homepage had settled, so no draft work is served from the live domain. The live pages carry the Edit toolbar but keep it hidden from visitors: it appears only on localhost or with `?edit=1`, so no Edit button is ever shown to the public.
 
 Responsive behaviour is one breakpoint at 520px, where the split stacks. Checked for horizontal overflow at 320, 390, 520, 768, and 1280px.
 
