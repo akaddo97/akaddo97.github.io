@@ -1,0 +1,8 @@
+# Everything here is public and may be crawled.
+# /cv/ is kept out of results by a noindex tag on the page itself,
+# which is the right tool: a path disallowed here can still be listed
+# as a bare URL if another site links to it.
+User-agent: *
+Allow: /
+
+Sitemap: https://akaddo97.github.io/sitemap.xml

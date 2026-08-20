@@ -1,6 +1,6 @@
 # akaddo97.github.io
 
-A one-page personal site for AK Addo, live at **https://akaddo97.github.io**.
+A one-page personal site for AK Addo, live at **https://akaddo97.github.io**. The domain is set in `domain.txt`; see The canonical domain below.
 
 Plain HTML with inline CSS. No framework, no build step, and no dependencies, which is deliberate: it means any page can be edited by anyone who can read HTML, and it deploys by pushing.
 
@@ -54,6 +54,26 @@ Two things worth knowing. The post is `no-cors` and fire-and-forget, because Goo
 
 The design tokens live in the `:root` block at the top of the stylesheet, so the palette can be changed in one place. The photo is `ak-addo.jpg`, an 800 by 800 square that the page renders as a circle. Any replacement should be square, or the circle will crop it unevenly.
 
-## Custom domain
+## The canonical domain
 
-Add a `CNAME` file at the repo root containing the bare domain, then point a DNS `ALIAS` or `A` record at GitHub Pages. Nothing else in the repo needs to change.
+The domain lives in `domain.txt` and nowhere else. `apply_domain.py` writes it to every place that repeats it: the `og:url` and `og:image` tags on all five pages, `sitemap.xml`, the `Sitemap:` line in `robots.txt`, and the `CNAME` file. Same pattern as `links.md`, for the absolute URLs that file does not cover.
+
+    python3 apply_domain.py            # dry run, the default
+    python3 apply_domain.py --commit   # writes
+    python3 apply_domain.py --check    # exits 1 if anything has drifted
+
+A `github.io` value writes no `CNAME`, because Pages only wants that file for a custom domain. Setting a real domain creates it; switching back removes it.
+
+`sitemap.xml` lists the four indexable pages and takes each `lastmod` from that file's last git commit, so the dates are facts rather than the day it was generated. `/cv/` is deliberately absent: it carries `noindex`, and listing a page you have asked search engines to skip is a contradiction. `robots.txt` allows everything and points at the sitemap; it is a request that well-behaved crawlers honour and scrapers ignore, so it is never a place to hide anything.
+
+## Moving to a custom domain
+
+The repo side is one edit. The DNS side is at the registrar.
+
+1. Buy the domain.
+2. Put the bare domain in `domain.txt`, then `python3 apply_domain.py --commit`. That rewrites the eight files and creates `CNAME`.
+3. At the registrar, point the apex at GitHub Pages with four `A` records, and add a `CNAME` record for `www` pointing at `akaddo97.github.io`. **Check GitHub's current Pages IP addresses in their own documentation before pasting any**, they have changed before and a stale list fails silently.
+4. In the repo's Settings, Pages, set the custom domain and tick Enforce HTTPS. The certificate takes a few minutes.
+5. Commit and push, then confirm the live site serves from the new domain and that the old `akaddo97.github.io` address redirects to it rather than 404ing.
+
+Existing `akaddo97.github.io` links keep working: GitHub redirects the old address to the custom domain once it is set. That is the reason to do this sooner rather than later, since every link already sent out keeps its value.
