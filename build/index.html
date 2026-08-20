@@ -132,6 +132,42 @@
     .rail::-webkit-scrollbar{display:none;}
   }
   @media print{.rail{display:none}}
+
+  /* Client-type tabs. CSS only: three radios drive both the label bar and the
+     panels through sibling selectors, so the page needs no JavaScript and every
+     panel's copy stays in the HTML for a crawler. The radios sit offscreen rather
+     than display:none, which would take them out of the tab order.
+     One product order across all three tabs, per AK: switching tab leaves the
+     product where it was and changes the words underneath it. */
+  .segs{margin:44px 0 8px;}
+  .segs > input{position:absolute;opacity:0;width:1px;height:1px;}
+  .segbar{display:flex;gap:8px;margin:0 0 20px;flex-wrap:wrap;}
+  .segbar label{font-size:15px;font-weight:600;line-height:1;padding:14px 15px;
+    border:1px solid var(--rule);border-radius:22px;background:#fff;color:var(--muted);
+    cursor:pointer;}
+  .segbar label:hover{border-color:var(--muted);}
+  #seg-pro:checked ~ .segbar label[for="seg-pro"],
+  #seg-smb:checked ~ .segbar label[for="seg-smb"],
+  #seg-ent:checked ~ .segbar label[for="seg-ent"]{
+    background:var(--ink);color:#fff;border-color:var(--ink);}
+  #seg-pro:focus-visible ~ .segbar label[for="seg-pro"],
+  #seg-smb:focus-visible ~ .segbar label[for="seg-smb"],
+  #seg-ent:focus-visible ~ .segbar label[for="seg-ent"]{
+    outline:2px solid var(--ink);outline-offset:2px;}
+  .panel{display:none;}
+  #seg-pro:checked ~ #p-pro,
+  #seg-smb:checked ~ #p-smb,
+  #seg-ent:checked ~ #p-ent{display:block;}
+  .prung{font-size:15px;color:var(--muted);margin:14px 0 0;}
+  .ptitle{display:none;font-size:13px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--muted);margin:0 0 10px;}
+  /* Editing opens every panel at once, so all three sets of copy are reachable in
+     one pass. Keyed off the live contenteditable attribute the harness sets, not
+     off body.ed-on, which is always true on localhost and would stop the tabs
+     being previewable there. */
+  #doc[contenteditable="true"] .panel{display:block;}
+  #doc[contenteditable="true"] .ptitle{display:block;}
+  #doc[contenteditable="true"] .panel + .panel{margin-top:32px;}
 </style>
 </head>
 <body>
@@ -192,36 +228,125 @@
      work with professionals, SMEs, and enterprises, including teams of
      non-technical users.</p>
 
-  <div class="probcards">
-    <div class="probcard">
-      <p class="ph">Too many emails</p>
-      <p class="plabel">What I build</p>
-      <p class="pname">Email triage</p>
-      <p class="pbody">An inbox you train to sort itself, and then act on what it finds: route each message to the right person, and optionally answer the repeat questions for you.</p>
+  <!-- Three client types as CSS-only tabs, per AK 2026-08-20. One product
+       order across all tabs so switching leaves the product in place and
+       changes the words. Copy is his, edited from the mockup sheet. -->
+  <div class="segs">
+    <input type="radio" name="seg" id="seg-pro" checked>
+    <input type="radio" name="seg" id="seg-smb">
+    <input type="radio" name="seg" id="seg-ent">
+    <div class="segbar">
+      <label for="seg-pro">Professionals</label>
+      <label for="seg-smb">SMEs</label>
+      <label for="seg-ent">Enterprise</label>
     </div>
-    <div class="probcard">
-      <p class="ph">The answer is in someone&rsquo;s head</p>
-      <p class="plabel">What I build</p>
-      <p class="pname">A semantic layer you can ask</p>
-      <p class="pbody">All your business logic in one place. Quick answers for new starters.</p>
+    <div class="panel" id="p-pro">
+      <p class="ptitle">Professionals</p>
+      <div class="probcards">
+        <div class="probcard">
+          <p class="ph">Your inbox is the job now</p>
+          <p class="plabel">What I build</p>
+          <p class="pname">Email triage</p>
+          <p class="pbody">Your inbox sorts itself the way you actually work, so the messages that need you are the ones you see first, and the routine replies are already drafted.</p>
+        </div>
+        <div class="probcard">
+          <p class="ph">The same admin, every single week</p>
+          <p class="plabel">What I build</p>
+          <p class="pname">Automations that give you your week back</p>
+          <p class="pbody">The repeating parts of your week handed over, so the hours go to the work only you can do.</p>
+        </div>
+        <div class="probcard">
+          <p class="ph">The number you need is on page 200</p>
+          <p class="plabel">What I build</p>
+          <p class="pname">Documents turned into data</p>
+          <p class="pbody">The reports, contracts, and decks you are sent become a table you can search, so you stop reading three hundred pages to find the one number you needed.</p>
+        </div>
+        <div class="probcard">
+          <p class="ph">You know you wrote it down somewhere</p>
+          <p class="plabel">What I build</p>
+          <p class="pname">A semantic layer you can ask</p>
+          <p class="pbody">Your own notes, files, and past work in one place you can ask in plain English. The things you know but cannot remember where you put.</p>
+        </div>
+        <div class="probcard">
+          <p class="ph">Walking into meetings cold</p>
+          <p class="plabel">What I build</p>
+          <p class="pname">A briefing before every meeting</p>
+          <p class="pbody">Connect your calendar and your files once. You walk in knowing who you are meeting and what you last said to them, without the hour of prep the night before.</p>
+        </div>
+      </div>
+      <p class="prung">Most of these land as <a href="../pricing/">Operator Edge</a>.</p>
     </div>
-    <div class="probcard">
-      <p class="ph">You do the same job, by hand, every week</p>
-      <p class="plabel">What I build</p>
-      <p class="pname">Automations that free up staff</p>
-      <p class="pbody">The repetitive middle of a workflow handed over, so your people spend their hours on the parts that need judgement.</p>
+    <div class="panel" id="p-smb">
+      <p class="ptitle">SMEs</p>
+      <div class="probcards">
+        <div class="probcard">
+          <p class="ph">Too many emails, and the important ones get missed</p>
+          <p class="plabel">What I build</p>
+          <p class="pname">Email triage</p>
+          <p class="pbody">A shared inbox that routes itself to the right person, answers the questions you get twenty times a week, and stops things falling between people.</p>
+        </div>
+        <div class="probcard">
+          <p class="ph">You do the same job, by hand, every week</p>
+          <p class="plabel">What I build</p>
+          <p class="pname">Automations that free up staff</p>
+          <p class="pbody">The repetitive middle of a workflow handed over, so a small team spends its hours on the parts that need judgement rather than the parts that need typing.</p>
+        </div>
+        <div class="probcard">
+          <p class="ph">The information is stuck in PDFs, decks, or other files</p>
+          <p class="plabel">What I build</p>
+          <p class="pname">Documents turned into data</p>
+          <p class="pbody">Invoices, supplier contracts, and orders read automatically into one table you can search, report on, and chart, instead of a folder nobody opens.</p>
+        </div>
+        <div class="probcard">
+          <p class="ph">The answer is in someone&rsquo;s head, and they are on holiday</p>
+          <p class="plabel">What I build</p>
+          <p class="pname">A semantic layer you can ask</p>
+          <p class="pbody">Everything the business knows in one place anyone can ask in plain English, so a new starter stops interrupting the person who knows.</p>
+        </div>
+        <div class="probcard">
+          <p class="ph">Nobody has time to prepare for the client call</p>
+          <p class="plabel">What I build</p>
+          <p class="pname">A briefing before every meeting</p>
+          <p class="pbody">Connect your calendar and your files once, and a short brief on the client you are about to see lands before the meeting.</p>
+        </div>
+      </div>
+      <p class="prung">Most of these land as a <a href="../pricing/">Build Sprint</a>.</p>
     </div>
-    <div class="probcard">
-      <p class="ph">The information is stuck in PDFs, decks, or other files</p>
-      <p class="plabel">What I build</p>
-      <p class="pname">Documents turned into data</p>
-      <p class="pbody">Contracts, invoices, and reports read automatically into a table you can search, report on, and chart.</p>
-    </div>
-    <div class="probcard">
-      <p class="ph">Walking into meetings cold</p>
-      <p class="plabel">What I build</p>
-      <p class="pname">A briefing before every meeting</p>
-      <p class="pbody">Connect your calendar and your files once. A short brief on who you are meeting lands before the meeting.</p>
+    <div class="panel" id="p-ent">
+      <p class="ptitle">Enterprise</p>
+      <div class="probcards">
+        <div class="probcard">
+          <p class="ph">Shared inboxes nobody owns</p>
+          <p class="plabel">What I build</p>
+          <p class="pname">Email triage</p>
+          <p class="pbody">High-volume inboxes classified and routed against your own taxonomy, so nothing sits unowned and the routine questions are answered at source.</p>
+        </div>
+        <div class="probcard">
+          <p class="ph">A process that runs on people copying between systems</p>
+          <p class="plabel">What I build</p>
+          <p class="pname">Automations that free up staff</p>
+          <p class="pbody">The repetitive middle of a process handed over department by department, with a person approving each step until the numbers earn the trust.</p>
+        </div>
+        <div class="probcard">
+          <p class="ph">Years of documents nothing can read</p>
+          <p class="plabel">What I build</p>
+          <p class="pname">Documents turned into data</p>
+          <p class="pbody">Contracts, filings, and reports read automatically into a structured store your existing systems can query, with the extraction rules reviewed rather than assumed.</p>
+        </div>
+        <div class="probcard">
+          <p class="ph">Every team answers the same question differently</p>
+          <p class="plabel">What I build</p>
+          <p class="pname">A semantic layer you can ask</p>
+          <p class="pbody">One layer over the systems you already run, so a question asked in plain English resolves against your definitions rather than a guess.</p>
+        </div>
+        <div class="probcard">
+          <p class="ph">The account lead has the context, and they are not in the room</p>
+          <p class="plabel">What I build</p>
+          <p class="pname">A briefing before every meeting</p>
+          <p class="pbody">Calendars and internal files connected once, so anyone walking into a client meeting has the same brief the account lead would have written.</p>
+        </div>
+      </div>
+      <p class="prung">Most of these run as a <a href="../pricing/">team programme</a>.</p>
     </div>
   </div>
 
