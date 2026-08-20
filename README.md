@@ -27,7 +27,7 @@ The rail is the site's only navigation. There is no footer: it repeated the same
 2. **Actions.** Book 30 minutes (the accent-coloured primary), Download a CV.
 3. **Elsewhere.** LinkedIn, GitHub, AK Bakes.
 
-A 64px left strip from 769px up, where the full label appears as a tooltip on hover, and a bottom bar below that, where a short label sits under each icon. The short labels exist because nine items across 390px leaves 43px each, which the full names do not fit. Both are in the markup, as `.rail-label` and `.rail-short`; each link also carries the full name as its `aria-label`. On a short desktop window the strip scrolls internally rather than clipping.
+A 64px left strip from 769px up, where the full label appears as a tooltip on hover, and a bottom bar below that, where a short label sits under each icon. The bottom bar carries six of the nine: the Elsewhere group is hidden below 769px, because nine across 390px left 43px each, under the 44px minimum. Six leaves 63px. The short labels exist because the full names do not fit either way. Both are in the markup, as `.rail-label` and `.rail-short`; each link also carries the full name as its `aria-label`. On a short desktop window the strip scrolls internally rather than clipping.
 
 Each action that depends on an external link is marked with an HTML comment on the line above it, alone on that line:
 
