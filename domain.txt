@@ -1,0 +1,4 @@
+# The canonical domain for this site, and the only place it is written.
+# Change it here, then run: python3 apply_domain.py --commit
+# A github.io value writes no CNAME; a custom domain writes one.
+akaddo97.github.io
