@@ -2,6 +2,15 @@
 
 For Jasmine Boatswain. This is a jumping-off point, not a finished design. Everything here is a decision that can be reversed, and the reasoning is written down so you can see what was deliberate and what was just the fastest thing that worked.
 
+> **Superseded on 2026-08-25.** The site moved to a new visual direction, derived from a Framer
+> template AK was trialling: near-white `#FDFDFD` ground, black text, a blue accent, and three
+> self-hosted faces (Instrument Serif for display, Google Sans Flex for body, Fragment Mono for
+> nav and labels). The left rail became a bracketed top nav plus a footer. The palette and the
+> split described below are **no longer what the site renders**, and are kept as the record of
+> the previous design and the reasoning behind it. Current tokens live in the `:root` block of
+> each page; navigation and typefaces are documented in `README.md`. The direction change has
+> not been through a design review.
+
 ## What the site is for
 
 Two audiences arrive here, and they want different things.

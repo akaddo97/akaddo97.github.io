@@ -14,11 +14,11 @@ ignored, so notes and headings are safe to write anywhere in this file.
 
 ## What each key is
 
-- `booking` is the appointment scheduler. Ten buttons: the rail on all five
-  pages, the free scoping block and the closing block on the prices page, and
-  the closing block on the home, build, and fluency pages.
-- `cv` is where the CV button goes. Six buttons: the rail on all five pages,
-  and the actions block on the homepage. A path such as `/AK_Addo_CV.pdf` works
+- `booking` is the appointment scheduler. Ten buttons: the footer on all five
+  pages, the hero and the closing block on the prices page, the closing block on
+  the build and fluency pages, and the Start here block on the homepage.
+- `cv` is where the CV button goes. Six buttons: the nav on all five pages, and
+  the Start here block on the homepage. A path such as `/AK_Addo_CV.pdf` works
   here as well as a full URL, if the CV is served from this repo.
 - `mentor` is the mentor signup form. One button, in the mentor section of the
   fluency page.

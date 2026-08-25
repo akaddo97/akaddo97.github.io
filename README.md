@@ -19,17 +19,20 @@ Open the page, change the copy, and push to `main`. GitHub Pages rebuilds within
 
 Every page also carries an edit-in-place toolbar, hidden from public visitors and shown when the URL has `?edit=1` on it. Edits save to that browser only and never reach the published page. Use "Save a copy" to download an edited version.
 
-## The rail
+## Navigation
 
-The rail is the site's only navigation. There is no footer: it repeated the same links, so it was removed. Nine items in three groups, separated by rules:
+A bracketed top nav on every page, plus a footer. It replaces the left rail, which was removed
+on 2026-08-25 with the design change. Nothing became unreachable: the four pages and CV sit in
+the nav, and Book 30 minutes, LinkedIn, GitHub, and AK Bakes sit in the footer.
 
-1. **Pages.** Home, Bespoke tech products, AI fluency, Services and prices. The current page is marked with `aria-current="page"` and a yellow indicator. The CV page at `/cv/` carries the same rail and is marked current there, but is not one of the four listed pages.
-2. **Actions.** Book 30 minutes (the accent-coloured primary), Download a CV.
-3. **Elsewhere.** LinkedIn, GitHub, AK Bakes.
+Both the nav and the footer sit **outside `#doc`**, so editing a page in the browser cannot move
+a marker away from its button. That was a real failure mode with the old layout.
 
-A 64px left strip from 769px up, where the full label appears as a tooltip on hover, and a bottom bar below that, where a short label sits under each icon. The bottom bar carries six of the nine: the Elsewhere group is hidden below 769px, because nine across 390px left 43px each, under the 44px minimum. Six leaves 63px. The short labels exist because the full names do not fit either way. Both are in the markup, as `.rail-label` and `.rail-short`; each link also carries the full name as its `aria-label`. On a short desktop window the strip scrolls internally rather than clipping.
+Nav labels are wrapped in square brackets and set in Fragment Mono. The current page is marked
+with `aria-current="page"`. Tap targets are 44px. On a phone the five nav items wrap to two rows.
 
-Each action that depends on an external link is marked with an HTML comment on the line above it, alone on that line:
+Each action that depends on an external link is marked with an HTML comment on the line above it,
+alone on that line:
 
 | Marker | Links | Points at |
 |---|---|---|
@@ -38,9 +41,21 @@ Each action that depends on an external link is marked with an HTML comment on t
 | `<!-- FORM:MENTOR -->` | 1 | **Live.** The mentor signup form. |
 | `<!-- FORM:COHORT -->` | 1 | **Live.** The AI fluency participant signup. |
 
-Eighteen marked buttons in total, all live as of 2026-08-13. The LinkedIn fallback pattern remains available for any future marker: a pending action points at the LinkedIn profile so nothing on the site opens onto a dead end while its form is being built.
+Eighteen marked buttons in total. That count is the tripwire: fewer means a marker went missing.
 
-**Do not edit these by hand.** Every URL lives in `links.md`, and `apply_links.py` writes it to every button. `python3 apply_links.py` shows what would change, `--commit` writes, `--check` exits 1 if the site and `links.md` have drifted apart. The field specification for each form lives in `docs/scoping/google_forms_build_sheet_2026-08-11.html` in the `aks_claude_data` repo.
+**Do not edit these by hand.** Every URL lives in `links.md`, and `apply_links.py` writes it to
+every button. `python3 apply_links.py` shows what would change, `--commit` writes, `--check`
+exits 1 if the site and `links.md` have drifted apart.
+
+## Typefaces
+
+Three faces, all self-hosted from `fonts/` so the site makes **no external requests**: Instrument
+Serif for display headings, Google Sans Flex for everything else, Fragment Mono for nav and
+labels. All three are open-licence, taken from the Google Fonts latin subsets. Google Sans Flex
+is the variable file, 400 to 700.
+
+Self-hosting rather than linking to Google is deliberate: it avoids a render-blocking round trip
+on first paint, and it avoids sending every visitor's IP address to Google.
 
 ## The CV page
 

@@ -3,216 +3,133 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
 <title>CV | AK Addo</title>
 <meta name="description" content="Download AK Addo's CV.">
-<meta name="robots" content="noindex">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://akaddo97.github.io/cv/">
-<meta property="og:title" content="CV | AK Addo">
-<meta property="og:description" content="Download AK Addo's CV.">
-<meta property="og:image" content="https://akaddo97.github.io/ak-addo.jpg">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231A1A1A'/><text y='68' x='50' text-anchor='middle' font-family='system-ui' font-weight='700' font-size='48' fill='%23F5C518'>AK</text></svg>">
 <style>
-  :root{--bg:#FAF8F2;--ink:#1A1A1A;--muted:#5A5750;--accent:#F5C518;--rule:#E4DFD2;--panel:#F0EDE3;}
+
+  :root{
+    --bg:#FDFDFD; --panel:#F7F7F7; --ink:#000000;
+    --muted:#636363; --muted2:#545454; --rule:#E6E6E6; --accent:#3455FA;
+  }
+  @font-face{font-family:"Google Sans Flex";src:url(../fonts/google-sans-flex.woff2) format("woff2");
+    font-weight:400 700;font-style:normal;font-display:swap;}
+  @font-face{font-family:"Instrument Serif";src:url(../fonts/instrument-serif.woff2) format("woff2");
+    font-weight:400;font-style:normal;font-display:swap;}
+  @font-face{font-family:"Fragment Mono";src:url(../fonts/fragment-mono.woff2) format("woff2");
+    font-weight:400;font-style:normal;font-display:swap;}
   *{box-sizing:border-box;}
   body{margin:0;background:var(--bg);color:var(--ink);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif;
-    font-size:18px;line-height:1.65;-webkit-font-smoothing:antialiased;}
-  main{max-width:640px;margin:0 auto;padding:56px 24px 72px;}
-  .back{display:inline-block;font-size:15px;color:var(--muted);text-decoration:none;
-    margin-bottom:44px;border-bottom:1px solid transparent;}
-  .back:hover{border-bottom-color:var(--muted);}
-  /* The page's only h1 carries this class, so it reads as a heading to search
-     engines and screen readers while looking like the small label AK left. */
-  .eyebrow{font-size:13px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--muted);margin:0 0 10px;}
-  p{margin:0 0 22px;}
-  h2{font-size:15px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
-    margin:44px 0 14px;font-weight:600;}
-  a{color:var(--ink);text-decoration:none;border-bottom:2px solid var(--accent);padding-bottom:1px;}
-  a:hover{background:var(--accent);}
-
-  /* The free first rung, set apart from the paid ladder below it so the entry
-     point is unmissable rather than being the smallest row in a price table. */
-  .free{border:2px solid var(--ink);border-radius:12px;padding:24px 24px 22px;margin:0 0 26px;
-    background:#fff;}
-  .free .ft{font-size:21px;font-weight:700;letter-spacing:-0.01em;margin:0 0 6px;}
-  .free p{font-size:16px;color:var(--muted);margin:0 0 16px;}
-
-  /* Method: numbered stages. The thing being sold is the method, not the rate,
-     so it sits above the price table. */
-  .stages{list-style:none;margin:0 0 22px;padding:0;counter-reset:stage;}
-  .stages li{position:relative;padding:0 0 18px 46px;counter-increment:stage;}
-  .stages li::before{content:counter(stage);position:absolute;left:0;top:2px;
-    width:30px;height:30px;border-radius:50%;background:var(--ink);color:var(--bg);
-    font-size:14px;font-weight:700;line-height:30px;text-align:center;}
-  .st{font-weight:600;margin:0 0 2px;}
-  .sd{color:var(--muted);font-size:17px;margin:0;}
-
-  .tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 14px;}
-  table{border-collapse:collapse;width:100%;min-width:460px;font-size:17px;}
-  th,td{text-align:left;padding:11px 14px 11px 0;border-bottom:1px solid var(--rule);
-    vertical-align:top;}
-  th{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
-    font-weight:600;}
-  td.num{white-space:nowrap;font-weight:600;}
-  tr.flag td{background:var(--panel);}
-  .note{font-size:15px;color:var(--muted);}
-
-  @media (max-width:520px){
-    body{font-size:17px;}
-    main{padding:40px 22px 56px;}
+    font-family:"Google Sans Flex",Inter,-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
+    font-size:16px;line-height:1.55;font-weight:400;letter-spacing:0.14px;
+    -webkit-font-smoothing:antialiased;}
+  .shell{max-width:1124px;margin:0 auto;border-left:1px solid var(--rule);
+    border-right:1px solid var(--rule);min-height:100vh;}
+  .sec{padding:56px 48px;border-bottom:1px solid var(--rule);}
+  .sec.center{text-align:center;}
+  a{color:var(--ink);text-decoration:none;}
+  .topnav{display:flex;align-items:center;justify-content:center;gap:20px;
+    padding:20px;border-bottom:1px solid var(--rule);flex-wrap:wrap;}
+  .topnav a{font-family:"Fragment Mono",ui-monospace,Menlo,monospace;font-size:13px;
+    letter-spacing:0.13px;color:var(--muted2);padding:12px 4px;}
+  .topnav a:hover,.topnav a[aria-current="page"]{color:var(--ink);}
+  .mark{display:grid;grid-template-columns:9px 9px;gap:3px;}
+  .mark i{display:block;width:9px;height:9px;background:var(--ink);border-radius:2px;}
+  .display{font-family:"Instrument Serif",Georgia,"Times New Roman",serif;font-weight:400;
+    font-size:clamp(40px,6.4vw,54px);line-height:1.08;margin:0 0 14px;}
+  .lead{font-size:20px;color:var(--ink);margin:0 0 8px;max-width:none;}
+  .sub{font-size:16px;color:var(--muted);max-width:58ch;margin:0 auto;}
+  .kicker{font-family:"Fragment Mono",ui-monospace,Menlo,monospace;font-size:11px;
+    letter-spacing:0.16px;text-transform:uppercase;color:var(--muted);margin:0 0 16px;}
+  h2{font-size:clamp(26px,3.6vw,34px);font-weight:400;line-height:1.15;
+    letter-spacing:-0.28px;margin:0 0 14px;}
+  h3{font-size:19px;font-weight:400;margin:0 0 4px;}
+  p{color:var(--muted);margin:0 0 15px;max-width:66ch;}
+  .btn{display:inline-block;border-radius:50px;padding:14px 22px;font-size:14px;
+    letter-spacing:0.13px;border:1px solid var(--rule);background:var(--panel);color:var(--ink);
+    font-family:inherit;cursor:pointer;}
+  .btn-dark{background:var(--ink);color:#fff;border-color:var(--ink);}
+  .btn:hover{border-color:var(--muted);}
+  .btns{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0 0;}
+  .sec.center .btns{justify-content:center;}
+  a.inline{color:var(--accent);border-bottom:1px solid var(--rule);}
+  a.inline:hover{border-bottom-color:var(--accent);}
+  .cards2{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+  .dcard{border:1px dashed var(--rule);padding:26px 24px;}
+  .dcard h3{font-size:18px;margin:0 0 8px;}
+  .dcard p{font-size:14px;margin:0;}
+  .ask{border:1px solid var(--rule);border-radius:18px;background:var(--panel);padding:26px 24px;}
+  .foot{padding:28px 48px 40px;display:flex;gap:22px;flex-wrap:wrap;align-items:center;}
+  .foot a{font-family:"Fragment Mono",ui-monospace,Menlo,monospace;font-size:12px;
+    letter-spacing:0.13px;color:var(--muted2);padding:10px 2px;}
+  .foot a:hover{color:var(--ink);}
+  .foot .spacer{flex:1;}
+  @media (max-width:820px){ .cards2{grid-template-columns:1fr;} }
+  @media (max-width:640px){
+    .sec{padding:40px 20px;}
+    .topnav{gap:12px;padding:14px 10px;}
+    .foot{padding:22px 20px 32px;gap:14px;}
   }
 
-  /* Editable harness, hidden unless ?edit=1. Public visitors never see it. */
+
+  .cvform{max-width:460px;}
+  .field{margin:0 0 16px;}
+  .field label{display:block;font-size:13px;color:var(--ink);margin:0 0 6px;}
+  .field input,.field select{width:100%;font:inherit;font-size:15px;padding:12px 14px;
+    border:1px solid var(--rule);border-radius:11px;background:#fff;color:var(--ink);}
+  .hint{font-size:12px;color:var(--muted);margin:4px 0 0;}
+  .err{color:#B00020;font-size:14px;margin:12px 0 0;}
+  .cvform button{cursor:pointer;}
+  .cvform button[disabled]{opacity:.55;cursor:default;}
+  .field input:focus,.field select:focus{outline:2px solid var(--accent);outline-offset:1px;
+    border-color:var(--ink);}
+  .done{display:none;}
+  .done p{margin:0 0 14px;}
+  body.cv-done .cvform{display:none;}
+  body.cv-done .done{display:block;}
+  .ask.done{margin-top:20px;}
+  #cvForm .btn{margin-top:4px;}
+
   .ed-bar{display:none;position:fixed;top:12px;right:12px;z-index:50;gap:6px;align-items:center;
     background:var(--bg);border:1px solid var(--rule);border-radius:8px;padding:5px 7px;
     box-shadow:0 2px 10px rgba(0,0,0,.08);}
   body.ed-on .ed-bar{display:flex;}
   .ed-bar button{font:inherit;font-size:12px;padding:3px 8px;border:1px solid var(--rule);
-    background:#F0EDE3;color:var(--ink);border-radius:6px;cursor:pointer;}
+    background:var(--panel);color:var(--ink);border-radius:6px;cursor:pointer;}
   .ed-bar button.on{background:var(--accent);color:var(--ink);border-color:var(--accent);}
   .ed-bar .ed-status{color:var(--muted);padding:0 2px;font-size:12px;}
   #doc[contenteditable="true"]{outline:2px dashed var(--accent);outline-offset:10px;border-radius:6px;}
   @media print{.ed-bar{display:none}}
   @media (max-width:640px){body.ed-on .ed-bar{position:static;margin:10px 12px 0;justify-content:flex-end;}}
-
-  /* Inquiry block. */
-  .ask{margin-top:44px;padding:24px 24px 22px;border:1px solid var(--rule);border-radius:12px;
-    background:#fff;}
-  .ask h3{font-size:19px;margin:0 0 6px;letter-spacing:-0.01em;}
-  .ask p{font-size:16px;color:var(--muted);margin:0 0 16px;}
-  .btn{display:inline-block;background:var(--ink);color:var(--bg);border:0;border-bottom:0;
-    border-radius:8px;padding:11px 20px;font-size:16px;font-weight:600;}
-  .btn:hover{background:#000;color:var(--bg);}
-
-  /* The site's only navigation, so it carries the pages, the two actions, and
-     the off-site links. A 64px left strip from 769px up, a bottom bar below
-     that, because on a phone the reachable edge is the bottom one. It scrolls
-     internally on short screens rather than clipping. Sits outside #doc so the
-     edit harness cannot remove it. */
-  .rail{position:fixed;z-index:60;display:flex;background:var(--ink);
-    margin:0;padding:0;border:0;gap:0;}
-  .rail-item{display:flex;align-items:center;color:#9C978C;border-bottom:0;
-    padding-bottom:0;font-weight:500;transition:color .16s ease,background .16s ease;}
-  .rail-item svg{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;
-    stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
-  .rail-item:hover{color:#fff;background:transparent;}
-  .rail-primary{color:var(--accent);}
-  .rail-primary:hover{color:var(--ink);background:var(--accent);}
-  .rail-here{color:#fff;}
-  .rail-item:focus-visible{outline:2px solid var(--accent);outline-offset:-2px;}
-  .rail-sep{flex:none;background:#2A2A2A;}
-  @media (min-width:769px){
-    body{padding-left:64px;}
-    /* Deliberately not a scroll container. The hover label sits outside the
-       64px strip, so any overflow other than visible clips it away entirely.
-       Short windows are handled by shrinking the items below instead. */
-    .rail{top:0;left:0;bottom:0;width:64px;flex-direction:column;align-items:stretch;
-      border-right:1px solid #2A2A2A;overflow:visible;}
-    .rail-item{position:relative;justify-content:center;height:64px;}
-    .rail-sep{height:1px;margin:7px 14px;}
-    .rail-here::before{content:"";position:absolute;left:0;top:14px;bottom:14px;
-      width:3px;background:var(--accent);}
-    .rail-short{display:none;}
-    .rail-item .rail-label{position:absolute;left:100%;margin-left:10px;padding:6px 10px;
-      white-space:nowrap;font-size:12px;color:#fff;background:var(--ink);
-      border:1px solid #2A2A2A;border-radius:4px;opacity:0;transform:translateX(-4px);
-      pointer-events:none;transition:opacity .16s ease,transform .16s ease;z-index:1;}
-    .rail-item:hover .rail-label,
-    .rail-item:focus-visible .rail-label{opacity:1;transform:translateX(0);}
-  }
-  @media (max-width:768px){
-    body{padding-bottom:60px;}
-    .rail{left:0;right:0;bottom:0;height:60px;flex-direction:row;
-      border-top:1px solid #2A2A2A;padding-bottom:env(safe-area-inset-bottom);}
-    .rail-item{flex:1;min-width:0;flex-direction:column;justify-content:center;gap:3px;}
-    .rail-sep{display:none;}
-    .rail-here{box-shadow:inset 0 2px 0 var(--accent);}
-    .rail-label{display:none;}
-    .rail-offsite{display:none;}
-    .rail-short{font-size:10px;letter-spacing:.01em;line-height:1;
-      max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-  }
-  /* Nine items at 64px plus two rules need about 610px of height. Below that
-     the items shrink rather than scroll, so the hover labels keep working. */
-  @media (min-width:769px) and (max-height:620px){
-    .rail-item{height:50px;}
-    .rail-sep{margin:5px 14px;}
-  }
-  /* Last resort on a genuinely tiny window: scroll, and accept that the hover
-     label is clipped there, which is the lesser problem than unreachable links. */
-  @media (min-width:769px) and (max-height:480px){
-    .rail{overflow-y:auto;scrollbar-width:none;}
-    .rail::-webkit-scrollbar{display:none;}
-  }
-  @media print{.rail{display:none}}
-</style>
-<style>
-  /* Page-specific: the four fields and the two states of the panel. Everything
-     else on this page is the site's shared style block above. */
-  .field{margin:0 0 18px;}
-  .field label{display:block;font-size:15px;font-weight:600;margin:0 0 6px;}
-  .field input,.field select{width:100%;font:inherit;font-size:16px;color:var(--ink);
-    background:#fff;border:1px solid var(--rule);border-radius:8px;padding:10px 12px;}
-  .field input:focus,.field select:focus{outline:2px solid var(--accent);outline-offset:1px;
-    border-color:var(--ink);}
-  .hint{font-size:14px;color:var(--muted);margin:6px 0 0;}
-  .cvform button{cursor:pointer;}
-  .cvform button[disabled]{opacity:.55;cursor:default;}
-  .done{display:none;}
-  .done p{margin:0 0 14px;}
-  body.cv-done .cvform{display:none;}
-  body.cv-done .done{display:block;}
-  .err{color:#7C2D12;font-size:15px;margin:12px 0 0;}
 </style>
 </head>
-
 <body>
 
 <div class="ed-bar" contenteditable="false"><button id="edEdit" type="button">Edit</button><button id="edSave" type="button">Save a copy</button><button id="edRevert" type="button">Revert</button><span class="ed-status" id="edStatus">Read only</span></div>
 
-<nav class="rail" aria-label="Site">
-  <a class="rail-item" href="../" aria-label="Home">
-    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 9.5L10 4l7 5.5"/><path d="M5 8.5V17h10V8.5"/></svg>
-    <span class="rail-label">Home</span><span class="rail-short">Home</span></a>
-  <a class="rail-item" href="../build/" aria-label="Bespoke tech products">
-    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 6l-4 4 4 4"/><path d="M13 6l4 4-4 4"/></svg>
-    <span class="rail-label">Bespoke tech products</span><span class="rail-short">Build</span></a>
-  <a class="rail-item" href="../learn/" aria-label="AI fluency">
-    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 4L2 7.5l8 3.5 8-3.5z"/><path d="M5.5 9.5V14c0 1.1 2 2 4.5 2s4.5-.9 4.5-2V9.5"/></svg>
-    <span class="rail-label">AI fluency</span><span class="rail-short">Learn</span></a>
-  <a class="rail-item" href="../pricing/" aria-label="Services and prices">
-    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10.6 3H16v5.4l-7.4 7.4a1.6 1.6 0 01-2.2 0l-3.2-3.2a1.6 1.6 0 010-2.2z"/><path d="M13.3 6.2v.01"/></svg>
-    <span class="rail-label">Services and prices</span><span class="rail-short">Prices</span></a>
-  <div class="rail-sep"></div>
-  <!-- FORM:BOOKING -->
-  <a class="rail-item rail-primary" href="https://calendar.app.google/9MuKtzaxZCC6NXULA" target="_blank" rel="noopener" aria-label="Book 30 minutes">
-    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 5h12v11H4z"/><path d="M4 8h12"/><path d="M7 3v3"/><path d="M13 3v3"/></svg>
-    <span class="rail-label">Book 30 minutes</span><span class="rail-short">Book</span></a>
+<div class="shell">
+
+<nav class="topnav" aria-label="Site">
+  <a href="../">[Home]</a>
+  <a href="../build/">[What I build]</a>
+  <span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+  <a href="../learn/">[AI fluency]</a>
+  <a href="../pricing/">[Prices]</a>
   <!-- FORM:CV -->
-  <a class="rail-item rail-here" href="/cv/" aria-current="page" aria-label="Download a CV">
-    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 3h6l4 4v10H5z"/><path d="M11 3v4h4"/><path d="M8 11h4"/><path d="M8 14h4"/></svg>
-    <span class="rail-label">Download a CV</span><span class="rail-short">CV</span></a>
-  <div class="rail-sep"></div>
-  <a class="rail-item rail-offsite" href="https://www.linkedin.com/in/ak-addo-248149196/" target="_blank" rel="noopener" aria-label="LinkedIn">
-    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3.5 3.5h13v13h-13z"/><path d="M6.5 8.5V14"/><path d="M6.5 6v.01"/><path d="M9.5 14V10a2.5 2.5 0 015 0v4"/></svg>
-    <span class="rail-label">LinkedIn</span><span class="rail-short">LinkedIn</span></a>
-  <a class="rail-item rail-offsite" href="https://github.com/akaddo97" target="_blank" rel="noopener" aria-label="GitHub">
-    <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="6" cy="5" r="2"/><circle cx="6" cy="15" r="2"/><circle cx="14" cy="6" r="2"/><path d="M6 7v6"/><path d="M14 8v1a3 3 0 01-3 3H8"/></svg>
-    <span class="rail-label">GitHub</span><span class="rail-short">GitHub</span></a>
-  <a class="rail-item rail-offsite" href="https://ak-baking.square.site/" target="_blank" rel="noopener" aria-label="AK Bakes">
-    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 12a7 4 0 0114 0z"/><path d="M3 12v2a7 4 0 0014 0v-2"/></svg>
-    <span class="rail-label">AK Bakes</span><span class="rail-short">Bakes</span></a>
+  <a href="/cv/" aria-current="page">[CV]</a>
 </nav>
 
 <main id="doc">
-  <a class="back" href="../">Back to Home</a>
 
-  <h1 class="eyebrow">Curriculum vitae</h1>
+  <div class="sec center">
+    <h1 class="display">Curriculum vitae</h1>
+    <p class="lead">Download a CV</p>
+  </div>
 
-  <div class="ask cvform">
-    <form id="cvForm" novalidate>
+  <div class="sec">
+    <div class="cvform">
+<form id="cvForm" novalidate>
       <div class="field">
         <label for="cvName">Name</label>
         <input id="cvName" name="name" type="text" autocomplete="name" required>
@@ -245,15 +162,28 @@
       <button class="btn" type="submit" id="cvSubmit">Download the CV</button>
       <p class="err" id="cvErr" hidden></p>
     </form>
-  </div>
+    </div>
 
-  <div class="ask done" id="cvDone">
+<div class="ask done" id="cvDone">
     <h3>On its way</h3>
     <p>The download should have started. If your browser blocked it,
        <a id="cvDirect" href="../AK_Addo_CV.pdf" download>use this link instead</a>.</p>
     <p>If something in it is worth a conversation, my calendar is on the site.</p>
   </div>
+  </div>
+
 </main>
+
+<div class="foot">
+  <!-- FORM:BOOKING -->
+  <a href="https://calendar.app.google/9MuKtzaxZCC6NXULA">[Book 30 minutes]</a>
+  <span class="spacer"></span>
+  <a href="https://www.linkedin.com/in/ak-addo-248149196/">[LinkedIn]</a>
+  <a href="https://github.com/akaddo97">[GitHub]</a>
+  <a href="https://ak-baking.square.site/">[AK Bakes]</a>
+</div>
+
+</div>
 
 <script>
 /* CV gate. Posts the four answers into a Google Form, then downloads the PDF
@@ -322,8 +252,6 @@ var PDF = "../AK_Addo_CV.pdf";
   });
 })();
 </script>
-
-
 <script>
 /* Editable-in-place harness, gated. See skills/editable_html/SKILL.md.
    Public visitors get no toolbar. Open any page with ?edit=1 to edit copy,
@@ -368,6 +296,5 @@ var PDF = "../AK_Addo_CV.pdf";
   });
 })();
 </script>
-
 </body>
 </html>
