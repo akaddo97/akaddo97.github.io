@@ -30,7 +30,7 @@ jobs:
         run: |
           UA='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36'
           URLS=(
-            "https://meridian.allenpress.com/imaps-conferences/article/2019/HiTen/000061/420559/Comparative-study-of-how-additives-affect-sintered"
+            "https://imapsource.org/article/67338-comparative-study-of-how-additives-affect-sintered-silver-microstructure-in-die-attach-applications"
             "https://ak-baking.square.site/"
             "https://github.com/akaddo97/sponge"
             "https://github.com/akaddo97/llm-providers"
