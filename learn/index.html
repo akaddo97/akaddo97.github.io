@@ -33,13 +33,37 @@
   .sec{padding:56px 48px;border-bottom:1px solid var(--rule);}
   .sec.center{text-align:center;}
   a{color:var(--ink);text-decoration:none;}
-  .topnav{display:flex;align-items:center;justify-content:center;gap:20px;
-    padding:20px;border-bottom:1px solid var(--rule);flex-wrap:wrap;}
+  .topnav{border-bottom:1px solid var(--rule);padding:16px 20px;}
+  .navtog{position:absolute;opacity:0;width:1px;height:1px;}
+  .navrow{display:flex;align-items:center;justify-content:center;gap:20px;}
+  /* Equal-width groups keep the mark on the true centre line, rather than
+     letting the wider pair of labels push it off to one side. */
+  .navgroup{display:flex;align-items:center;gap:20px;flex:1 1 0;}
+  .navgroup.one{justify-content:flex-end;}
+  .navgroup.two{justify-content:flex-start;}
   .topnav a{font-family:"Fragment Mono",ui-monospace,Menlo,monospace;font-size:13px;
-    letter-spacing:0.13px;color:var(--muted2);padding:12px 4px;}
+    letter-spacing:0.13px;color:var(--muted2);padding:12px 4px;white-space:nowrap;}
   .topnav a:hover,.topnav a[aria-current="page"]{color:var(--ink);}
-  .mark{display:grid;grid-template-columns:9px 9px;gap:3px;}
+  .mark{display:grid;grid-template-columns:9px 9px;gap:3px;padding:13px;
+    background:none;border:0;}
   .mark i{display:block;width:9px;height:9px;background:var(--ink);border-radius:2px;}
+  .mark-toggle{display:none;cursor:pointer;}
+  .navtog:focus-visible ~ .navrow .mark-toggle{outline:2px solid var(--accent);
+    outline-offset:2px;border-radius:6px;}
+  @media (max-width:720px){
+    /* The mark is the whole bar until it is tapped. Everything that appears
+       then is centred on it rather than strung along a wrapped row. */
+    .navrow{flex-direction:column;gap:0;}
+    .mark-toggle{display:grid;order:0;}
+    .mark-home{display:none;}
+    .navgroup{display:none;flex-direction:column;gap:0;width:100%;flex:none;}
+    .navgroup.one{order:1;}
+    .navgroup.two{order:2;}
+    .navtog:checked ~ .navrow .navgroup{display:flex;}
+    .navtog:checked ~ .navrow .navgroup a{text-align:center;padding:14px 4px;
+      border-top:1px solid var(--rule);width:100%;}
+    .navtog:checked ~ .navrow{gap:0;}
+  }
 
   .display{font-family:"Instrument Serif",Georgia,"Times New Roman",serif;font-weight:400;
     font-size:clamp(40px,6.4vw,54px);line-height:1.08;margin:0 0 14px;}
@@ -122,7 +146,7 @@
   @media (max-width:820px){ .cards2{grid-template-columns:1fr;} }
   @media (max-width:640px){
     .sec{padding:40px 20px;}
-    .topnav{gap:12px;padding:14px 10px;}
+    .topnav{padding:10px;}
     .cohort{grid-template-columns:1fr;}
     .foot{padding:22px 20px 32px;gap:14px;}
   }
@@ -147,13 +171,21 @@
 <div class="shell">
 
 <nav class="topnav" aria-label="Site">
-  <a href="../">[Home]</a>
-  <a href="../build/">[What I build]</a>
-  <span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-  <a href="../learn/" aria-current="page">[AI fluency]</a>
-  <a href="../pricing/">[Prices]</a>
-  <!-- FORM:CV -->
-  <a href="/cv/">[CV]</a>
+  <input type="checkbox" id="navtog" class="navtog" aria-hidden="true" tabindex="-1">
+  <div class="navrow">
+    <div class="navgroup one">
+        <a href="../build/">[Bespoke tech products]</a>
+        <a href="../learn/" aria-current="page">[AI fluency]</a>
+    </div>
+    <label class="mark mark-toggle" for="navtog" role="button" tabindex="0"
+      aria-label="Show the menu"><i></i><i></i><i></i><i></i></label>
+    <a class="mark mark-home" href="../" aria-label="Home"><i></i><i></i><i></i><i></i></a>
+    <div class="navgroup two">
+        <a href="../pricing/">[Prices]</a>
+        <!-- FORM:CV -->
+        <a href="/cv/">[CV]</a>
+    </div>
+  </div>
 </nav>
 
 <main id="doc">
