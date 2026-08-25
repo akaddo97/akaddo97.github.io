@@ -88,6 +88,29 @@
   .md{font-size:13px;color:var(--muted);margin:0;}
   .cnote{font-size:13px;color:var(--muted);margin:16px 0 0;}
 
+
+  /* Inline application forms, so nobody is routed off the site. */
+  .gform{max-width:560px;margin:18px 0 0;}
+  .gform .field{margin:0 0 18px;border:0;padding:0;}
+  .gform label,.gform legend{display:block;font-size:14px;color:var(--ink);margin:0 0 8px;padding:0;}
+  .gform .opt{color:var(--muted);font-size:12px;}
+  .gform input[type=text],.gform textarea{width:100%;font:inherit;font-size:15px;
+    padding:12px 14px;border:1px solid var(--rule);border-radius:11px;background:#fff;
+    color:var(--ink);}
+  .gform textarea{resize:vertical;}
+  .gform input:focus,.gform textarea:focus{outline:2px solid var(--accent);outline-offset:1px;
+    border-color:var(--ink);}
+  /* 44px rows: the same tap-target standard the nav uses. The label wraps the
+     input, so the whole row is the target, not just the box. */
+  .gform .opt-row{display:flex;gap:12px;align-items:center;font-size:14px;color:var(--muted);
+    margin:0 0 2px;cursor:pointer;min-height:44px;padding:4px 0;}
+  .gform .opt-row input{flex:none;width:18px;height:18px;accent-color:var(--accent);}
+  .gform .opt-row:hover{color:var(--ink);}
+  .gform button[disabled]{opacity:.55;cursor:default;}
+  .err{color:#B00020;font-size:14px;margin:12px 0 0;}
+  .gdone{border:1px solid var(--rule);border-radius:18px;background:var(--panel);
+    padding:20px 22px;margin:18px 0 0;color:var(--ink);max-width:560px;}
+  .fallback{font-size:13px;color:var(--muted);margin:14px 0 0;}
   .ask{border:1px solid var(--rule);border-radius:18px;background:var(--panel);padding:26px 24px;}
   .foot{padding:28px 48px 40px;display:flex;gap:22px;flex-wrap:wrap;align-items:center;}
   .foot a{font-family:"Fragment Mono",ui-monospace,Menlo,monospace;font-size:12px;
@@ -259,10 +282,64 @@
     <p class="cnote">Members are shown by initial and lane.</p>
     <div class="ask" style="margin-top:22px">
       <h3>Apply for a cohort place</h3>
-      <div class="btns">
-        <!-- FORM:COHORT -->
-        <a class="btn btn-dark" href="https://docs.google.com/forms/d/e/1FAIpQLSetZTijhq0l2xNujow4Qc9kulguoO5PSRlpVX6grZopnp9rPg/viewform">Apply</a>
-      </div>
+      <form class="gform" id="cohForm" data-endpoint="https://docs.google.com/forms/d/e/1FAIpQLSetZTijhq0l2xNujow4Qc9kulguoO5PSRlpVX6grZopnp9rPg/formResponse" novalidate>
+        <div class="field"><label for="coh0">Name</label><input id="coh0" name="coh0" data-entry="entry.868886202" type="text" required></div>
+        <div class="field"><label for="coh1">Job title</label><input id="coh1" name="coh1" data-entry="entry.1668098676" type="text" required></div>
+        <div class="field"><label for="coh2">Could you explain a little about what you do?</label><textarea id="coh2" name="entry.162092223" rows="3" required></textarea></div>
+        <fieldset class="field" data-entry="entry.1889560579" data-kind="checkbox" required>
+          <legend>Current job sector?</legend>
+          <label class="opt-row"><input type="checkbox" name="entry.1889560579" value="Financial Services"><span>Financial Services</span></label>
+          <label class="opt-row"><input type="checkbox" name="entry.1889560579" value="Technology"><span>Technology</span></label>
+          <label class="opt-row"><input type="checkbox" name="entry.1889560579" value="Entrepreneurship"><span>Entrepreneurship</span></label>
+          <label class="opt-row"><input type="checkbox" name="entry.1889560579" value="Investing"><span>Investing</span></label>
+          <label class="opt-row"><input type="checkbox" name="entry.1889560579" value="SME operations"><span>SME operations</span></label>
+          <label class="opt-row"><input type="checkbox" name="entry.1889560579" value="Law"><span>Law</span></label>
+          <label class="opt-row"><input type="checkbox" name="entry.1889560579" value="Health"><span>Health</span></label>
+          <label class="opt-row"><input type="checkbox" name="entry.1889560579" value="Theatre/media"><span>Theatre/media</span></label>
+          <label class="opt-row"><input type="checkbox" name="entry.1889560579" value="Marketing"><span>Marketing</span></label>
+        </fieldset>
+        <fieldset class="field" data-entry="entry.2095401517" data-kind="checkbox" required>
+          <legend>What do you want to learn/build/work on?</legend>
+          <label class="opt-row"><input type="checkbox" name="entry.2095401517" value="Speed up parts of my job"><span>Speed up parts of my job</span></label>
+          <label class="opt-row"><input type="checkbox" name="entry.2095401517" value="Build software without being a developer"><span>Build software without being a developer</span></label>
+          <label class="opt-row"><input type="checkbox" name="entry.2095401517" value="Use AI to get a job, or move into a different one"><span>Use AI to get a job, or move into a different one</span></label>
+          <label class="opt-row"><input type="checkbox" name="entry.2095401517" value="Set up automated tasks that run on their own"><span>Set up automated tasks that run on their own</span></label>
+          <label class="opt-row"><input type="checkbox" name="entry.2095401517" value="Turn my notes, contacts, emails etc. into a compounding asset"><span>Turn my notes, contacts, emails etc. into a compounding asset</span></label>
+          <label class="opt-row"><input type="checkbox" name="entry.2095401517" value="Understand how AI/neural networks work under the hood"><span>Understand how AI/neural networks work under the hood</span></label>
+          <label class="opt-row"><input type="checkbox" name="entry.2095401517" value="Not sure yet, I want to find out what&#x27;s possible"><span>Not sure yet, I want to find out what&#x27;s possible</span></label>
+        </fieldset>
+        <div class="field"><label for="coh5">Why do you want to learn/build/work on this now?</label><textarea id="coh5" name="entry.587756498" rows="3" required></textarea></div>
+        <fieldset class="field" data-entry="entry.617719592" data-kind="radio" required>
+          <legend>What is your technical ability?</legend>
+          <label class="opt-row"><input type="radio" name="entry.617719592" value="Never written code"><span>Never written code</span></label>
+          <label class="opt-row"><input type="radio" name="entry.617719592" value="Have copied and pasted code that works"><span>Have copied and pasted code that works</span></label>
+          <label class="opt-row"><input type="radio" name="entry.617719592" value="I&#x27;m a programmer"><span>I&#x27;m a programmer</span></label>
+        </fieldset>
+        <fieldset class="field" data-entry="entry.2095566273" data-kind="checkbox" required>
+          <legend>Which are you comfortable using/writing?</legend>
+          <label class="opt-row"><input type="checkbox" name="entry.2095566273" value="Excel/Google Sheets"><span>Excel/Google Sheets</span></label>
+          <label class="opt-row"><input type="checkbox" name="entry.2095566273" value="Powerpoint/Google Slides"><span>Powerpoint/Google Slides</span></label>
+          <label class="opt-row"><input type="checkbox" name="entry.2095566273" value="PowerBI"><span>PowerBI</span></label>
+          <label class="opt-row"><input type="checkbox" name="entry.2095566273" value="Python"><span>Python</span></label>
+          <label class="opt-row"><input type="checkbox" name="entry.2095566273" value="SQL"><span>SQL</span></label>
+          <label class="opt-row"><input type="checkbox" name="entry.2095566273" value="Next.js"><span>Next.js</span></label>
+          <label class="opt-row"><input type="checkbox" name="entry.2095566273" value="Java"><span>Java</span></label>
+          <label class="opt-row"><input type="checkbox" name="entry.2095566273" value="Claude Code/Codex/other agent harnesses"><span>Claude Code/Codex/other agent harnesses</span></label>
+        </fieldset>
+        <fieldset class="field" data-entry="entry.1940237822" data-kind="radio" required>
+          <legend>How much time can you commit per week?</legend>
+          <label class="opt-row"><input type="radio" name="entry.1940237822" value="An hour a week session + homework"><span>An hour a week session + homework</span></label>
+          <label class="opt-row"><input type="radio" name="entry.1940237822" value="An hour a week"><span>An hour a week</span></label>
+          <label class="opt-row"><input type="radio" name="entry.1940237822" value="Less than that"><span>Less than that</span></label>
+        </fieldset>
+        <div class="field"><label for="coh9">LinkedIn profile</label><input id="coh9" name="coh9" data-entry="entry.210935957" type="text" required></div>
+        <button class="btn btn-dark" type="submit">Send</button>
+        <p class="err" id="cohErr" hidden></p>
+      </form>
+      <p class="gdone" id="cohDone" hidden>Thanks. Your application is in, and AK will come back to you.</p>
+      <p class="fallback">Prefer the Google form?
+      <!-- FORM:COHORT -->
+      <a class="inline" href="https://docs.google.com/forms/d/e/1FAIpQLSetZTijhq0l2xNujow4Qc9kulguoO5PSRlpVX6grZopnp9rPg/viewform">Open it in a new tab</a>.</p>
     </div>
   </div>
 
@@ -273,10 +350,50 @@
     <p>Just an hour a month could be extremely useful.</p>
     <div class="ask">
       <h3>Be a mentor</h3>
-      <div class="btns">
-        <!-- FORM:MENTOR -->
-        <a class="btn btn-dark" href="https://forms.gle/9TQKPCNVHnF6iqqbA">Volunteer</a>
-      </div>
+      <form class="gform" id="menForm" data-endpoint="https://docs.google.com/forms/d/e/1FAIpQLSfeyJ-DlHsev53d_D5zJn8BsQVzzivL76RB6qDZ4QY80pbf8w/formResponse" novalidate>
+        <div class="field"><label for="men0">Name</label><input id="men0" name="men0" data-entry="entry.1615850715" type="text" required></div>
+        <div class="field"><label for="men1">Company/Organisation</label><input id="men1" name="men1" data-entry="entry.215535610" type="text" required></div>
+        <div class="field"><label for="men2">Your current role</label><input id="men2" name="men2" data-entry="entry.1376027042" type="text" required></div>
+        <fieldset class="field" data-entry="entry.1836930917" data-kind="checkbox" required>
+          <legend>Which of these lanes could you speak to?</legend>
+          <label class="opt-row"><input type="checkbox" name="entry.1836930917" value="Financial Services"><span>Financial Services</span></label>
+          <label class="opt-row"><input type="checkbox" name="entry.1836930917" value="Technology"><span>Technology</span></label>
+          <label class="opt-row"><input type="checkbox" name="entry.1836930917" value="Entrepreneurship"><span>Entrepreneurship</span></label>
+          <label class="opt-row"><input type="checkbox" name="entry.1836930917" value="Investing"><span>Investing</span></label>
+          <label class="opt-row"><input type="checkbox" name="entry.1836930917" value="SME operations"><span>SME operations</span></label>
+          <label class="opt-row"><input type="checkbox" name="entry.1836930917" value="Law"><span>Law</span></label>
+          <label class="opt-row"><input type="checkbox" name="entry.1836930917" value="Health"><span>Health</span></label>
+          <label class="opt-row"><input type="checkbox" name="entry.1836930917" value="Theatre/media"><span>Theatre/media</span></label>
+          <label class="opt-row"><input type="checkbox" name="entry.1836930917" value="Marketing"><span>Marketing</span></label>
+        </fieldset>
+        <fieldset class="field" data-entry="entry.327776953" data-kind="radio" required>
+          <legend>How much time can you give to your mentee?</legend>
+          <label class="opt-row"><input type="radio" name="entry.327776953" value="An hour a month"><span>An hour a month</span></label>
+          <label class="opt-row"><input type="radio" name="entry.327776953" value="An hour a fortnight"><span>An hour a fortnight</span></label>
+          <label class="opt-row"><input type="radio" name="entry.327776953" value="An hour a week"><span>An hour a week</span></label>
+          <label class="opt-row"><input type="radio" name="entry.327776953" value="A one-off conversation"><span>A one-off conversation</span></label>
+        </fieldset>
+        <fieldset class="field" data-entry="entry.1189875548" data-kind="checkbox" required>
+          <legend>What shape will your mentorship take?</legend>
+          <label class="opt-row"><input type="checkbox" name="entry.1189875548" value="Sourcing leads within your network"><span>Sourcing leads within your network</span></label>
+          <label class="opt-row"><input type="checkbox" name="entry.1189875548" value="Introductions and networking"><span>Introductions and networking</span></label>
+          <label class="opt-row"><input type="checkbox" name="entry.1189875548" value="Technical support"><span>Technical support</span></label>
+          <label class="opt-row"><input type="checkbox" name="entry.1189875548" value="Industry-specific advice"><span>Industry-specific advice</span></label>
+          <label class="opt-row"><input type="checkbox" name="entry.1189875548" value="Personal/pastoral advice"><span>Personal/pastoral advice</span></label>
+        </fieldset>
+        <fieldset class="field" data-entry="entry.1913974427" data-kind="radio" required>
+          <legend>Do you consent to have your details handed over to your mentee?</legend>
+          <label class="opt-row"><input type="radio" name="entry.1913974427" value="Yes"><span>Yes</span></label>
+        </fieldset>
+        <div class="field"><label for="men7">Anything specific you want to help with? <span class="opt">optional</span></label><textarea id="men7" name="entry.231248540" rows="3"></textarea></div>
+        <div class="field"><label for="men8">LinkedIn profile</label><input id="men8" name="men8" data-entry="entry.1398875455" type="text" required></div>
+        <button class="btn btn-dark" type="submit">Send</button>
+        <p class="err" id="menErr" hidden></p>
+      </form>
+      <p class="gdone" id="menDone" hidden>Thanks for volunteering. AK will be in touch about matching you with a mentee.</p>
+      <p class="fallback">Prefer the Google form?
+      <!-- FORM:MENTOR -->
+      <a class="inline" href="https://forms.gle/9TQKPCNVHnF6iqqbA">Open it in a new tab</a>.</p>
     </div>
   </div>
 
@@ -349,6 +466,53 @@
     if(confirm('Discard your saved edits and reload the original?')===false)return;
     try{localStorage.removeItem(KEY);}catch(e){}
     location.reload();
+  });
+})();
+</script>
+<script>
+/* The two forms post straight into their Google Forms, so nobody leaves the site.
+   Same shape as the CV page: a no-cors POST, which Google accepts but whose reply
+   the browser will not let us read. That means a failed write is invisible, so the
+   fallback link under each form stays, and it opens the real form. */
+(function(){
+  var forms=document.querySelectorAll('.gform');
+  Array.prototype.forEach.call(forms,function(f){
+    var err=document.getElementById(f.id.replace('Form','Err'));
+    var done=document.getElementById(f.id.replace('Form','Done'));
+    f.addEventListener('submit',function(ev){
+      ev.preventDefault();
+      var body=new URLSearchParams(), missing=[];
+      Array.prototype.forEach.call(f.querySelectorAll('.field'),function(field){
+        var entry=field.getAttribute('data-entry'), kind=field.getAttribute('data-kind');
+        var control0=field.querySelector('input[type=text],textarea');
+        var need=field.hasAttribute('required')||(control0!==null&&control0.hasAttribute('required'));
+        if(kind==='radio'||kind==='checkbox'){
+          var picked=field.querySelectorAll('input:checked');
+          if(need&&picked.length===0){missing.push(field);return;}
+          Array.prototype.forEach.call(picked,function(p){body.append(entry,p.value);});
+        }else{
+          var control=field.querySelector('input,textarea');
+          var entry2=control.getAttribute('data-entry')||control.getAttribute('name');
+          var val=(control.value||'').trim();
+          if(need&&val===''){missing.push(field);return;}
+          if(val!==''){body.append(entry2,val);}
+        }
+      });
+      if(missing.length>0){
+        err.textContent='Please fill in every question marked as needed.';
+        err.hidden=false;
+        missing[0].scrollIntoView({block:'center'});
+        return;
+      }
+      err.hidden=true;
+      var btn=f.querySelector('button');
+      btn.disabled=true; btn.textContent='Sending';
+      try{
+        fetch(f.getAttribute('data-endpoint'),{method:'POST',mode:'no-cors',body:body});
+      }catch(e){}
+      f.hidden=true; done.hidden=false;
+      done.scrollIntoView({block:'center'});
+    });
   });
 })();
 </script>

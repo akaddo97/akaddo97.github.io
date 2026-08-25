@@ -82,7 +82,11 @@
     border:1px solid var(--rule);display:block;}
   .offers{display:grid;grid-template-columns:1fr 1fr;gap:0;}
   .offer{border:1px dashed var(--rule);padding:32px 26px;display:block;}
-  .offer .ot{font-size:22px;color:var(--ink);margin:0 0 6px;}
+  /* The whole card is the link, but the title carries the same visible link
+     treatment as the bakery and repo links so it reads as one. */
+  .offer .ot{font-size:22px;color:var(--accent);margin:0 0 6px;
+    border-bottom:1px solid var(--rule);display:inline-block;padding-bottom:2px;}
+  .offer:hover .ot{border-bottom-color:var(--accent);}
   .offer .os{font-size:14px;color:var(--muted);margin:0;}
   @media (max-width:900px){ .hero{grid-template-columns:1fr;gap:26px;}
     .hero .shot{margin:0 auto;} }
