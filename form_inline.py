@@ -20,7 +20,9 @@ import sys
 import urllib.request
 
 ROOT = pathlib.Path(__file__).resolve().parent
-PAGE = ROOT / "learn/index.html"
+# each form now lives on its own page, reached from a button on /learn/
+PAGES = {"cohort": ROOT / "learn/apply/index.html",
+         "mentor": ROOT / "learn/mentor/index.html"}
 
 TYPES = {0: "short", 1: "paragraph", 2: "radio", 3: "dropdown", 4: "checkbox"}
 
@@ -191,19 +193,25 @@ def main():
         for q in qs:
             print(f"  {q['entry']:22} {q['kind']:10} req={q['required']}  {q['title'][:50]}")
 
-    page = PAGE.read_text()
     if a.check:
-        bad = [n for n, (ep, qs, _) in built.items()
-               if ep not in page or any(q["entry"] not in page for q in qs)]
+        bad = []
+        for n, (ep, qs, _) in built.items():
+            page = PAGES[n].read_text()
+            if ep not in page or any(q["entry"] not in page for q in qs):
+                bad.append(n)
         if bad:
             print("check: page is out of sync with", ", ".join(bad))
             return 1
-        print("check: page carries every endpoint and entry id")
+        print("check: every form page carries its endpoint and entry ids")
         return 0
 
-    if not a.write:
-        print("\ndry run. Re-run with --write to put these into learn/index.html.")
-        return 0
+    if a.write:
+        print("\n--write is retired. The forms moved to their own pages on 2026-08-25,")
+        print("so regenerating them means editing learn/apply/ and learn/mentor/ directly.")
+        print("Use --check to catch drift after editing a question in Google Forms.")
+        return 1
+    print("\ndry run. Use --check to compare these against the two form pages.")
+    return 0
 
     for name, cfg in FORMS.items():
         endpoint, qs, markup = built[name]

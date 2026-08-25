@@ -14,16 +14,16 @@ ignored, so notes and headings are safe to write anywhere in this file.
 
 ## What each key is
 
-- `booking` is the appointment scheduler. Ten buttons: the footer on all five
-  pages, the hero and the closing block on the prices page, the closing block on
-  the build and fluency pages, and the Start here block on the homepage.
-- `cv` is where the CV button goes. Six buttons: the nav on all five pages, and
-  the Start here block on the homepage. A path such as `/AK_Addo_CV.pdf` works
-  here as well as a full URL, if the CV is served from this repo.
-- `mentor` is the mentor signup form. One button, in the mentor section of the
-  fluency page.
-- `cohort` is the cohort application. One button, under the roster on the
-  fluency page.
+- `booking` is the appointment scheduler. Twelve buttons: the footer on all
+  seven pages, the hero and the closing block on the prices page, the closing
+  block on the build and fluency pages, and the Start here block on the homepage.
+- `cv` is where the CV button goes. Eight buttons: the nav on all seven pages,
+  and the Start here block on the homepage. A path such as `/AK_Addo_CV.pdf`
+  works here as well as a full URL, if the CV is served from this repo.
+- `mentor` is the mentor signup form. One button, the fallback link on
+  `/learn/mentor/`, under the form that posts into it.
+- `cohort` is the cohort application. One button, the fallback link on
+  `/learn/apply/`, under the form that posts into it.
 
 ## How to change a link
 

@@ -36,12 +36,19 @@ alone on that line:
 
 | Marker | Links | Points at |
 |---|---|---|
-| `<!-- FORM:BOOKING -->` | 10 | **Live.** A Google appointment schedule. |
-| `<!-- FORM:CV -->` | 6 | **Live.** Points at `/cv/`, the gate page. |
+| `<!-- FORM:BOOKING -->` | 12 | **Live.** A Google appointment schedule. |
+| `<!-- FORM:CV -->` | 8 | **Live.** Points at `/cv/`, the gate page. |
 | `<!-- FORM:MENTOR -->` | 1 | **Live.** The mentor signup form. |
 | `<!-- FORM:COHORT -->` | 1 | **Live.** The AI fluency participant signup. |
 
-Eighteen marked buttons in total. That count is the tripwire: fewer means a marker went missing.
+Twenty-two marked buttons in total. That count is the tripwire: fewer means a marker went missing.
+
+## Pages
+
+Seven, not five. `/`, `/build/`, `/learn/`, `/pricing/` and `/cv/` are the site proper.
+`/learn/apply/` and `/learn/mentor/` carry the two application forms, which were inline on
+`/learn/` until they made it 552 lines long. Like `/cv/` they are reached from a button rather
+than from the nav, and they carry `noindex`, so they stay out of the sitemap and out of search.
 
 **Do not edit these by hand.** Every URL lives in `links.md`, and `apply_links.py` writes it to
 every button. `python3 apply_links.py` shows what would change, `--commit` writes, `--check`
