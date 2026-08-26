@@ -140,6 +140,22 @@
   #doc[contenteditable="true"]{outline:2px dashed var(--accent);outline-offset:10px;border-radius:6px;}
   @media print{.ed-bar{display:none}}
   @media (max-width:640px){body.ed-on .ed-bar{position:static;margin:10px 12px 0;justify-content:flex-end;}}
+
+  /* Tapping the square drops the menu out of it, one item after the next. This
+     is a CSS animation hung off the existing checkbox, so the mobile menu still
+     runs no JavaScript. Same curve and same 55ms gap as the desktop entrance. */
+  @media (max-width:720px) and (prefers-reduced-motion:no-preference){
+    @keyframes navdrop{
+      from{opacity:0;transform:translateY(-14px);}
+      to{opacity:1;transform:translateY(0);}
+    }
+    .navtog:checked ~ .navrow .navgroup a{
+      animation:navdrop 420ms cubic-bezier(0.34,1.55,0.64,1) both;}
+    .navtog:checked ~ .navrow .navgroup.one a:nth-child(1){animation-delay:0ms;}
+    .navtog:checked ~ .navrow .navgroup.one a:nth-child(2){animation-delay:55ms;}
+    .navtog:checked ~ .navrow .navgroup.two a:nth-child(1){animation-delay:110ms;}
+    .navtog:checked ~ .navrow .navgroup.two a:nth-child(2){animation-delay:165ms;}
+  }
 </style>
 </head>
 <body>
