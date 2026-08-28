@@ -11,6 +11,7 @@ ignored, so notes and headings are safe to write anywhere in this file.
     cv: /cv/
     mentor: https://forms.gle/9TQKPCNVHnF6iqqbA
     cohort: https://docs.google.com/forms/d/e/1FAIpQLSetZTijhq0l2xNujow4Qc9kulguoO5PSRlpVX6grZopnp9rPg/viewform?usp=dialog
+    cvfile: /AK_Addo_CV.pdf
 
 ## What each key is
 
@@ -24,6 +25,10 @@ ignored, so notes and headings are safe to write anywhere in this file.
   `/learn/mentor/`, under the form that posts into it.
 - `cohort` is the cohort application. One button, the fallback link on
   `/learn/apply/`, under the form that posts into it.
+- `cvfile` is the CV document itself, as opposed to `cv` which is the page that
+  asks for it. One link, on `/cv/`, revealed after the form is answered. The
+  page reads the address off that one anchor rather than keeping its own copy,
+  so moving the CV to Drive or anywhere else is a one-line edit here.
 
 ## How to change a link
 

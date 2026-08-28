@@ -214,8 +214,9 @@
 
 <div class="ask done" id="cvDone">
     <h3>On its way</h3>
-    <p>The download should have started. If your browser blocked it,
-       <a id="cvDirect" href="../AK_Addo_CV.pdf" download>use this link instead</a>.</p>
+    <p>Your copy is ready. If nothing happened,
+       <!-- FORM:CVFILE -->
+       <a id="cvDirect" href="/AK_Addo_CV.pdf" download>open it here</a>.</p>
     <p>If something in it is worth a conversation, my calendar is on the site.</p>
   </div>
   </div>
@@ -250,7 +251,12 @@ var FORM = {
   ENDPOINT: "https://docs.google.com/forms/d/e/1FAIpQLSc7bFlSMv5HddV7DiNWSygfNi8So97YfzzDHSR_oGW_VhpRlQ/formResponse",
   FIELDS: { name: "entry.1575010182", email: "emailAddress", company: "entry.181770931", purpose: "entry.560195620", linkedin: "entry.1395016513" }
 };
-var PDF = "../AK_Addo_CV.pdf";
+/* The CV document is an outbound link like every other, so its address lives in
+   links.md and apply_links.py writes it onto the anchor below the marker. This
+   reads it back off that anchor rather than keeping a second copy, so there is
+   only one place it can be wrong, and moving the file off this repo needs no
+   change here. */
+var LINK = document.getElementById('cvDirect');
 
 (function(){
   var form=document.getElementById('cvForm');
@@ -272,9 +278,16 @@ var PDF = "../AK_Addo_CV.pdf";
   }
 
   function download(){
-    var a=document.createElement('a');
-    a.href=PDF; a.download='AK_Addo_CV.pdf';
-    document.body.appendChild(a); a.click(); a.remove();
+    var url=LINK.getAttribute('href');
+    /* A download attribute only works same-origin. Once the file lives off this
+       repo the browser ignores it, so an off-site address opens in a tab. */
+    if(/^[./]/.test(url)){
+      var a=document.createElement('a');
+      a.href=url; a.download='AK_Addo_CV.pdf';
+      document.body.appendChild(a); a.click(); a.remove();
+    }else{
+      window.open(url,'_blank','noopener');
+    }
   }
 
   form.addEventListener('submit',function(ev){

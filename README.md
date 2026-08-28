@@ -38,10 +38,11 @@ alone on that line:
 |---|---|---|
 | `<!-- FORM:BOOKING -->` | 12 | **Live.** A Google appointment schedule. |
 | `<!-- FORM:CV -->` | 8 | **Live.** Points at `/cv/`, the gate page. |
+| `<!-- FORM:CVFILE -->` | 1 | **Live.** The CV document itself, revealed on `/cv/` after the form. `cv` is the page that asks; `cvfile` is the file. The page reads the address off this anchor, so moving the CV off this repo is a one-line edit in `links.md`. |
 | `<!-- FORM:MENTOR -->` | 1 | **Live.** The mentor signup form. |
 | `<!-- FORM:COHORT -->` | 1 | **Live.** The AI fluency participant signup. |
 
-Twenty-two marked buttons in total. That count is the tripwire: fewer means a marker went missing.
+Twenty-three marked buttons in total. That count is the tripwire: fewer means a marker went missing.
 
 ## Pages
 

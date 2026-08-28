@@ -28,6 +28,7 @@ MARKERS = {
     "cv": "FORM:CV",
     "mentor": "FORM:MENTOR",
     "cohort": "FORM:COHORT",
+    "cvfile": "FORM:CVFILE",
     "vibe": "FORM:VIBE",
 }
 
