@@ -67,7 +67,7 @@ on first paint, and it avoids sending every visitor's IP address to Google.
 
 ## The CV page
 
-`/cv/` asks for a name, email, company, and purpose, posts them into a Google Form in the background, and downloads `AK_Addo_CV.pdf` from this repo. The form endpoint and its field ids are filled in by `cv_form_wire.py <form-url> --write`, which reads them out of the published form rather than anyone transcribing them.
+`/cv/` asks for a name, email, company, and purpose, posts them into a Google Form in the background, then opens the CV, which is hosted on Google Drive and reached through the `cvfile` link. The PDF is deliberately not in this repo: a file served from here is fetchable at a guessable address without answering the form, and stays in the history after it is deleted. The form endpoint and its field ids are filled in by `cv_form_wire.py <form-url> --write`, which reads them out of the published form rather than anyone transcribing them.
 
 Two things worth knowing. The post is `no-cors` and fire-and-forget, because Google sends no CORS headers on `formResponse`, so a failed write is invisible to the page; the download never waits on it. And the PDF path is in the page source, so this is a courtesy gate rather than a lock. While the endpoint is empty the page still downloads the CV and simply skips the capture, so the button is never dead.
 

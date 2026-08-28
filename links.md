@@ -11,7 +11,7 @@ ignored, so notes and headings are safe to write anywhere in this file.
     cv: /cv/
     mentor: https://forms.gle/9TQKPCNVHnF6iqqbA
     cohort: https://docs.google.com/forms/d/e/1FAIpQLSetZTijhq0l2xNujow4Qc9kulguoO5PSRlpVX6grZopnp9rPg/viewform?usp=dialog
-    cvfile: /AK_Addo_CV.pdf
+    cvfile: https://drive.google.com/file/d/15FstsRI5urZQMnR27qGhW-qqwIiUAhjP/view
 
 ## What each key is
 
@@ -28,7 +28,9 @@ ignored, so notes and headings are safe to write anywhere in this file.
 - `cvfile` is the CV document itself, as opposed to `cv` which is the page that
   asks for it. One link, on `/cv/`, revealed after the form is answered. The
   page reads the address off that one anchor rather than keeping its own copy,
-  so moving the CV to Drive or anywhere else is a one-line edit here.
+  so moving the CV somewhere else is a one-line edit here. It now lives on
+  Google Drive rather than in this repo, so that the file is not fetchable
+  without going through the form, and is not in this repo's history.
 
 ## How to change a link
 
