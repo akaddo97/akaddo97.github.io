@@ -159,6 +159,12 @@
   .np-when{margin:4px 0 0;color:#8A8A8A;font-size:12px;
     font-family:"Fragment Mono",ui-monospace,Menlo,monospace;}
   .np-when.is-live{color:var(--accent);}
+
+  /* Reading. Generated from the graph by scripts/apply_reading.py. Static, so
+     it stays put when the listening feed is quiet, and it borrows the .np-row
+     styles above so the two read as one list. */
+  .rd-row{display:flex;align-items:center;gap:16px;margin:14px 0 0;}
+  .rd-ak{margin:6px 0 0;color:var(--ink);font-size:14px;overflow-wrap:anywhere;}
 </style>
 </head>
 <body>
@@ -233,6 +239,18 @@
        being moved onto the same AI tooling I build for clients.</p>
   </div>
 
+
+  <div class="sec" id="readingSec">
+    <p class="kicker">Reading</p>
+    <div class="rd-row">
+      <div class="np-text">
+        <p class="np-kind">Book</p>
+        <p class="np-title">The Lessons of History</p>
+        <p class="np-sub">Will Durant and Ariel Durant</p>
+        <p class="np-when">since 23 August 2026</p>
+      </div>
+    </div>
+  </div>
 
   <div class="sec" id="npSec" hidden>
     <p class="kicker">Listening</p>
