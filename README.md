@@ -44,6 +44,23 @@ alone on that line:
 
 Twenty-three marked buttons in total. That count is the tripwire: fewer means a marker went missing.
 
+## The one external dependency
+
+The homepage Listening block reads `https://ak-now-playing.akaddo97.workers.dev`, a
+Cloudflare worker in `~/Projects/ak-now-playing`. It holds the Spotify refresh token this
+public repo cannot, and returns two slots, music and podcast.
+
+This is the only external request the site makes; it made none before. Album art is proxied
+through that worker, so a visitor's browser never talks to Spotify.
+
+If the worker is down, blocked, or JavaScript is off, the block hides itself and the page is
+exactly as it was. To silence it without a deploy:
+
+    npx wrangler kv key put --binding NP off 1     # from ~/Projects/ak-now-playing
+
+The endpoint is a fetch target rather than a marked button, so it is not in `links.md`; it
+is one named constant in `index.html`.
+
 ## Pages
 
 Seven, not five. `/`, `/build/`, `/learn/`, `/pricing/` and `/cv/` are the site proper.

@@ -143,6 +143,22 @@
     .navtog:checked ~ .navrow .navgroup.two a:nth-child(1){animation-delay:110ms;}
     .navtog:checked ~ .navrow .navgroup.two a:nth-child(2){animation-delay:165ms;}
   }
+
+  /* Listening. Filled in by script from the worker that holds the Spotify
+     token, since a static public site cannot hold one itself. Two rows, music
+     and podcast; each starts hidden and appears only when there is something
+     to show. */
+  .np-row{display:flex;align-items:center;gap:16px;margin:14px 0 0;}
+  .np-art{width:64px;height:64px;border-radius:10px;object-fit:cover;flex:none;
+    background:var(--panel);}
+  .np-text{min-width:0;}
+  .np-kind{margin:0 0 2px;font-family:"Fragment Mono",ui-monospace,Menlo,monospace;
+    font-size:11px;letter-spacing:0.13px;color:#8A8A8A;text-transform:uppercase;}
+  .np-title{margin:0;font-size:17px;color:var(--ink);overflow-wrap:anywhere;}
+  .np-sub{margin:2px 0 0;color:var(--muted);font-size:14px;overflow-wrap:anywhere;}
+  .np-when{margin:4px 0 0;color:#8A8A8A;font-size:12px;
+    font-family:"Fragment Mono",ui-monospace,Menlo,monospace;}
+  .np-when.is-live{color:var(--accent);}
 </style>
 </head>
 <body>
@@ -215,6 +231,29 @@
     <h2><a class="inline" href="https://ak-baking.square.site/">AK Bakes, an AI first bakery</a></h2>
     <p>A passion project and technical testbed. Orders, stock, costings, and customer messages are
        being moved onto the same AI tooling I build for clients.</p>
+  </div>
+
+
+  <div class="sec" id="npSec" hidden>
+    <p class="kicker">Listening</p>
+    <div class="np-row" id="npMusic" hidden>
+      <img class="np-art" id="npMusicArt" alt="" hidden>
+      <div class="np-text">
+        <p class="np-kind">Music</p>
+        <p class="np-title"><a class="inline" id="npMusicTitle"></a></p>
+        <p class="np-sub" id="npMusicSub"></p>
+        <p class="np-when" id="npMusicWhen"></p>
+      </div>
+    </div>
+    <div class="np-row" id="npPodcast" hidden>
+      <img class="np-art" id="npPodcastArt" alt="" hidden>
+      <div class="np-text">
+        <p class="np-kind">Podcast</p>
+        <p class="np-title"><a class="inline" id="npPodcastTitle"></a></p>
+        <p class="np-sub" id="npPodcastSub"></p>
+        <p class="np-when" id="npPodcastWhen"></p>
+      </div>
+    </div>
   </div>
 
   <div class="sec">
@@ -356,6 +395,78 @@
   function go(){if(fired){return;}fired=true;run();}
   if(document.fonts&&document.fonts.ready){document.fonts.ready.then(go,go);}
   window.setTimeout(go,400);
+})();
+</script>
+<script>
+/* Listening. The site is static and public, so it cannot hold a Spotify refresh
+   token; a small worker holds it and hands back two slots, music and podcast.
+   This only renders what it is given, and hides the whole section when there is
+   nothing, so the homepage without the worker is the homepage as it was. */
+(function(){
+  var ENDPOINT='https://ak-now-playing.akaddo97.workers.dev';
+  var sec=document.getElementById('npSec');
+  if(sec===null){return;}
+  var slots=[{key:'music',id:'Music'},{key:'podcast',id:'Podcast'}];
+
+  function ago(iso){
+    var mins=Math.round((Date.now()-Date.parse(iso))/60000);
+    if(isNaN(mins)){return '';}
+    if(mins<2){return 'a moment ago';}
+    if(mins<60){return mins+' minutes ago';}
+    var hours=Math.round(mins/60);
+    if(hours<24){return hours===1?'an hour ago':hours+' hours ago';}
+    var days=Math.round(hours/24);
+    return days===1?'yesterday':days+' days ago';
+  }
+
+  function paint(slot,d){
+    var row=document.getElementById('np'+slot.id);
+    if(d===null||d===undefined){row.hidden=true;return false;}
+    var art=document.getElementById('np'+slot.id+'Art');
+    var title=document.getElementById('np'+slot.id+'Title');
+    title.textContent=d.title||'';
+    if(d.url){title.setAttribute('href',d.url);}
+    else{title.removeAttribute('href');}
+    document.getElementById('np'+slot.id+'Sub').textContent=d.subtitle||'';
+    var when=document.getElementById('np'+slot.id+'When');
+    when.textContent=d.live===true?'now playing':'last played, '+ago(d.at);
+    when.className=d.live===true?'np-when is-live':'np-when';
+    if(d.art){
+      art.setAttribute('src',ENDPOINT+'/art?u='+encodeURIComponent(d.art));
+      art.hidden=false;
+    }else{
+      art.removeAttribute('src');
+      art.hidden=true;
+    }
+    row.hidden=false;
+    return true;
+  }
+
+  function render(data){
+    if(data===null||typeof data!=='object'){sec.hidden=true;return;}
+    var any=false;
+    slots.forEach(function(s){
+      if(paint(s,data[s.key])){any=true;}
+    });
+    sec.hidden=any===false;
+  }
+
+  function pull(){
+    fetch(ENDPOINT+'/now',{cache:'no-store'})
+      .then(function(r){return r.ok?r.json():null;})
+      .then(render)
+      .catch(function(){sec.hidden=true;});
+  }
+
+  /* Poll only while the tab is being looked at, the same discipline the nav
+     entrance uses. A backgrounded tab costs the worker nothing. */
+  var timer=0;
+  function start(){if(timer===0){pull();timer=window.setInterval(pull,60000);}}
+  function stop(){if(timer!==0){window.clearInterval(timer);timer=0;}}
+  document.addEventListener('visibilitychange',function(){
+    if(document.visibilityState==='visible'){start();}else{stop();}
+  });
+  if(document.visibilityState==='visible'){start();}
 })();
 </script>
 </body>
