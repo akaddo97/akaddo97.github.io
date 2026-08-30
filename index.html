@@ -160,10 +160,11 @@
     font-family:"Fragment Mono",ui-monospace,Menlo,monospace;}
   .np-when.is-live{color:var(--accent);}
 
-  /* Reading. Generated from the graph by scripts/apply_reading.py. Static, so
-     it stays put when the listening feed is quiet, and it borrows the .np-row
-     styles above so the two read as one list. */
+  /* Books. Generated from the graph by scripts/apply_reading.py and placed
+     inside the Media section. Static, so they stay put when the live feed is
+     quiet, and they match .np-row so the section reads as one list. */
   .rd-row{display:flex;align-items:center;gap:16px;margin:14px 0 0;}
+  .rd-art{height:64px;width:auto;border-radius:6px;flex:none;background:var(--panel);}
   .rd-ak{margin:6px 0 0;color:var(--ink);font-size:14px;overflow-wrap:anywhere;}
 </style>
 </head>
@@ -240,20 +241,8 @@
   </div>
 
 
-  <div class="sec" id="readingSec">
-    <p class="kicker">Reading</p>
-    <div class="rd-row">
-      <div class="np-text">
-        <p class="np-kind">Book</p>
-        <p class="np-title">The Lessons of History</p>
-        <p class="np-sub">Will Durant and Ariel Durant</p>
-        <p class="np-when">since 23 August 2026</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="sec" id="npSec" hidden>
-    <p class="kicker">Listening</p>
+  <div class="sec" id="npSec">
+    <p class="kicker">Media</p>
     <div class="np-row" id="npMusic" hidden>
       <img class="np-art" id="npMusicArt" alt="" hidden>
       <div class="np-text">
@@ -270,6 +259,17 @@
         <p class="np-title"><a class="inline" id="npPodcastTitle"></a></p>
         <p class="np-sub" id="npPodcastSub"></p>
         <p class="np-when" id="npPodcastWhen"></p>
+      </div>
+    </div>
+    <div class="rd-books">
+      <div class="rd-row">
+        <img class="rd-art" src="covers/lessons_of_history.jpg" alt="">
+        <div class="np-text">
+          <p class="np-kind">Book</p>
+          <p class="np-title">The Lessons of History</p>
+          <p class="np-sub">Will Durant and Ariel Durant</p>
+          <p class="np-when">since 23 August 2026</p>
+        </div>
       </div>
     </div>
   </div>
@@ -426,6 +426,13 @@
   if(sec===null){return;}
   var slots=[{key:'music',id:'Music'},{key:'podcast',id:'Podcast'}];
 
+  /* The Media section also carries static rows written into the page by
+     scripts/apply_reading.py in the graph repo: books, which are true whether
+     or not this worker answers. So the section is hidden only when there is
+     nothing at all to show, live or static. Counting the DOM rather than
+     holding a flag keeps the two generators independent of each other. */
+  function statics(){return sec.querySelectorAll('.rd-row').length;}
+
   function ago(iso){
     var mins=Math.round((Date.now()-Date.parse(iso))/60000);
     if(isNaN(mins)){return '';}
@@ -461,19 +468,19 @@
   }
 
   function render(data){
-    if(data===null||typeof data!=='object'){sec.hidden=true;return;}
+    if(data===null||typeof data!=='object'){sec.hidden=statics()===0;return;}
     var any=false;
     slots.forEach(function(s){
       if(paint(s,data[s.key])){any=true;}
     });
-    sec.hidden=any===false;
+    sec.hidden=any===false&&statics()===0;
   }
 
   function pull(){
     fetch(ENDPOINT+'/now',{cache:'no-store'})
       .then(function(r){return r.ok?r.json():null;})
       .then(render)
-      .catch(function(){sec.hidden=true;});
+      .catch(function(){sec.hidden=statics()===0;});
   }
 
   /* Poll only while the tab is being looked at, the same discipline the nav
