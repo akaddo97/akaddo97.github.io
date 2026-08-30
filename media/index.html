@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Media, AK Addo</title>
+<style>
+  :root{
+    --bg:#FDFDFD; --panel:#F7F7F7; --ink:#000000;
+    --muted:#636363; --muted2:#545454; --rule:#E6E6E6; --accent:#3455FA;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;}
+  .wrap{max-width:760px;margin:0 auto;padding:44px 22px 80px}
+  .kicker{font-family:"Fragment Mono",ui-monospace,Menlo,monospace;font-size:11px;
+    letter-spacing:0.13px;color:#8A8A8A;text-transform:uppercase;margin:0 0 6px}
+  h1{font-size:30px;margin:0 0 10px;letter-spacing:-0.3px}
+  .lede{color:var(--muted);margin:0 0 6px}
+  .note{font-size:13.5px;color:var(--muted);background:var(--panel);
+    border-radius:10px;padding:12px 15px;margin:20px 0 0}
+  h2{font-family:"Fragment Mono",ui-monospace,Menlo,monospace;font-size:12px;
+    letter-spacing:0.13px;color:#8A8A8A;text-transform:uppercase;
+    margin:34px 0 4px;padding-bottom:6px;border-bottom:1px solid var(--rule)}
+  .row{display:flex;align-items:flex-start;gap:16px;padding:14px 0;
+    border-bottom:1px solid var(--rule)}
+  .row:last-child{border-bottom:0}
+  .art{width:56px;height:56px;border-radius:9px;object-fit:cover;flex:none;
+    background:var(--panel)}
+  .art.book{height:56px;width:auto;border-radius:5px}
+  .txt{min-width:0;flex:1}
+  .kind{margin:0 0 2px;font-family:"Fragment Mono",ui-monospace,Menlo,monospace;
+    font-size:10.5px;letter-spacing:0.13px;color:#8A8A8A;text-transform:uppercase}
+  .title{margin:0;font-size:16px;overflow-wrap:anywhere}
+  .title a{color:var(--ink);text-decoration:none}
+  .title a:hover{color:var(--accent)}
+  .sub{margin:2px 0 0;color:var(--muted);font-size:14px;overflow-wrap:anywhere}
+  .when{margin:3px 0 0;color:#8A8A8A;font-size:12px;
+    font-family:"Fragment Mono",ui-monospace,Menlo,monospace}
+  .ak{margin:7px 0 0;font-size:14.5px;overflow-wrap:anywhere;
+    border-left:3px solid var(--rule);padding-left:11px}
+  .empty{color:var(--muted);padding:22px 0}
+  footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--rule);
+    font-size:13px;color:var(--muted)}
+  a{color:var(--accent)}
+  @media (max-width:520px){ .wrap{padding:30px 15px 60px} h1{font-size:25px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Unlisted</p>
+  <h1>Media</h1>
+  <p class="lede">What I have been listening to and reading. Albums rather than
+     tracks, so a record I played twenty times is one line.</p>
+
+  <div class="note">
+    <strong>What this covers.</strong>
+    Music history starts on 2026-08-30, when I started recording it.
+    Podcast history before that date is recovered from episodes I opened the
+    transcript for, so it is what I read along with rather than everything I
+    heard. Both are true, and neither is the complete picture.
+  </div>
+
+  <h2>Reading</h2>
+    <div class="row">
+      <img class="art book" src="../covers/lessons_of_history.jpg" alt="">
+      <div class="txt">
+        <p class="kind">Book</p>
+        <p class="title">The Lessons of History</p>
+        <p class="sub">Will Durant, Ariel Durant</p>
+        <p class="when">since 2026-08-23</p>
+      </div>
+    </div>
+
+  <div id="histRows"></div>
+  <p class="empty" id="histStatus">Loading.</p>
+
+  <footer>
+    This page is unlisted: not linked from anywhere, not in the sitemap, and
+    marked noindex. It is not secret. The site repository is public, so anyone
+    who goes looking can read it. Built 30 August 2026.
+  </footer>
+</div>
+<script>
+/* The list is fetched, not baked, so hiding something takes effect on the next
+   load with no rebuild. Comments are baked, because they live in the graph.
+
+   If the worker is unreachable the books still render: they are static markup
+   above this, and this only ever appends. */
+(function(){
+  var ENDPOINT='https://ak-now-playing.akaddo97.workers.dev';
+  var COMMENTS={};
+  var host=document.getElementById('histRows');
+  var status=document.getElementById('histStatus');
+  if(host===null){return;}
+
+  var MONTHS=['January','February','March','April','May','June','July',
+              'August','September','October','November','December'];
+  function monthLabel(iso){
+    var p=String(iso||'').split('-');
+    if(p.length<2){return 'Undated';}
+    return MONTHS[parseInt(p[1],10)-1]+' '+p[0];
+  }
+  function dayLabel(iso){
+    var p=String(iso||'').split('-');
+    if(p.length<3){return '';}
+    return parseInt(p[2],10)+' '+MONTHS[parseInt(p[1],10)-1].slice(0,3);
+  }
+  function el(tag,cls,text){
+    var n=document.createElement(tag);
+    if(cls){n.className=cls;}
+    if(text!==undefined&&text!==null){n.textContent=text;}
+    return n;
+  }
+
+  function render(items){
+    if(items.length===0){
+      status.textContent='Nothing recorded yet.';
+      return;
+    }
+    status.textContent='';
+    var month='';
+    items.forEach(function(it){
+      var m=monthLabel(it.last);
+      if(m!==month){
+        month=m;
+        host.appendChild(el('h2',null,m));
+      }
+      var row=el('div','row');
+      if(it.art){
+        var img=document.createElement('img');
+        img.className='art';
+        /* Show artwork is stored site-relative; this page is one level down.
+           Plain string checks rather than a regex, so this survives being
+           embedded in a Python string without escaping games. */
+        var src=it.art;
+        if(src.indexOf('http')!==0&&src.indexOf('/')!==0&&src.indexOf('../')!==0){
+          src='../'+src;
+        }
+        img.src=src; img.alt='';
+        img.loading='lazy';
+        row.appendChild(img);
+      }
+      var txt=el('div','txt');
+      txt.appendChild(el('p','kind',it.kind==='music'?'Album':'Podcast'));
+      var title=el('p','title');
+      if(it.url){
+        var a=document.createElement('a');
+        a.href=it.url; a.textContent=it.title; a.rel='noopener';
+        title.appendChild(a);
+      }else{
+        title.textContent=it.title;
+      }
+      txt.appendChild(title);
+      var sub=it.subtitle||'';
+      if(sub.charAt(0)==='['){
+        try{sub=JSON.parse(sub).join(', ');}catch(e){}
+      }
+      if(sub){txt.appendChild(el('p','sub',sub));}
+      var when=dayLabel(it.last);
+      if(it.plays>1){when=when+'  '+it.plays+' plays';}
+      txt.appendChild(el('p','when',when));
+      var note=COMMENTS[String(it.title||'').toLowerCase()];
+      if(note){txt.appendChild(el('p','ak','AK: '+note));}
+      row.appendChild(txt);
+      host.appendChild(row);
+    });
+  }
+
+  fetch(ENDPOINT+'/history?limit=200',{cache:'no-store'})
+    .then(function(r){return r.ok?r.json():null;})
+    .then(function(d){
+      if(d===null||typeof d!=='object'){throw new Error('bad payload');}
+      render(d.items||[]);
+    })
+    .catch(function(){
+      status.textContent='The listening history is not reachable right now.';
+    });
+})();
+</script>
+</body>
+</html>

@@ -13,6 +13,11 @@ A github.io domain writes no CNAME, because GitHub Pages only wants that file
 when the site is served from a custom domain. Switching to one writes it, and
 switching back removes it.
 
+/media/ is deliberately absent from BOTH lists below. It is the unlisted media
+history: no sitemap entry, no og tags, no link from anywhere, and a noindex tag
+on the page itself. Do not add it. It is not secret (this repo is public) but
+it is not advertised either, and adding it here would quietly advertise it.
+
 /cv/ is deliberately absent from sitemap.xml: it carries noindex, and listing a
 page you have asked search engines not to index is a contradiction.
 """
