@@ -79,7 +79,7 @@
   <footer>
     This page is unlisted: not linked from anywhere, not in the sitemap, and
     marked noindex. It is not secret. The site repository is public, so anyone
-    who goes looking can read it. Built 30 August 2026.
+    who goes looking can read it. Built 31 August 2026.
   </footer>
 </div>
 <script>
@@ -91,6 +91,9 @@
 (function(){
   var ENDPOINT='https://ak-now-playing.akaddo97.workers.dev';
   var COMMENTS={};
+  /* quoted-data:start */
+  var BAKED=null;
+  /* quoted-data:end */
   var host=document.getElementById('histRows');
   var status=document.getElementById('histStatus');
   if(host===null){return;}
@@ -167,6 +170,11 @@
       host.appendChild(row);
     });
   }
+
+  /* The preview is built with the rows already in it. The worker only
+     answers to the live origin, so a preview served from localhost cannot
+     fetch, and a preview AK is editing offline should not need to. */
+  if(BAKED!==null){render(BAKED);return;}
 
   fetch(ENDPOINT+'/history?limit=200',{cache:'no-store'})
     .then(function(r){return r.ok?r.json():null;})

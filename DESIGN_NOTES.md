@@ -71,6 +71,10 @@ Preview locally with `python3 -m http.server 8080` from the repo root.
 
 The four homepage alternatives used to sit in `options/`, unlinked and marked `noindex`. They were deleted on 2026-08-20 once the homepage had settled, so no draft work is served from the live domain. The live pages carry the Edit toolbar but keep it hidden from visitors: it appears only on localhost or with `?edit=1`, so no Edit button is ever shown to the public.
 
+**The nav movement lives in one file.** `nav_anim.js` is the source of truth and `apply_nav_anim.py` propagates it into every page that has a `.navrow`, between `<!-- NAV-ANIM:START -->` and `<!-- NAV-ANIM:END -->` markers. Dry run by default, `--commit` to write, `--check` exits 1 on drift, same shape as `apply_links.py`. Do not hand-edit the block in a page: the next run will overwrite it.
+
+It has two halves. Arriving, the labels spring out of the nav item for the page you are on, so landing on `/learn/` unpacks the row out of `[AI fluency]`; home has no current item and falls back to the centre square. Leaving, the other labels fold into the one you clicked, then the page changes 320ms later. The delay only ever applies to a plain left click on a same-origin link that is not the current page, so a middle click, a modified click, an outbound link, reduced motion and any viewport under 721px all navigate immediately.
+
 Responsive behaviour is one breakpoint at 520px, where the split stacks. Checked for horizontal overflow at 320, 390, 520, 768, and 1280px.
 
 ## Known rough edges
