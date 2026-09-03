@@ -149,6 +149,11 @@
      and podcast; each starts hidden and appears only when there is something
      to show. */
   .np-row{display:flex;align-items:center;gap:16px;margin:14px 0 0;}
+  /* display:flex above beats the browser's own rule for [hidden], so a row the
+     script has hidden still rendered its Music or Podcast label with nothing
+     under it. Only visible when the worker is unreachable, which is exactly
+     when nobody is looking to catch it. */
+  .np-row[hidden]{display:none;}
   .np-art{width:64px;height:64px;border-radius:10px;object-fit:cover;flex:none;
     background:var(--panel);}
   .np-text{min-width:0;}
