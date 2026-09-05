@@ -28,7 +28,8 @@ DOMAIN_FILE = os.path.join(ROOT, 'domain.txt')
 
 # path on the site -> file that serves it. Indexable pages only.
 SITEMAP_PAGES = [('/', 'index.html'), ('/build/', 'build/index.html'),
-                 ('/learn/', 'learn/index.html'), ('/pricing/', 'pricing/index.html')]
+                 ('/learn/', 'learn/index.html'), ('/pricing/', 'pricing/index.html'),
+                 ('/about/', 'about/index.html')]
 # every page carrying absolute og tags, including the noindex ones
 OG_PAGES = SITEMAP_PAGES + [('/cv/', 'cv/index.html')]
 

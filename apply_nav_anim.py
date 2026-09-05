@@ -30,7 +30,9 @@ END = "<!-- NAV-ANIM:END -->"
 BLOCK = re.compile(re.escape(START) + r".*?" + re.escape(END), re.S)
 
 PAGES = ["index.html", "build/index.html", "learn/index.html",
-         "pricing/index.html", "cv/index.html", "media/index.html"]
+         "learn/apply/index.html", "learn/mentor/index.html",
+         "pricing/index.html", "cv/index.html", "about/index.html",
+         "media/index.html"]
 
 
 def block():

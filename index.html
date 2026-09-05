@@ -175,6 +175,52 @@
   .rd-art{width:64px;height:64px;object-fit:contain;border-radius:6px;flex:none;
     background:var(--panel);}
   .rd-ak{margin:6px 0 0;color:var(--ink);font-size:14px;overflow-wrap:anywhere;}
+
+  /* The rotating band. A real scroll container, so drag, swipe, trackpad and
+     arrow keys all work without a line of code for any of them. The cost is
+     that browser smooth-scroll easing cannot be tuned the way the nav
+     entrance's curve can, which for something this slow is the right trade:
+     a carousel that overshoots reads as busy. */
+  .rot-sec{padding:0;}
+  .rot-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;
+    scrollbar-width:none;-ms-overflow-style:none;}
+  .rot-track::-webkit-scrollbar{display:none;}
+  .rot-track:focus-visible{outline:2px solid var(--accent);outline-offset:-3px;}
+  .rot-slide{flex:0 0 100%;scroll-snap-align:center;display:block;
+    padding:60px 48px 22px;min-width:0;}
+  /* .rot-slide sets display, which beats the browser's own rule for [hidden],
+     so a hidden slide would still take a full frame of the track. */
+  .rot-slide[hidden]{display:none;}
+  .rot-kind{font-family:"Fragment Mono",ui-monospace,Menlo,monospace;font-size:11px;
+    letter-spacing:0.16px;text-transform:uppercase;color:var(--muted);margin:0 0 14px;}
+  .rot-q{font-family:"Instrument Serif",Georgia,"Times New Roman",serif;font-weight:400;
+    font-size:clamp(30px,4.6vw,46px);line-height:1.1;letter-spacing:-0.2px;
+    color:var(--ink);margin:0 0 18px;max-width:22ch;
+    /* Stops "AI" being left on a line of its own, which is what the first
+       mockup did with the fluency quote. Ignored where unsupported. */
+    text-wrap:balance;}
+  .rot-to{font-family:"Fragment Mono",ui-monospace,Menlo,monospace;font-size:13px;
+    letter-spacing:0.13px;color:var(--muted);margin:0;}
+  .rot-slide:hover .rot-to{color:var(--accent);}
+  .rot-dots{display:flex;gap:9px;padding:0 48px 34px;}
+  .rot-dots button{width:8px;height:8px;padding:0;border-radius:50%;
+    border:1px solid var(--rule);background:var(--panel);cursor:pointer;}
+  .rot-dots button.on{background:var(--ink);border-color:var(--ink);}
+  .rot-dots button:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+  /* Snap stays on so the dots still land cleanly, but relaxed, because
+     mandatory snap plus a reader who has asked for less motion fights them. */
+  .rot-reduced .rot-track{scroll-snap-type:x proximity;}
+  @media (max-width:640px){
+    .rot-slide{padding:40px 20px 18px;}
+    .rot-dots{padding:0 20px 28px;}
+  }
+
+  /* The name and the photograph are the way into the About page, so they have
+     to look like they lead somewhere without turning the hero into a button. */
+  .hero h1 a{color:inherit;border-bottom:1px solid transparent;}
+  .hero h1 a:hover{border-bottom-color:var(--accent);}
+  .hero .shotlink{display:block;border-radius:100%;}
+  .hero .shotlink:hover .shot{border-color:var(--accent);}
 </style>
 </head>
 <body>
@@ -195,8 +241,7 @@
     <a class="mark mark-home" href="./" aria-label="Home"><i></i><i></i><i></i><i></i></a>
     <div class="navgroup two">
         <a href="pricing/">[Prices]</a>
-        <!-- FORM:CV -->
-        <a href="/cv/">[CV]</a>
+        <a href="/about/">[About]</a>
     </div>
   </div>
 </nav>
@@ -206,48 +251,50 @@
   <div class="sec">
     <div class="hero">
       <div>
-        <h1 class="display">AK Addo</h1>
+        <h1 class="display"><a href="about/">AK Addo</a></h1>
         <p class="lead">London-based forward-deployed engineer</p>
         <p class="sub" style="margin-left:0">I build token-efficient, model-agnostic tooling that
            makes teams demonstrably faster. I work with professionals, SMEs, and enterprise
-           clients.</p>
+           clients. I also run an AI upskilling course, teaching young professionals
+           practical AI skills.</p>
       </div>
-      <img class="shot" src="/ak-addo.jpg" alt="AK Addo">
+      <a class="shotlink" href="about/" aria-label="About AK Addo"><img class="shot" src="/ak-addo.jpg" alt="AK Addo"></a>
     </div>
   </div>
 
-  <div class="sec">
-    <p>I also run an AI upskilling course, teaching young professionals practical AI skills.</p>
-    <p>Before going independent in 2024 I spent three years at Man Group in London, moving through
-       risk engineering, quantitative equity research, and data science. I have a BSc in Physics,
-       and am hoping to add a US MBA to my creds list.</p>
-    <p>Most of my recent work leverages knowledge graphs built for people and agents to work well
-       together. Alongside client work I am juggling processes across several AI startups and VC
-       funds, where I am gaining exposure to a breadth of AI-native approaches to problems.</p>
-    <p>Off the clock I run <a class="inline" href="https://ak-baking.square.site/">AK Bakes</a>,
-       an AI-assisted home bakery.</p>
-  </div>
 
-  <div class="sec">
-    <div class="offers">
-      <a class="offer" href="build/">
-        <p class="ot">Bespoke tech products</p>
-        <p class="os">Make yourself faster</p>
-      </a>
-      <a class="offer" href="learn/">
-        <p class="ot">AI fluency</p>
-        <p class="os">Learn practical skills</p>
-      </a>
+  <div class="sec rot-sec">
+    <div class="rot" id="rot" aria-roledescription="carousel"
+      aria-label="What AK does">
+      <div class="rot-track" id="rotTrack" tabindex="0">
+
+        <a class="rot-slide" href="learn/" data-name="AI fluency">
+          <p class="rot-q">Get out of the chatbot space of AI</p>
+          <p class="rot-to">[AI fluency]</p>
+        </a>
+
+        <a class="rot-slide" href="build/" data-name="Bespoke tech products">
+          <p class="rot-q">Have your repetitive workflows automated</p>
+          <p class="rot-to">[Bespoke tech products]</p>
+        </a>
+
+        <a class="rot-slide" href="https://ak-baking.square.site/" data-name="AK Bakes">
+          <p class="rot-q">Order from London's first AI bakery</p>
+          <p class="rot-to">[AK Bakes]</p>
+        </a>
+
+        <a class="rot-slide" id="rotGit" href="https://github.com/akaddo97/sponge"
+          data-name="Sponge" hidden>
+          <p class="rot-kind">On GitHub</p>
+          <p class="rot-q">The model proposes, you approve</p>
+          <p class="rot-to">[Sponge]</p>
+        </a>
+
+      </div>
+      <div class="rot-dots" id="rotDots"></div>
     </div>
-    <div class="btns"><a class="btn" href="pricing/">Method and Pricing</a></div>
   </div>
 
-  <div class="sec">
-    <p class="kicker">AK Bakes</p>
-    <h2><a class="inline" href="https://ak-baking.square.site/">AK Bakes, an AI first bakery</a></h2>
-    <p>A passion project and technical testbed. Orders, stock, costings, and customer messages are
-       being moved onto the same AI tooling I build for clients.</p>
-  </div>
 
 
   <div class="sec" id="npSec">
@@ -587,5 +634,102 @@
 })();
 </script>
 <!-- NAV-ANIM:END -->
+<script>
+/* The rotating band.
+
+   Auto-advance is a courtesy, not a mechanism: it pauses on hover, on focus,
+   and while the tab is in the background, and it stops for good the moment the
+   reader touches the track or a dot. Someone who has taken hold of it does not
+   want it moving under them a few seconds later.
+
+   Under prefers-reduced-motion it never starts at all, and every slide is
+   still reachable by scrolling and by dot. With script off the track is a
+   plain horizontal strip with all the slides in it. */
+(function(){
+  var rot=document.getElementById('rot');
+  if(rot===null){return;}
+  var track=document.getElementById('rotTrack');
+  var dots=document.getElementById('rotDots');
+  var reduce=window.matchMedia('(prefers-reduced-motion:reduce)');
+  var DWELL=7500;
+  var timer=0, stopped=false, raf=0;
+
+  function slides(){
+    return Array.prototype.slice.call(track.querySelectorAll('.rot-slide'))
+      .filter(function(el){return el.hidden!==true;});
+  }
+  function index(){
+    var w=track.clientWidth;
+    return w===0?0:Math.round(track.scrollLeft/w);
+  }
+  function go(i){
+    var list=slides();
+    if(list.length===0){return;}
+    var n=((i%list.length)+list.length)%list.length;
+    track.scrollTo({left:n*track.clientWidth,behavior:'smooth'});
+  }
+  function mark(){
+    var i=index();
+    Array.prototype.slice.call(dots.children).forEach(function(b,n){
+      b.classList.toggle('on',n===i);
+      if(n===i){b.setAttribute('aria-current','true');}
+      else{b.removeAttribute('aria-current');}
+    });
+  }
+  function buildDots(){
+    dots.textContent='';
+    slides().forEach(function(s,i){
+      var b=document.createElement('button');
+      b.type='button';
+      b.setAttribute('aria-label','Show '+(s.getAttribute('data-name')||('slide '+(i+1))));
+      b.addEventListener('click',function(){stop();go(i);});
+      dots.appendChild(b);
+    });
+    mark();
+  }
+  function quiet(){return reduce.matches||window.rotForceReduce===true;}
+  function start(){
+    if(stopped||timer!==0||quiet()){return;}
+    if(slides().length<2){return;}
+    timer=window.setInterval(function(){go(index()+1);},DWELL);
+  }
+  function pause(){if(timer!==0){window.clearInterval(timer);timer=0;}}
+  function stop(){stopped=true;pause();}
+
+  rot.addEventListener('mouseenter',pause);
+  rot.addEventListener('mouseleave',start);
+  rot.addEventListener('focusin',pause);
+  rot.addEventListener('focusout',start);
+  /* A scroll event cannot tell us who caused it: the smooth scroll we asked
+     for fires them too. The input events can, so those are what stop it. */
+  ['pointerdown','wheel','touchstart','keydown'].forEach(function(ev){
+    track.addEventListener(ev,stop,{passive:true});
+  });
+  document.addEventListener('visibilitychange',function(){
+    if(document.visibilityState==='visible'){start();}else{pause();}
+  });
+  track.addEventListener('scroll',function(){
+    if(raf!==0){return;}
+    raf=window.requestAnimationFrame(function(){raf=0;mark();});
+  },{passive:true});
+
+  if(reduce.matches){rot.classList.add('rot-reduced');}
+
+  /* For the mockup panel only. Named rather than left to it to reach inside,
+     so the controls cannot depend on anything private in here. Nothing on the
+     live page calls these, and none of them can restart a rotator the reader
+     has already stopped. */
+  window.rotRebuild=buildDots;
+  window.rotSetDwell=function(ms){DWELL=ms;pause();start();};
+  window.rotSetReduce=function(on){
+    window.rotForceReduce=on;
+    rot.classList.toggle('rot-reduced',on);
+    if(on){pause();}else{start();}
+  };
+
+  buildDots();
+  if(document.visibilityState==='visible'){start();}
+})();
+</script>
 </body>
 </html>

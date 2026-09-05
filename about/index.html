@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bespoke tech products | AK Addo</title>
-<meta name="description" content="Bespoke tools built and run for you, shipped end to end from data layer to interface. Forward-deployed, not slideware.">
+<title>About | AK Addo</title>
+<meta name="description" content="AK Addo: forward-deployed engineer in London. Three years at Man Group, a BSc in Physics, and a home bakery run on the same tooling.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://akaddo97.github.io/build/">
-<meta property="og:title" content="Bespoke tech products">
-<meta property="og:description" content="A working tool, built and run for you. Anyone can pass on prompt tips. Few ship a working tool.">
+<meta property="og:url" content="https://akaddo97.github.io/about/">
+<meta property="og:title" content="About AK Addo">
+<meta property="og:description" content="Where I have been, what I am working on, and how to get the CV.">
 <meta property="og:image" content="https://akaddo97.github.io/ak-addo.jpg">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231A1A1A'/><text y='68' x='50' text-anchor='middle' font-family='system-ui' font-weight='700' font-size='48' fill='%23F5C518'>AK</text></svg>">
 <style>
@@ -166,6 +166,12 @@
     .navtog:checked ~ .navrow .navgroup.two a:nth-child(1){animation-delay:110ms;}
     .navtog:checked ~ .navrow .navgroup.two a:nth-child(2){animation-delay:165ms;}
   }
+
+  .hero{display:grid;grid-template-columns:1fr 232px;gap:44px;align-items:center;}
+  .hero .shot{width:232px;height:232px;border-radius:100%;object-fit:cover;
+    border:1px solid var(--rule);display:block;}
+  @media (max-width:900px){ .hero{grid-template-columns:1fr;gap:26px;}
+    .hero .shot{margin:0 auto;} }
 </style>
 </head>
 <body>
@@ -182,7 +188,7 @@
   <input type="checkbox" id="navtog" class="navtog" aria-hidden="true" tabindex="-1">
   <div class="navrow">
     <div class="navgroup one">
-        <a href="../build/" aria-current="page">[Bespoke tech products]</a>
+        <a href="../build/">[Bespoke tech products]</a>
         <a href="../learn/">[AI fluency]</a>
     </div>
     <label class="mark mark-toggle" for="navtog" role="button" tabindex="0"
@@ -190,152 +196,34 @@
     <a class="mark mark-home" href="../" aria-label="Home"><i></i><i></i><i></i><i></i></a>
     <div class="navgroup two">
         <a href="../pricing/">[Prices]</a>
-        <a href="/about/">[About]</a>
+        <a href="/about/" aria-current="page">[About]</a>
     </div>
   </div>
 </nav>
 
 <main id="doc">
 
-  <div class="sec center">
-    <h1 class="display">Bespoke tech products</h1>
-    <p class="lead">Make yourself faster</p>
-    <p class="sub">A working tool, built and run for you.</p>
-  </div>
-
   <div class="sec">
-    <p>I embed with your team, ship working tools into current workflows, and teach best practices along the way. No generic training, no generic products.</p>
-    <p>Tools are built end to end, from the data layer to the interface, by me. I work with professionals, SMEs, and enterprises, including teams of non-technical users.</p>
-  </div>
+    <div class="hero">
+      <div>
+        <h1 class="display">About</h1>
+        <p>Before going independent in 2024 I spent three years at Man Group in London, moving through
+           risk engineering, quantitative equity research, and data science. I have a BSc in Physics,
+           and am hoping to add a US MBA to my creds list.</p>
 
-  <div class="sec">
-    <div class="segs">
-    <input type="radio" name="seg" id="seg-pro" checked>
-    <input type="radio" name="seg" id="seg-smb">
-    <input type="radio" name="seg" id="seg-ent">
-    <div class="segbar">
-      <label for="seg-pro">Professionals</label>
-      <label for="seg-smb">SMEs</label>
-      <label for="seg-ent">Enterprise</label>
-    </div>
-    <div class="panel" id="p-pro">
-      <p class="ptitle">Professionals</p>
-      <div class="probcards">
-      <div class="probcard">
-        <p class="ph">Your inbox is your job now</p>
-        <span class="plabel">What I build</span>
-        <p class="pname">Email triage</p>
-        <p class="pbody">We teach your inbox to sort itself. The messages that need you are the ones you see first, routine replies are drafted for you.</p>
-      </div>
-      <div class="probcard">
-        <p class="ph">The same admin, every single week</p>
-        <span class="plabel">What I build</span>
-        <p class="pname">Automations</p>
-        <p class="pbody">The repeating parts of your work week handed over to agents.</p>
-      </div>
-      <div class="probcard">
-        <p class="ph">Details are stored in various documents</p>
-        <span class="plabel">What I build</span>
-        <p class="pname">Documents to data pipeline</p>
-        <p class="pbody">The reports, contracts, and decks you are sent become a graph you and your agents can search.</p>
-      </div>
-      <div class="probcard">
-        <p class="ph">You know you wrote it down somewhere</p>
-        <span class="plabel">What I build</span>
-        <p class="pname">A semantic layer</p>
-        <p class="pbody">All your notes, files, and past work in one place you can ask in plain English.</p>
-      </div>
-      <div class="probcard">
-        <p class="ph">Walking into meetings cold</p>
-        <span class="plabel">What I build</span>
-        <p class="pname">A briefing before every meeting</p>
-        <p class="pbody">Connect your calendar and your files once. Get fresh context for every meeting.</p>
-      </div>
-      </div>
-      <p class="prung">Prices for <a href="../pricing/">Operator Edge</a>.</p>
-    </div>
-    <div class="panel" id="p-smb">
-      <p class="ptitle">SMEs</p>
-      <div class="probcards">
-      <div class="probcard">
-        <p class="ph">Too many emails, important ones can get missed</p>
-        <span class="plabel">What I build</span>
-        <p class="pname">Email triage</p>
-        <p class="pbody">We teach your inbox to route itself to the right person and answer repetitive queries automatically.</p>
-      </div>
-      <div class="probcard">
-        <p class="ph">You do the same job, by hand, every week</p>
-        <span class="plabel">What I build</span>
-        <p class="pname">Automations</p>
-        <p class="pbody">The repetitive middle of a workflow handed over. Teams can spend time where judgement matters.</p>
-      </div>
-      <div class="probcard">
-        <p class="ph">The information is stuck in PDFs, decks, or other files</p>
-        <span class="plabel">What I build</span>
-        <p class="pname">Documents to data pipeline</p>
-        <p class="pbody">Invoices, supplier contracts, and orders read automatically into one table you can search, report on, and chart, instead of a folder nobody opens.</p>
-      </div>
-      <div class="probcard">
-        <p class="ph">The answer is in someone&rsquo;s head</p>
-        <span class="plabel">What I build</span>
-        <p class="pname">A semantic layer</p>
-        <p class="pbody">All available business context in one place anyone can ask in plain English.</p>
-      </div>
-      <div class="probcard">
-        <p class="ph">Nobody has time to prepare for the call</p>
-        <span class="plabel">What I build</span>
-        <p class="pname">A briefing before every meeting</p>
-        <p class="pbody">Connect your calendar and your files once, a short brief is sent to team members ahead of the meeting.</p>
-      </div>
-      </div>
-      <p class="prung">Prices for <a href="../pricing/">Build Sprint</a>.</p>
-    </div>
-    <div class="panel" id="p-ent">
-      <p class="ptitle">Enterprise</p>
-      <div class="probcards">
-      <div class="probcard">
-        <p class="ph">Shared inboxes nobody owns</p>
-        <span class="plabel">What I build</span>
-        <p class="pname">Email triage</p>
-        <p class="pbody">High-volume inboxes classified and routed against your own taxonomy. Nothing sits unowned and the routine questions can be answered automatically.</p>
-      </div>
-      <div class="probcard">
-        <p class="ph">Someone does the same job every week</p>
-        <span class="plabel">What I build</span>
-        <p class="pname">Automations</p>
-        <p class="pbody">The repetitive middle of a workflow handed over. Teams can spend time where judgement matters.</p>
-      </div>
-      <div class="probcard">
-        <p class="ph">Disaggregated business documents</p>
-        <span class="plabel">What I build</span>
-        <p class="pname">Documents to data pipeline</p>
-        <p class="pbody">Contracts, filings, and reports read automatically into a structured store your existing systems can query.</p>
-      </div>
-      <div class="probcard">
-        <p class="ph">Every team answers the same question differently</p>
-        <span class="plabel">What I build</span>
-        <p class="pname">A semantic layer</p>
-        <p class="pbody">All available business context in one place anyone can ask in plain English.</p>
-      </div>
-      <div class="probcard">
-        <p class="ph">Critical context lives with one person</p>
-        <span class="plabel">What I build</span>
-        <p class="pname">A briefing before every meeting</p>
-        <p class="pbody">Calendars and internal files connected once, a short brief is sent to team members ahead of the meeting.</p>
-      </div>
-      </div>
-      <p class="prung">Prices for <a href="../pricing/">team programmes</a>.</p>
-    </div>
-    </div>
-  </div>
+        <p>Most of my recent work leverages knowledge graphs built for people and agents to work well
+           together. Alongside client work I am juggling processes across several AI startups and VC
+           funds, where I am gaining exposure to a breadth of AI-native approaches to problems.</p>
 
-  <div class="sec">
-    <div class="ask">
-      <h3>Have something in mind?</h3>
-      <div class="btns">
-        <!-- FORM:BOOKING -->
-        <a class="btn btn-dark" href="https://calendar.app.google/9MuKtzaxZCC6NXULA">Book 30 minutes</a>
+        <p>Off the clock I run <a class="inline" href="https://ak-baking.square.site/">AK Bakes</a>,
+           an AI-assisted home bakery.</p>
+
+        <div class="btns">
+          <!-- FORM:CV -->
+          <a class="btn" href="/cv/">Download a CV</a>
+        </div>
       </div>
+      <img class="shot" src="/ak-addo.jpg" alt="AK Addo">
     </div>
   </div>
 
