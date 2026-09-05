@@ -1,0 +1,50 @@
+# Does the worker still answer the way the pages expect?
+#
+# The homepage Media block and /media/ both fetch a Cloudflare worker at
+# runtime. Its payload changed twice in one week, gaining lastAt and starting
+# to carry podcast artwork, and nothing on this side would have noticed either.
+#
+# Deliberately not part of the deploy. A third party having a bad afternoon
+# must not stop AK publishing a copy change, so this reports rather than
+# blocks, the same way the link check does.
+
+name: Worker contract
+
+on:
+  schedule:
+    - cron: "30 7 * * *"   # 07:30 UTC daily
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install pytest
+
+      - name: Ask the worker
+        id: check
+        continue-on-error: true
+        run: python -m pytest tests -m contract --no-header -q | tee /tmp/out.txt
+
+      - name: Open or update an issue when the contract has moved
+        if: steps.check.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TITLE="Worker contract: the site and the worker disagree"
+          BODY=$(printf 'The daily contract check failed.\n\n```\n%s\n```\nChecked %s. The site reads /now and /history at runtime, so a field that has moved shows up as a blank row rather than an error, which is why this is checked rather than waited for.\n' \
+                 "$(tail -40 /tmp/out.txt)" "$(date -u '+%Y-%m-%d %H:%M UTC')")
+          EXISTING=$(gh issue list --state open --search "$TITLE in:title" \
+                       --json number --jq '.[0].number' 2>/dev/null || true)
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --body "$BODY"
+          else
+            gh issue create --title "$TITLE" --body "$BODY"
+          fi

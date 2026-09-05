@@ -1,0 +1,8 @@
+# Test-only. Nothing here is imported by anything that ships: the site is
+# static HTML and its own scripts are stdlib Python.
+#
+#   uv venv --python 3.13 .venv
+#   uv pip install --python .venv/bin/python -r requirements-dev.txt
+#   .venv/bin/python -m playwright install chromium
+pytest==9.1.1
+playwright==1.62.0

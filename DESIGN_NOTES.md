@@ -77,6 +77,51 @@ It has two halves. Arriving, the labels spring out of the nav item for the page 
 
 Responsive behaviour is one breakpoint at 520px, where the split stacks. Checked for horizontal overflow at 320, 390, 520, 768, and 1280px.
 
+## Tests
+
+The site is public and is sent to people, so it has a suite and CI that can stop
+a bad deploy. `python3 -m pytest tests` from the repo root, after
+`uv pip install --python .venv/bin/python -r requirements-dev.txt` and
+`.venv/bin/python -m playwright install chromium`.
+
+Four layers, in the order they run:
+
+**Structure.** Every page the site publishes is checked against the several
+hand-written lists of pages this repo keeps: `apply_nav_anim.PAGES`,
+`apply_domain.SITEMAP_PAGES` and `OG_PAGES`. Adding a page and forgetting one of
+them is now a failing build rather than a silence, which is how `learn/apply/`
+and `learn/mentor/` went a week without the nav animation. Also: the nav is
+byte-identical everywhere, every internal link resolves, every local asset
+exists, the HTML nests, and every inline script passes `node --check`.
+
+**Publication.** The things that must never be true of a public repo: no CV or
+PDF committed, no client or cohort name on any page, no key, no email address,
+no phone number. And the listed/unlisted split holds in both directions, so a
+page cannot fall out of the sitemap while staying crawlable, or the reverse.
+
+**Rendered.** Playwright loads each page at 1280 and 390 and asserts computed
+values, not screenshots, so a copy edit never turns it red. Anything carrying
+`hidden` computes to `display:none`; no page scrolls sideways; every image
+loaded; the nav is not left invisible; the hero stacks on a phone and does not
+on a desktop; the band never moves for a reader who asked for reduced motion,
+and every slide stays reachable when it does not.
+
+That third layer exists because the three worst bugs this site has shipped were
+all invisible to everything else: a listening row that said `hidden` and
+rendered anyway, the same fault in the rotator, and the About page going out
+with none of the CSS its hero needed. All three passed the HTML parse, the house
+style check and all four `--check` scripts.
+
+**Contract.** `-m contract` asks the live worker whether `/now` and `/history`
+still carry the fields the pages read, and whether the site origin is still on
+its CORS allowlist. Excluded from the deploy on purpose: a third party having a
+bad afternoon must not stop a copy change going out. It runs daily and opens an
+issue.
+
+`.github/workflows/deploy.yml` runs the first three layers and then publishes,
+so a red build leaves the previous version up. This requires Pages to be set to
+deploy from GitHub Actions rather than from the branch.
+
 ## Known rough edges
 
 The photo is a single 800px square. There is no smaller variant for mobile and no `srcset`.

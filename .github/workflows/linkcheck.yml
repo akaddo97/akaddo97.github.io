@@ -1,5 +1,10 @@
-# Weekly check on the outbound links that matter, chiefly the HiTEN publication
-# URL, which the publisher has moved before.
+# Weekly check on every outbound link the site actually carries.
+#
+# The list used to be six URLs typed into this file, which had already drifted
+# from what the pages link to: it named a repo the site no longer mentions and
+# missed the booking link, LinkedIn and the forms. It is now read out of the
+# pages, so a link added to the site is checked without anyone remembering to
+# add it here too.
 #
 # This never fails the build. GitHub Pages deploys from the branch and does not
 # depend on this workflow, and the job is written to exit 0 whatever it finds.
@@ -25,18 +30,28 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+
+      - name: Collect the outbound links from the pages
+        id: collect
+        run: |
+          python3 - <<'PY' > /tmp/urls.txt
+          import pathlib, re
+          seen = []
+          for page in sorted(pathlib.Path('.').glob('**/index.html')):
+              for url in re.findall(r'href="(https?://[^"]+)"', page.read_text()):
+                  if url not in seen:
+                      seen.append(url)
+          print('\n'.join(seen))
+          PY
+          echo "Found $(wc -l < /tmp/urls.txt) outbound links"
+          cat /tmp/urls.txt
+
       - name: Check the links
         id: check
         run: |
           UA='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36'
-          URLS=(
-            "https://imapsource.org/article/67338-comparative-study-of-how-additives-affect-sintered-silver-microstructure-in-die-attach-applications"
-            "https://ak-baking.square.site/"
-            "https://github.com/akaddo97/sponge"
-            "https://github.com/akaddo97/llm-providers"
-            "https://github.com/akaddo97/knowledge-gun"
-            "https://github.com/akaddo97/knowledge-gun-mcp"
-          )
+          mapfile -t URLS < /tmp/urls.txt
           BROKEN=""
           for url in "${URLS[@]}"; do
             code=000

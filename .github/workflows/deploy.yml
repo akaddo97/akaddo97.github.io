@@ -1,0 +1,87 @@
+# Test, then publish.
+#
+# This site used to deploy straight from the branch, which meant a broken page
+# went live the moment it was pushed and stayed live until somebody looked. Now
+# the tests run first and the deploy only happens if they pass: a red build
+# leaves the previous version up, which is almost always better than replacing
+# it with a worse one.
+#
+# Switching this on is a one-time settings change: Settings, Pages, Source,
+# GitHub Actions. Until that is done this workflow runs the tests and the
+# deploy step is skipped by GitHub.
+#
+# The worker tests are deliberately not here. They talk to a third party, and
+# an outage on their side must not stop AK publishing a copy change. They run
+# on a schedule in contract.yml.
+
+name: Test and deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # The sitemap's lastmod comes from each file's last commit date, and
+          # the page-list tests read git. A shallow clone would give both the
+          # wrong answer.
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"   # node --check, on every inline script
+
+      - name: Install the test tools
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+          python -m playwright install --with-deps chromium
+
+      - name: Run the suite
+        run: python -m pytest tests
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - name: Gather only what the site serves
+        # Rather than uploading the repository. The test suite, the generator
+        # scripts and the workflows are all public already, but there is no
+        # reason to serve them at a URL.
+        run: |
+          mkdir _site
+          rsync -a --exclude '.git' --exclude '.github' --exclude 'tests' \
+                --exclude '.venv' --exclude '__pycache__' \
+                --exclude '*.py' --exclude 'requirements-dev.txt' \
+                --exclude 'pytest.ini' --exclude '*.md' \
+                ./ _site/
+      - name: Package the site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@v4
