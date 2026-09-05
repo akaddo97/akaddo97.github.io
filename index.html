@@ -169,7 +169,11 @@
      inside the Media section. Static, so they stay put when the live feed is
      quiet, and they match .np-row so the section reads as one list. */
   .rd-row{display:flex;align-items:center;gap:16px;margin:14px 0 0;}
-  .rd-art{height:64px;width:auto;border-radius:6px;flex:none;background:var(--panel);}
+  /* A square box like .np-art, so the text beside a book starts on the same
+     line as the text beside a record. contain rather than cover, because a
+     book cover cropped to a square stops being a book cover. */
+  .rd-art{width:64px;height:64px;object-fit:contain;border-radius:6px;flex:none;
+    background:var(--panel);}
   .rd-ak{margin:6px 0 0;color:var(--ink);font-size:14px;overflow-wrap:anywhere;}
 </style>
 </head>
